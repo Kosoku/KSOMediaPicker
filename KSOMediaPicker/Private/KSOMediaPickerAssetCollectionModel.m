@@ -1,5 +1,5 @@
 //
-//  KSOMediaPickerMedia.h
+//  KSOMediaPickerAssetCollectionModel.m
 //  KSOMediaPicker
 //
 //  Created by William Towe on 3/18/17.
@@ -13,17 +13,25 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <Foundation/Foundation.h>
-#import <Photos/PHAsset.h>
+#import "KSOMediaPickerAssetCollectionModel.h"
+#import "KSOMediaPickerAssetModel.h"
 
-#import <KSOMediaPicker/KSOMediaPickerDefines.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@protocol KSOMediaPickerMedia <NSObject>
-@required
-@property (readonly,nonatomic) PHAsset *mediaPickerMediaAsset;
-@property (readonly,nonatomic) KSOMediaPickerMediaType mediaPickerMediaType;
+@interface KSOMediaPickerAssetCollectionModel ()
+@property (readwrite,strong,nonatomic) PHAssetCollection *assetCollection;
+@property (readwrite,strong,nonatomic) PHFetchResult<PHAsset *> *fetchResult;
 @end
 
-NS_ASSUME_NONNULL_END
+@implementation KSOMediaPickerAssetCollectionModel
+
+- (instancetype)initWithAssetCollection:(PHAssetCollection *)assetCollection; {
+    if (!(self = [super init]))
+        return nil;
+    
+    NSParameterAssert(assetCollection);
+    
+    _assetCollection = assetCollection;
+    
+    return self;
+}
+
+@end

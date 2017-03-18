@@ -15,6 +15,17 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class KSOMediaPickerAssetCollectionModel,KSOMediaPickerAssetModel;
+
 @interface KSOMediaPickerModel : NSObject
 
+@property (readonly,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
+@property (strong,nonatomic,nullable) KSOMediaPickerAssetCollectionModel *selectedAssetCollectionModel;
+@property (readonly,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
+@property (readonly,nonatomic,nullable) NSArray<KSOMediaPickerAssetModel *> *selectedAssetModels;
+
 @end
+
+NS_ASSUME_NONNULL_END

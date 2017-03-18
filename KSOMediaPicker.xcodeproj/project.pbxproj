@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		07377F201E7D998700094D95 /* KSOMediaPickerMedia.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F1F1E7D998700094D95 /* KSOMediaPickerMedia.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07377F221E7D9C4A00094D95 /* KSOMediaPickerDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F211E7D9C4A00094D95 /* KSOMediaPickerDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07377F251E7DE98600094D95 /* KSOMediaPickerAssetModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F231E7DE98600094D95 /* KSOMediaPickerAssetModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07377F261E7DE98600094D95 /* KSOMediaPickerAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07377F241E7DE98600094D95 /* KSOMediaPickerAssetModel.m */; };
+		07377F291E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F271E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07377F2A1E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07377F281E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m */; };
 		07A549941E7C97AA00A6C4A1 /* KSOMediaPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A549921E7C97AA00A6C4A1 /* KSOMediaPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07A549A01E7C97D400A6C4A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5499F1E7C97D400A6C4A1 /* main.m */; };
 		07A549A31E7C97D400A6C4A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A549A21E7C97D400A6C4A1 /* AppDelegate.m */; };
@@ -51,6 +55,10 @@
 /* Begin PBXFileReference section */
 		07377F1F1E7D998700094D95 /* KSOMediaPickerMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerMedia.h; sourceTree = "<group>"; };
 		07377F211E7D9C4A00094D95 /* KSOMediaPickerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerDefines.h; sourceTree = "<group>"; };
+		07377F231E7DE98600094D95 /* KSOMediaPickerAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerAssetModel.h; sourceTree = "<group>"; };
+		07377F241E7DE98600094D95 /* KSOMediaPickerAssetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerAssetModel.m; sourceTree = "<group>"; };
+		07377F271E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerAssetCollectionModel.h; sourceTree = "<group>"; };
+		07377F281E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerAssetCollectionModel.m; sourceTree = "<group>"; };
 		07A5498F1E7C97AA00A6C4A1 /* KSOMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A549921E7C97AA00A6C4A1 /* KSOMediaPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOMediaPicker.h; sourceTree = "<group>"; };
 		07A549931E7C97AA00A6C4A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -175,6 +183,10 @@
 			children = (
 				07A549C11E7C9C9500A6C4A1 /* KSOMediaPickerModel.h */,
 				07A549C21E7C9C9500A6C4A1 /* KSOMediaPickerModel.m */,
+				07377F271E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h */,
+				07377F281E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m */,
+				07377F231E7DE98600094D95 /* KSOMediaPickerAssetModel.h */,
+				07377F241E7DE98600094D95 /* KSOMediaPickerAssetModel.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -186,6 +198,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07377F291E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h in Headers */,
+				07377F251E7DE98600094D95 /* KSOMediaPickerAssetModel.h in Headers */,
 				07A549B71E7C980600A6C4A1 /* KSOMediaPickerViewController.h in Headers */,
 				07A549C31E7C9C9500A6C4A1 /* KSOMediaPickerModel.h in Headers */,
 				07377F221E7D9C4A00094D95 /* KSOMediaPickerDefines.h in Headers */,
@@ -298,7 +312,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				07A549C41E7C9C9500A6C4A1 /* KSOMediaPickerModel.m in Sources */,
+				07377F261E7DE98600094D95 /* KSOMediaPickerAssetModel.m in Sources */,
 				07A549B81E7C980600A6C4A1 /* KSOMediaPickerViewController.m in Sources */,
+				07377F2A1E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
