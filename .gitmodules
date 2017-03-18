@@ -1,0 +1,9 @@
+[submodule "Vendor/Quicksilver"]
+	path = Vendor/Quicksilver
+	url = https://github.com/Kosoku/Quicksilver.git
+[submodule "Vendor/Agamotto"]
+	path = Vendor/Agamotto
+	url = https://github.com/Kosoku/Agamotto.git
+[submodule "Vendor/Ditko"]
+	path = Vendor/Ditko
+	url = https://github.com/Kosoku/Ditko.git
