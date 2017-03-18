@@ -19,6 +19,8 @@
 
 #import <Quicksilver/Quicksilver.h>
 
+#import <Photos/Photos.h>
+
 @interface KSOMediaPickerModel ()
 @property (readwrite,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (readwrite,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
@@ -27,7 +29,22 @@
 @implementation KSOMediaPickerModel
 
 - (NSArray<KSOMediaPickerAssetModel *> *)selectedAssetModels {
-    return nil;
+    NSMutableArray *retval = [[NSMutableArray alloc] init];
+    
+    for (NSString *assetIdentifier in self.selectedAssetIdentifiers) {
+        PHFetchOptions *options = [[PHFetchOptions alloc] init];
+        
+        [options setWantsIncrementalChangeDetails:NO];
+        [options setFetchLimit:1];
+        
+        PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[assetIdentifier] options:options].firstObject;
+        
+        [retval addObject:asset];
+    }
+    
+    return [retval KQS_map:^id _Nullable(PHAsset * _Nonnull object, NSInteger index) {
+        return [[KSOMediaPickerAssetModel alloc] initWithAsset:object];
+    }];
 }
 
 @end
