@@ -13,6 +13,12 @@
 		07377F261E7DE98600094D95 /* KSOMediaPickerAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07377F241E7DE98600094D95 /* KSOMediaPickerAssetModel.m */; };
 		07377F291E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F271E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07377F2A1E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07377F281E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m */; };
+		07377F4A1E7DF58A00094D95 /* Agamotto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07377F491E7DF58A00094D95 /* Agamotto.framework */; };
+		07377F4B1E7DF58A00094D95 /* Agamotto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07377F491E7DF58A00094D95 /* Agamotto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07377F4D1E7DF59000094D95 /* Ditko.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07377F4C1E7DF59000094D95 /* Ditko.framework */; };
+		07377F4E1E7DF59000094D95 /* Ditko.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07377F4C1E7DF59000094D95 /* Ditko.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07377F501E7DF59500094D95 /* Quicksilver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07377F4F1E7DF59500094D95 /* Quicksilver.framework */; };
+		07377F511E7DF59500094D95 /* Quicksilver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07377F4F1E7DF59500094D95 /* Quicksilver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07A549941E7C97AA00A6C4A1 /* KSOMediaPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A549921E7C97AA00A6C4A1 /* KSOMediaPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07A549A01E7C97D400A6C4A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5499F1E7C97D400A6C4A1 /* main.m */; };
 		07A549A31E7C97D400A6C4A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A549A21E7C97D400A6C4A1 /* AppDelegate.m */; };
@@ -45,7 +51,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				07377F4B1E7DF58A00094D95 /* Agamotto.framework in Embed Frameworks */,
 				07A549BA1E7C989700A6C4A1 /* KSOMediaPicker.framework in Embed Frameworks */,
+				07377F4E1E7DF59000094D95 /* Ditko.framework in Embed Frameworks */,
+				07377F511E7DF59500094D95 /* Quicksilver.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,6 +68,9 @@
 		07377F241E7DE98600094D95 /* KSOMediaPickerAssetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerAssetModel.m; sourceTree = "<group>"; };
 		07377F271E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerAssetCollectionModel.h; sourceTree = "<group>"; };
 		07377F281E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerAssetCollectionModel.m; sourceTree = "<group>"; };
+		07377F491E7DF58A00094D95 /* Agamotto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Agamotto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07377F4C1E7DF59000094D95 /* Ditko.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ditko.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07377F4F1E7DF59500094D95 /* Quicksilver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Quicksilver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A5498F1E7C97AA00A6C4A1 /* KSOMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A549921E7C97AA00A6C4A1 /* KSOMediaPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOMediaPicker.h; sourceTree = "<group>"; };
 		07A549931E7C97AA00A6C4A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,7 +102,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07377F501E7DF59500094D95 /* Quicksilver.framework in Frameworks */,
 				07A549C01E7C989F00A6C4A1 /* Photos.framework in Frameworks */,
+				07377F4A1E7DF58A00094D95 /* Agamotto.framework in Frameworks */,
+				07377F4D1E7DF59000094D95 /* Ditko.framework in Frameworks */,
 				07A549B91E7C989700A6C4A1 /* KSOMediaPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,6 +188,9 @@
 		07A549BE1E7C989F00A6C4A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07377F4F1E7DF59500094D95 /* Quicksilver.framework */,
+				07377F4C1E7DF59000094D95 /* Ditko.framework */,
+				07377F491E7DF58A00094D95 /* Agamotto.framework */,
 				07A549BF1E7C989F00A6C4A1 /* Photos.framework */,
 			);
 			name = Frameworks;
@@ -412,6 +430,11 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/Vendor/Quicksilver",
+					"$(SRCROOT)/Vendor/Ditko",
+					"$(SRCROOT)/Vendor/Agamotto",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksomediapicker;
@@ -468,6 +491,11 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/Vendor/Quicksilver",
+					"$(SRCROOT)/Vendor/Ditko",
+					"$(SRCROOT)/Vendor/Agamotto",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksomediapicker;
 				PRODUCT_NAME = "$(TARGET_NAME)";

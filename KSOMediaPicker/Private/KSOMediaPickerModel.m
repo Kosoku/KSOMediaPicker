@@ -17,6 +17,8 @@
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerAssetModel.h"
 
+#import <Quicksilver/Quicksilver.h>
+
 @interface KSOMediaPickerModel ()
 @property (readwrite,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (readwrite,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
