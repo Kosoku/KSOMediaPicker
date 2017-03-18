@@ -25,6 +25,12 @@
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    [self.navigationItem setLeftBarButtonItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_cancelItemAction:)]]];
+}
+
+- (IBAction)_cancelItemAction:(id)sender {
+    [self.delegate mediaPickerViewControllerDidCancel:self];
 }
 
 @end

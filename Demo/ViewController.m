@@ -17,7 +17,7 @@
 
 #import <KSOMediaPicker/KSOMediaPicker.h>
 
-@interface ViewController ()
+@interface ViewController () <KSOMediaPickerViewControllerDelegate>
 @property (strong,nonatomic) UIButton *modalButton;
 @end
 
@@ -38,8 +38,17 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.modalButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
 }
 
+- (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController {
+    [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia>> *)media {
+    [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)_buttonAction:(id)sender {
     KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
+    
+    [viewController setDelegate:self];
     
     [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
 }

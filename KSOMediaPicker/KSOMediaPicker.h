@@ -23,4 +23,6 @@ FOUNDATION_EXPORT const unsigned char KSOMediaPickerVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <KSOMediaPicker/PublicHeader.h>
 
+#import <KSOMediaPicker/KSOMediaPickerDefines.h>
+#import <KSOMediaPicker/KSOMediaPickerMedia.h>
 #import <KSOMediaPicker/KSOMediaPickerViewController.h>
