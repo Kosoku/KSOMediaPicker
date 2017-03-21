@@ -16,11 +16,18 @@
 #import "KSOMediaPickerViewController.h"
 #import "KSOMediaPickerModel.h"
 #import "KSOMediaPickerAssetModel.h"
+#import "KSOMediaPickerTheme.h"
+#import "KSOMediaPickerTitleView.h"
 
 #import <Stanley/Stanley.h>
+#import <Agamotto/Agamotto.h>
 
 @interface KSOMediaPickerViewController ()
 @property (strong,nonatomic) KSOMediaPickerModel *model;
+@property (strong,nonatomic) UIView<KSOMediaPickerTitleView> *titleView;
+
+- (void)_updateTitleViewProperties;
+- (void)_updateTitleViewTitleAndSubtitle;
 @end
 
 @implementation KSOMediaPickerViewController
@@ -53,8 +60,59 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
+    [self setTitleView:[[self.model.theme.titleViewClass alloc] initWithFrame:CGRectZero]];
+    
     [self.navigationItem setLeftBarButtonItems:@[self.model.cancelBarButtonItem]];
     [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
+    
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,titleView)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        if (self.titleView != nil) {
+            [self _updateTitleViewProperties];
+            
+            [self.navigationItem setTitleView:_titleView];
+        }
+    }];
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,title),@kstKeypath(self.model,subtitle)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            [self _updateTitleViewTitleAndSubtitle];
+        });
+    }];
+    
+}
+
+- (void)_updateTitleViewProperties; {
+    for (UIGestureRecognizer *gr in self.titleView.gestureRecognizers) {
+        [self.titleView removeGestureRecognizer:gr];
+    }
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapGestureRecognizerAction:)];
+    
+    [tapGestureRecognizer setNumberOfTapsRequired:1];
+    [tapGestureRecognizer setNumberOfTouchesRequired:1];
+    
+    [self.titleView addGestureRecognizer:tapGestureRecognizer];
+    
+    if ([self.titleView respondsToSelector:@selector(setTheme:)]) {
+        [self.titleView setTheme:self.model.theme];
+    }
+    
+    [self _updateTitleViewTitleAndSubtitle];
+}
+- (void)_updateTitleViewTitleAndSubtitle; {
+    [self.titleView setTitle:self.model.title];
+    
+    if ([self.titleView respondsToSelector:@selector(setSubtitle:)]) {
+        [self.titleView setSubtitle:self.model.subtitle];
+    }
+    
+    [self.titleView sizeToFit];
+}
+
+- (IBAction)_tapGestureRecognizerAction:(id)sender {
+    
 }
 
 @end

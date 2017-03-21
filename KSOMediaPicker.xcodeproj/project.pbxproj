@@ -36,6 +36,11 @@
 		07D1AC8E1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07D1AC8F1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */; };
 		07D1AC931E8171CF00A963B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC911E8171CF00A963B1 /* Localizable.strings */; };
+		07D1AC961E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1AC941E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07D1AC971E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D1AC951E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.m */; };
+		07D1AC991E81728600A963B1 /* KSOMediaPickerTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1AC981E81728600A963B1 /* KSOMediaPickerTitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		07D1AC9C1E81730400A963B1 /* KSOMediaPickerTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1AC9A1E81730400A963B1 /* KSOMediaPickerTheme.h */; };
+		07D1AC9D1E81730400A963B1 /* KSOMediaPickerTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D1AC9B1E81730400A963B1 /* KSOMediaPickerTheme.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +101,11 @@
 		07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+KSOMediaPickerPrivateExtensions.h"; sourceTree = "<group>"; };
 		07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+KSOMediaPickerPrivateExtensions.m"; sourceTree = "<group>"; };
 		07D1AC921E8171CF00A963B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		07D1AC941E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerDefaultTitleView.h; sourceTree = "<group>"; };
+		07D1AC951E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerDefaultTitleView.m; sourceTree = "<group>"; };
+		07D1AC981E81728600A963B1 /* KSOMediaPickerTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerTitleView.h; sourceTree = "<group>"; };
+		07D1AC9A1E81730400A963B1 /* KSOMediaPickerTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerTheme.h; sourceTree = "<group>"; };
+		07D1AC9B1E81730400A963B1 /* KSOMediaPickerTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +198,9 @@
 			children = (
 				07377F211E7D9C4A00094D95 /* KSOMediaPickerDefines.h */,
 				07377F1F1E7D998700094D95 /* KSOMediaPickerMedia.h */,
+				07D1AC981E81728600A963B1 /* KSOMediaPickerTitleView.h */,
+				07D1AC9A1E81730400A963B1 /* KSOMediaPickerTheme.h */,
+				07D1AC9B1E81730400A963B1 /* KSOMediaPickerTheme.m */,
 				07A549B51E7C980600A6C4A1 /* KSOMediaPickerViewController.h */,
 				07A549B61E7C980600A6C4A1 /* KSOMediaPickerViewController.m */,
 				07A549C51E7C9CA900A6C4A1 /* Private */,
@@ -217,6 +230,8 @@
 				07377F241E7DE98600094D95 /* KSOMediaPickerAssetModel.m */,
 				07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */,
 				07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */,
+				07D1AC941E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.h */,
+				07D1AC951E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -229,12 +244,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				07377F291E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.h in Headers */,
+				07D1AC991E81728600A963B1 /* KSOMediaPickerTitleView.h in Headers */,
 				07377F251E7DE98600094D95 /* KSOMediaPickerAssetModel.h in Headers */,
 				07A549B71E7C980600A6C4A1 /* KSOMediaPickerViewController.h in Headers */,
 				07A549C31E7C9C9500A6C4A1 /* KSOMediaPickerModel.h in Headers */,
 				07D1AC8E1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */,
 				07377F221E7D9C4A00094D95 /* KSOMediaPickerDefines.h in Headers */,
+				07D1AC9C1E81730400A963B1 /* KSOMediaPickerTheme.h in Headers */,
 				07377F201E7D998700094D95 /* KSOMediaPickerMedia.h in Headers */,
+				07D1AC961E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.h in Headers */,
 				07A549941E7C97AA00A6C4A1 /* KSOMediaPicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +382,8 @@
 			files = (
 				07A549C41E7C9C9500A6C4A1 /* KSOMediaPickerModel.m in Sources */,
 				07D1AC8F1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */,
+				07D1AC971E81725C00A963B1 /* KSOMediaPickerDefaultTitleView.m in Sources */,
+				07D1AC9D1E81730400A963B1 /* KSOMediaPickerTheme.m in Sources */,
 				07377F261E7DE98600094D95 /* KSOMediaPickerAssetModel.m in Sources */,
 				07A549B81E7C980600A6C4A1 /* KSOMediaPickerViewController.m in Sources */,
 				07377F2A1E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m in Sources */,

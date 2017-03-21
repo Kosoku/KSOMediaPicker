@@ -18,6 +18,10 @@
 #import "KSOMediaPickerModel.h"
 #import "NSBundle+KSOMediaPickerPrivateExtensions.h"
 
+#import <Stanley/Stanley.h>
+
+#import <Photos/Photos.h>
+
 @interface KSOMediaPickerAssetCollectionModel ()
 @property (readwrite,weak,nonatomic,nullable) KSOMediaPickerModel *model;
 @property (readwrite,strong,nonatomic) PHAssetCollection *assetCollection;
@@ -35,7 +39,32 @@
     _assetCollection = assetCollection;
     _model = model;
     
+    [self reloadFetchResult];
+    
     return self;
+}
+
+- (void)reloadFetchResult {
+    PHFetchOptions *options = [[PHFetchOptions alloc] init];
+    NSMutableArray *predicates = [[NSMutableArray alloc] init];
+    
+    if (self.model.mediaTypes & KSOMediaPickerMediaTypesUnknown) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"%K == %@",@kstKeypath(PHAsset.new,mediaType),@(PHAssetMediaTypeUnknown)]];
+    }
+    if (self.model.mediaTypes & KSOMediaPickerMediaTypesImage) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"%K == %@",@kstKeypath(PHAsset.new,mediaType),@(PHAssetMediaTypeImage)]];
+    }
+    if (self.model.mediaTypes & KSOMediaPickerMediaTypesVideo) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"%K == %@",@kstKeypath(PHAsset.new,mediaType),@(PHAssetMediaTypeVideo)]];
+    }
+    if (self.model.mediaTypes & KSOMediaPickerMediaTypesAudio) {
+        [predicates addObject:[NSPredicate predicateWithFormat:@"%K == %@",@kstKeypath(PHAsset.new,mediaType),@(PHAssetMediaTypeAudio)]];
+    }
+    
+    [options setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:predicates]];
+    [options setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@kstKeypath(PHAsset.new,creationDate) ascending:YES]]];
+    
+    [self setFetchResult:[PHAsset fetchAssetsInAssetCollection:self.assetCollection options:options]];
 }
 
 - (NSString *)identifier {

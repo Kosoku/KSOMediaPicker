@@ -1,8 +1,8 @@
 //
-//  KSOMediaPicker.h
+//  KSOMediaPickerDefaultTitleView.h
 //  KSOMediaPicker
 //
-//  Created by William Towe on 3/17/17.
+//  Created by William Towe on 3/21/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,15 +15,8 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for KSOMediaPicker.
-FOUNDATION_EXPORT double KSOMediaPickerVersionNumber;
-
-//! Project version string for KSOMediaPicker.
-FOUNDATION_EXPORT const unsigned char KSOMediaPickerVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <KSOMediaPicker/PublicHeader.h>
-
-#import <KSOMediaPicker/KSOMediaPickerDefines.h>
-#import <KSOMediaPicker/KSOMediaPickerMedia.h>
 #import <KSOMediaPicker/KSOMediaPickerTitleView.h>
-#import <KSOMediaPicker/KSOMediaPickerViewController.h>
+
+@interface KSOMediaPickerDefaultTitleView : UIView <KSOMediaPickerTitleView>
+
+@end

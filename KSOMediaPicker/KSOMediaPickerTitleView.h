@@ -1,8 +1,8 @@
 //
-//  KSOMediaPicker.h
+//  KSOMediaPickerTitleView.h
 //  KSOMediaPicker
 //
-//  Created by William Towe on 3/17/17.
+//  Created by William Towe on 3/21/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -13,17 +13,26 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-//! Project version number for KSOMediaPicker.
-FOUNDATION_EXPORT double KSOMediaPickerVersionNumber;
+@class KSOMediaPickerTheme;
 
-//! Project version string for KSOMediaPicker.
-FOUNDATION_EXPORT const unsigned char KSOMediaPickerVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <KSOMediaPicker/PublicHeader.h>
-
-#import <KSOMediaPicker/KSOMediaPickerDefines.h>
-#import <KSOMediaPicker/KSOMediaPickerMedia.h>
-#import <KSOMediaPicker/KSOMediaPickerTitleView.h>
-#import <KSOMediaPicker/KSOMediaPickerViewController.h>
+/**
+ BBMediaPickerTitleView is a protocol describing an instance of the class used to display the title and subtitle text in the navigation bar of the media picker.
+ */
+@protocol KSOMediaPickerTitleView <NSObject>
+@required
+/**
+ Set and get the title of the title view, which will be the title of the selected asset collection.
+ */
+@property (copy,nonatomic,nullable) NSString *title;
+@optional
+/**
+ Set and get the subtitle of the title view.
+ */
+@property (copy,nonatomic,nullable) NSString *subtitle;
+/**
+ Set and get the theme of the title view.
+ */
+@property (strong,nonatomic,nullable) KSOMediaPickerTheme *theme;
+@end

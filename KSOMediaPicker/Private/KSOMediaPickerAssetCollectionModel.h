@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithAssetCollection:(PHAssetCollection *)assetCollection model:(nullable KSOMediaPickerModel *)model;
 
+- (void)reloadFetchResult;
+
 @end
 
 NS_ASSUME_NONNULL_END

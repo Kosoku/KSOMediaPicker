@@ -17,6 +17,7 @@
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerAssetModel.h"
 #import "NSBundle+KSOMediaPickerPrivateExtensions.h"
+#import "KSOMediaPickerTheme.h"
 
 #import <Quicksilver/Quicksilver.h>
 #import <Agamotto/Agamotto.h>
@@ -49,6 +50,12 @@
 - (instancetype)init {
     if (!(self = [super init]))
         return nil;
+    
+    _hidesEmptyAssetCollections = YES;
+    _mediaTypes = KSOMediaPickerMediaTypesAll;
+    _initiallySelectedAssetCollectionSubtype = KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary;
+    
+    _theme = KSOMediaPickerTheme.defaultTheme;
     
     _doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:NULL];
     _cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:NULL];
@@ -135,6 +142,7 @@
     [self setSubtitle:self.selectedAssetCollectionModel == nil ? nil : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_DEFAULT_SUBTITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Tap to select album ▼", @"media picker default subtitle")];
 }
 - (void)_reloadAssetCollectionModels; {
+    __block __weak void(^weakBlock)(PHAuthorizationStatus) = nil;
     void(^block)(PHAuthorizationStatus) = ^(PHAuthorizationStatus status){
         switch (status) {
             case PHAuthorizationStatusAuthorized: {
@@ -171,7 +179,7 @@
                 }
                 
                 // select camera roll by default
-                if (!self.selectedAssetCollectionModel) {
+                if (self.selectedAssetCollectionModel == nil) {
                     for (KSOMediaPickerAssetCollectionModel *collection in self.assetCollectionModels) {
                         if (collection.subtype == self.initiallySelectedAssetCollectionSubtype) {
                             [self setSelectedAssetCollectionModel:collection];
@@ -181,14 +189,16 @@
                 }
                 
                 // if still no selection, select the first asset collection
-                if (!self.selectedAssetCollectionModel) {
+                if (self.selectedAssetCollectionModel == nil) {
                     [self setSelectedAssetCollectionModel:self.assetCollectionModels.firstObject];
                 }
             }
                 break;
             case PHAuthorizationStatusNotDetermined: {
+                void(^strongBlock)(PHAuthorizationStatus) = weakBlock;
+                
                 [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-                    block(status);
+                    strongBlock(status);
                 }];
             }
                 break;
@@ -199,7 +209,12 @@
             default:
                 break;
         }
+        
+        [self _updateTitle];
+        [self _updateSubtitle];
     };
+    
+    weakBlock = block;
     
     block([PHPhotoLibrary authorizationStatus]);
 }
