@@ -18,15 +18,58 @@
 #import "KSOMediaPickerAssetModel.h"
 
 #import <Quicksilver/Quicksilver.h>
+#import <Agamotto/Agamotto.h>
+#import <Stanley/KSTScopeMacros.h>
+#import <Ditko/UIBarButtonItem+KDIExtensions.h>
 
 #import <Photos/Photos.h>
 
 @interface KSOMediaPickerModel ()
 @property (readwrite,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (readwrite,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
+
+@property (readwrite,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
+@property (readwrite,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
 @end
 
 @implementation KSOMediaPickerModel
+
+- (instancetype)init {
+    if (!(self = [super init]))
+        return nil;
+    
+    _doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:NULL];
+    _cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:NULL];
+    
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@"doneBarButtonItemBlock",@"cancelBarButtonItemBlock"] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        if ([keyPath isEqualToString:@"doneBarButtonItemBlock"]) {
+            if (value == nil) {
+                [self.doneBarButtonItem setKDI_block:nil];
+            }
+            else {
+                [self.doneBarButtonItem setKDI_block:^(UIBarButtonItem *item){
+                    kstStrongify(self);
+                    self.doneBarButtonItemBlock();
+                }];
+            }
+        }
+        else {
+            if (value == nil) {
+                [self.cancelBarButtonItem setKDI_block:nil];
+            }
+            else {
+                [self.cancelBarButtonItem setKDI_block:^(UIBarButtonItem *item){
+                    kstStrongify(self);
+                    self.cancelBarButtonItemBlock();
+                }];
+            }
+        }
+    }];
+    
+    return self;
+}
 
 - (NSArray<KSOMediaPickerAssetModel *> *)selectedAssetModels {
     NSMutableArray *retval = [[NSMutableArray alloc] init];

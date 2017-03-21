@@ -14,23 +14,43 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "KSOMediaPickerViewController.h"
+#import "KSOMediaPickerModel.h"
+#import "KSOMediaPickerAssetModel.h"
+
+#import <Stanley/KSTScopeMacros.h>
 
 @interface KSOMediaPickerViewController ()
-
+@property (strong,nonatomic) KSOMediaPickerModel *model;
 @end
 
 @implementation KSOMediaPickerViewController
+
+- (instancetype)init {
+    if (!(self = [super init]))
+        return nil;
+    
+    _model = [[KSOMediaPickerModel alloc] init];
+    
+    kstWeakify(self);
+    [_model setDoneBarButtonItemBlock:^{
+        kstStrongify(self);
+        [self.delegate mediaPickerViewController:self didFinishPickingMedia:self.model.selectedAssetModels];
+    }];
+    [_model setCancelBarButtonItemBlock:^{
+        kstStrongify(self);
+        [self.delegate mediaPickerViewControllerDidCancel:self];
+    }];
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    [self.navigationItem setLeftBarButtonItems:@[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_cancelItemAction:)]]];
-}
-
-- (IBAction)_cancelItemAction:(id)sender {
-    [self.delegate mediaPickerViewControllerDidCancel:self];
+    [self.navigationItem setLeftBarButtonItems:@[self.model.cancelBarButtonItem]];
+    [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
 }
 
 @end
