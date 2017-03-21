@@ -15,23 +15,53 @@
 
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerAssetModel.h"
+#import "KSOMediaPickerModel.h"
+#import "NSBundle+KSOMediaPickerPrivateExtensions.h"
 
 @interface KSOMediaPickerAssetCollectionModel ()
+@property (readwrite,weak,nonatomic,nullable) KSOMediaPickerModel *model;
 @property (readwrite,strong,nonatomic) PHAssetCollection *assetCollection;
 @property (readwrite,strong,nonatomic) PHFetchResult<PHAsset *> *fetchResult;
 @end
 
 @implementation KSOMediaPickerAssetCollectionModel
 
-- (instancetype)initWithAssetCollection:(PHAssetCollection *)assetCollection; {
+- (instancetype)initWithAssetCollection:(PHAssetCollection *)assetCollection model:(KSOMediaPickerModel *)model; {
     if (!(self = [super init]))
         return nil;
     
     NSParameterAssert(assetCollection);
     
     _assetCollection = assetCollection;
+    _model = model;
     
     return self;
+}
+
+- (NSString *)identifier {
+    return self.assetCollection.localIdentifier;
+}
+- (KSOMediaPickerAssetCollectionSubtype)subtype {
+    return (KSOMediaPickerAssetCollectionSubtype)self.assetCollection.assetCollectionSubtype;
+}
+- (NSString *)title {
+    return self.assetCollection.localizedTitle;
+}
+- (NSString *)subtitle {
+    return [NSNumberFormatter localizedStringFromNumber:@(self.countOfAssetModels) numberStyle:NSNumberFormatterDecimalStyle];
+}
+- (UIImage *)typeImage {
+    switch (self.subtype) {
+        case KSOMediaPickerAssetCollectionSubtypeSmartAlbumVideos:
+        case KSOMediaPickerAssetCollectionSubtypeSmartAlbumSlomoVideos:
+            return [UIImage imageNamed:@"type_video" inBundle:[NSBundle KSO_mediaPickerFrameworkBundle] compatibleWithTraitCollection:nil];
+        default:
+            return nil;
+    }
+}
+
+- (NSUInteger)countOfAssetModels {
+    return self.fetchResult.count;
 }
 
 @end

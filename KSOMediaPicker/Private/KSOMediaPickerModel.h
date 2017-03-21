@@ -15,21 +15,31 @@
 
 #import <UIKit/UIKit.h>
 
+#import <KSOMediaPicker/KSOMediaPickerDefines.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class KSOMediaPickerAssetCollectionModel,KSOMediaPickerAssetModel;
 
 @interface KSOMediaPickerModel : NSObject
 
-@property (readonly,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
-@property (strong,nonatomic,nullable) KSOMediaPickerAssetCollectionModel *selectedAssetCollectionModel;
-@property (readonly,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
-@property (readonly,nonatomic,nullable) NSArray<KSOMediaPickerAssetModel *> *selectedAssetModels;
+@property (assign,nonatomic) BOOL hidesEmptyAssetCollections;
+
+@property (assign,nonatomic) KSOMediaPickerAssetCollectionSubtype initiallySelectedAssetCollectionSubtype;
+@property (copy,nonatomic) NSSet<NSNumber *> *allowedAssetCollectionSubtypes;
 
 @property (readonly,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (copy,nonatomic) dispatch_block_t doneBarButtonItemBlock;
 @property (readonly,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
 @property (copy,nonatomic) dispatch_block_t cancelBarButtonItemBlock;
+
+@property (readonly,copy,nonatomic) NSString *title;
+@property (readonly,copy,nonatomic,nullable) NSString *subtitle;
+
+@property (readonly,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
+@property (strong,nonatomic,nullable) KSOMediaPickerAssetCollectionModel *selectedAssetCollectionModel;
+@property (readonly,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
+@property (readonly,nonatomic,nullable) NSArray<KSOMediaPickerAssetModel *> *selectedAssetModels;
 
 @end
 

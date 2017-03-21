@@ -32,6 +32,10 @@
 		07A549C01E7C989F00A6C4A1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A549BF1E7C989F00A6C4A1 /* Photos.framework */; };
 		07A549C31E7C9C9500A6C4A1 /* KSOMediaPickerModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A549C11E7C9C9500A6C4A1 /* KSOMediaPickerModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07A549C41E7C9C9500A6C4A1 /* KSOMediaPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A549C21E7C9C9500A6C4A1 /* KSOMediaPickerModel.m */; };
+		07D1AC8B1E816A2A00A963B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */; };
+		07D1AC8E1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07D1AC8F1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */; };
+		07D1AC931E8171CF00A963B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC911E8171CF00A963B1 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,10 @@
 		07A549BF1E7C989F00A6C4A1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/Photos.framework; sourceTree = DEVELOPER_DIR; };
 		07A549C11E7C9C9500A6C4A1 /* KSOMediaPickerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerModel.h; sourceTree = "<group>"; };
 		07A549C21E7C9C9500A6C4A1 /* KSOMediaPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerModel.m; sourceTree = "<group>"; };
+		07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+KSOMediaPickerPrivateExtensions.h"; sourceTree = "<group>"; };
+		07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+KSOMediaPickerPrivateExtensions.m"; sourceTree = "<group>"; };
+		07D1AC921E8171CF00A963B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +176,9 @@
 		07A549B31E7C97E600A6C4A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07D1AC911E8171CF00A963B1 /* Localizable.strings */,
 				07A549931E7C97AA00A6C4A1 /* Info.plist */,
+				07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -205,6 +215,8 @@
 				07377F281E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m */,
 				07377F231E7DE98600094D95 /* KSOMediaPickerAssetModel.h */,
 				07377F241E7DE98600094D95 /* KSOMediaPickerAssetModel.m */,
+				07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */,
+				07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -220,6 +232,7 @@
 				07377F251E7DE98600094D95 /* KSOMediaPickerAssetModel.h in Headers */,
 				07A549B71E7C980600A6C4A1 /* KSOMediaPickerViewController.h in Headers */,
 				07A549C31E7C9C9500A6C4A1 /* KSOMediaPickerModel.h in Headers */,
+				07D1AC8E1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */,
 				07377F221E7D9C4A00094D95 /* KSOMediaPickerDefines.h in Headers */,
 				07377F201E7D998700094D95 /* KSOMediaPickerMedia.h in Headers */,
 				07A549941E7C97AA00A6C4A1 /* KSOMediaPicker.h in Headers */,
@@ -233,6 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 07A549951E7C97AA00A6C4A1 /* Build configuration list for PBXNativeTarget "KSOMediaPicker" */;
 			buildPhases = (
+				07D1AC901E816E9600A963B1 /* genstrings */,
 				07A5498A1E7C97AA00A6C4A1 /* Sources */,
 				07A5498B1E7C97AA00A6C4A1 /* Frameworks */,
 				07A5498C1E7C97AA00A6C4A1 /* Headers */,
@@ -310,6 +324,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07D1AC8B1E816A2A00A963B1 /* Assets.xcassets in Resources */,
+				07D1AC931E8171CF00A963B1 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,12 +340,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		07D1AC901E816E9600A963B1 /* genstrings */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = genstrings;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = scripts/./genstrings.sh;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		07A5498A1E7C97AA00A6C4A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				07A549C41E7C9C9500A6C4A1 /* KSOMediaPickerModel.m in Sources */,
+				07D1AC8F1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */,
 				07377F261E7DE98600094D95 /* KSOMediaPickerAssetModel.m in Sources */,
 				07A549B81E7C980600A6C4A1 /* KSOMediaPickerViewController.m in Sources */,
 				07377F2A1E7DEA9D00094D95 /* KSOMediaPickerAssetCollectionModel.m in Sources */,
@@ -363,6 +397,14 @@
 				07A549AD1E7C97D400A6C4A1 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		07D1AC911E8171CF00A963B1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07D1AC921E8171CF00A963B1 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -1,0 +1,1 @@
+find $SRCROOT/KSOMediaPicker/ -name "*.m" | xargs genstrings -o $SRCROOT/KSOMediaPicker/en.lproj

@@ -16,20 +16,28 @@
 #import "KSOMediaPickerModel.h"
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerAssetModel.h"
+#import "NSBundle+KSOMediaPickerPrivateExtensions.h"
 
 #import <Quicksilver/Quicksilver.h>
 #import <Agamotto/Agamotto.h>
 #import <Stanley/Stanley.h>
-#import <Ditko/UIBarButtonItem+KDIExtensions.h>
+#import <Ditko/Ditko.h>
 
 #import <Photos/Photos.h>
 
 @interface KSOMediaPickerModel ()
+@property (readwrite,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
+@property (readwrite,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
+
+@property (readwrite,copy,nonatomic) NSString *title;
+@property (readwrite,copy,nonatomic,nullable) NSString *subtitle;
+
 @property (readwrite,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (readwrite,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
 
-@property (readwrite,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
-@property (readwrite,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
+- (void)_updateTitle;
+- (void)_updateSubtitle;
+- (void)_reloadAssetCollectionModels;
 @end
 
 @implementation KSOMediaPickerModel
@@ -72,6 +80,10 @@
         }
     }];
     
+    [self _updateTitle];
+    [self _updateSubtitle];
+    [self _reloadAssetCollectionModels];
+    
     return self;
 }
 
@@ -86,12 +98,110 @@
         
         PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[assetIdentifier] options:options].firstObject;
         
-        [retval addObject:asset];
+        if (retval != nil) {
+            [retval addObject:asset];
+        }
     }
     
     return [retval KQS_map:^id _Nullable(PHAsset * _Nonnull object, NSInteger index) {
         return [[KSOMediaPickerAssetModel alloc] initWithAsset:object];
     }];
+}
+
+- (void)_updateTitle; {
+    if (self.selectedAssetCollectionModel == nil) {
+        switch ([PHPhotoLibrary authorizationStatus]) {
+            case PHAuthorizationStatusAuthorized:
+                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_AUTHORIZED_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Authorized", @"media picker authorized title")];
+                break;
+            case PHAuthorizationStatusDenied:
+                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_DENIED_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Denied", @"media picker denied title")];
+                break;
+            case PHAuthorizationStatusNotDetermined:
+                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_REQUESTING_AUTHORIZATION_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Requesting Authorization", @"media picker requesting authorization title")];
+                break;
+            case PHAuthorizationStatusRestricted:
+                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_RESTRICTED_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Restricted", @"media picker restricted title")];
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        [self setTitle:self.selectedAssetCollectionModel.title];
+    }
+}
+- (void)_updateSubtitle; {
+    [self setSubtitle:self.selectedAssetCollectionModel == nil ? nil : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_DEFAULT_SUBTITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Tap to select album ▼", @"media picker default subtitle")];
+}
+- (void)_reloadAssetCollectionModels; {
+    void(^block)(PHAuthorizationStatus) = ^(PHAuthorizationStatus status){
+        switch (status) {
+            case PHAuthorizationStatusAuthorized: {
+                NSMutableArray<PHAssetCollection *> *retval = [[NSMutableArray alloc] init];
+                
+                [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:nil] enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [retval addObject:obj];
+                }];
+                
+                [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAny options:nil] enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [retval addObject:obj];
+                }];
+                
+                NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels = [retval KQS_map:^id _Nullable(PHAssetCollection * _Nonnull object, NSInteger index) {
+                    return [[KSOMediaPickerAssetCollectionModel alloc] initWithAssetCollection:object model:self];
+                }];
+                
+                KSOMediaPickerAssetCollectionModel *oldSelectedAssetCollectionModel = self.selectedAssetCollectionModel;
+                
+                [self setAssetCollectionModels:[[assetCollectionModels KQS_reject:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
+                    return object.title.length == 0 || (self.hidesEmptyAssetCollections && object.countOfAssetModels == 0);
+                }] KQS_filter:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
+                    return self.allowedAssetCollectionSubtypes == nil || [self.allowedAssetCollectionSubtypes containsObject:@(object.subtype)];
+                }]];
+                
+                // try to select previously selected asset collection model
+                if (oldSelectedAssetCollectionModel != nil) {
+                    for (KSOMediaPickerAssetCollectionModel *model in self.assetCollectionModels) {
+                        if ([model.identifier isEqualToString:oldSelectedAssetCollectionModel.identifier]) {
+                            [self setSelectedAssetCollectionModel:model];
+                            break;
+                        }
+                    }
+                }
+                
+                // select camera roll by default
+                if (!self.selectedAssetCollectionModel) {
+                    for (KSOMediaPickerAssetCollectionModel *collection in self.assetCollectionModels) {
+                        if (collection.subtype == self.initiallySelectedAssetCollectionSubtype) {
+                            [self setSelectedAssetCollectionModel:collection];
+                            break;
+                        }
+                    }
+                }
+                
+                // if still no selection, select the first asset collection
+                if (!self.selectedAssetCollectionModel) {
+                    [self setSelectedAssetCollectionModel:self.assetCollectionModels.firstObject];
+                }
+            }
+                break;
+            case PHAuthorizationStatusNotDetermined: {
+                [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                    block(status);
+                }];
+            }
+                break;
+            case PHAuthorizationStatusDenied:
+                break;
+            case PHAuthorizationStatusRestricted:
+                break;
+            default:
+                break;
+        }
+    };
+    
+    block([PHPhotoLibrary authorizationStatus]);
 }
 
 @end
