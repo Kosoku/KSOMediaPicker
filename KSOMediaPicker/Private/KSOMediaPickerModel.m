@@ -19,7 +19,7 @@
 
 #import <Quicksilver/Quicksilver.h>
 #import <Agamotto/Agamotto.h>
-#import <Stanley/KSTScopeMacros.h>
+#import <Stanley/Stanley.h>
 #import <Ditko/UIBarButtonItem+KDIExtensions.h>
 
 #import <Photos/Photos.h>
@@ -34,6 +34,10 @@
 
 @implementation KSOMediaPickerModel
 
+- (void)dealloc {
+    KSTLogObject(self.class);
+}
+
 - (instancetype)init {
     if (!(self = [super init]))
         return nil;
@@ -42,9 +46,9 @@
     _cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:NULL];
     
     kstWeakify(self);
-    [self KAG_addObserverForKeyPaths:@[@"doneBarButtonItemBlock",@"cancelBarButtonItemBlock"] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,doneBarButtonItemBlock),@kstKeypath(self,cancelBarButtonItemBlock)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        if ([keyPath isEqualToString:@"doneBarButtonItemBlock"]) {
+        if ([keyPath isEqualToString:@kstKeypath(self,doneBarButtonItemBlock)]) {
             if (value == nil) {
                 [self.doneBarButtonItem setKDI_block:nil];
             }

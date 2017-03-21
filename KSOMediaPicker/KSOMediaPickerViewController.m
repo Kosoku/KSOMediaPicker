@@ -17,13 +17,17 @@
 #import "KSOMediaPickerModel.h"
 #import "KSOMediaPickerAssetModel.h"
 
-#import <Stanley/KSTScopeMacros.h>
+#import <Stanley/Stanley.h>
 
 @interface KSOMediaPickerViewController ()
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @end
 
 @implementation KSOMediaPickerViewController
+
+- (void)dealloc {
+    KSTLogObject(self.class);
+}
 
 - (instancetype)init {
     if (!(self = [super init]))
