@@ -19,6 +19,7 @@
 
 @interface ViewController () <KSOMediaPickerViewControllerDelegate>
 @property (strong,nonatomic) UIButton *modalButton;
+@property (strong,nonatomic) UIButton *pushButton;
 @end
 
 @implementation ViewController
@@ -34,23 +35,47 @@
     [self.modalButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.modalButton];
     
+    [self setPushButton:[UIButton buttonWithType:UIButtonTypeSystem]];
+    [self.pushButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.pushButton setTitle:@"Push" forState:UIControlStateNormal];
+    [self.pushButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.pushButton];
+    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top]-[view]" options:0 metrics:nil views:@{@"view": self.modalButton, @"top": self.topLayoutGuide}]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.modalButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]" options:0 metrics:nil views:@{@"view": self.pushButton, @"subview": self.modalButton}]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pushButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
 }
 
 - (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController {
-    [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    if (mediaPickerViewController.presentingViewController == nil) {
+        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia>> *)media {
-    [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    if (mediaPickerViewController.presentingViewController == nil) {
+        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
-- (IBAction)_buttonAction:(id)sender {
+- (IBAction)_buttonAction:(UIButton *)sender {
     KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
     
     [viewController setDelegate:self];
     
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
+    if (sender == self.modalButton) {
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
+    }
+    else {
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 @end

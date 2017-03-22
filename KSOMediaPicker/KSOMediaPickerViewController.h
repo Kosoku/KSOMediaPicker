@@ -28,6 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic,null_resettable) KSOMediaPickerTheme *theme;
 
+/**
+ Set and get whether the media picker allows the user to select multiple assets.
+ 
+ The default is NO.
+ */
+@property (assign,nonatomic) BOOL allowsMultipleSelection;
+
 @end
 
 @protocol KSOMediaPickerViewControllerDelegate <NSObject>

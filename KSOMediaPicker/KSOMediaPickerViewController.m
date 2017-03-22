@@ -71,8 +71,15 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
     
-    [self.navigationItem setLeftBarButtonItems:@[self.model.cancelBarButtonItem]];
-    [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
+    if (self.allowsMultipleSelection) {
+        if (self.presentingViewController != nil) {
+            [self.navigationItem setLeftBarButtonItems:@[self.model.cancelBarButtonItem]];
+        }
+        [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
+    }
+    else {
+        [self.navigationItem setRightBarButtonItems:@[self.model.cancelBarButtonItem]];
+    }
     
     kstWeakify(self);
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,titleView)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
@@ -105,6 +112,14 @@
 }
 - (void)setTheme:(KSOMediaPickerTheme *)theme {
     [self.model setTheme:theme];
+}
+
+@dynamic allowsMultipleSelection;
+- (BOOL)allowsMultipleSelection {
+    return self.model.allowsMultipleSelection;
+}
+- (void)setAllowsMultipleSelection:(BOOL)allowsMultipleSelection {
+    [self.model setAllowsMultipleSelection:allowsMultipleSelection];
 }
 
 - (void)_updateTitleViewProperties; {
