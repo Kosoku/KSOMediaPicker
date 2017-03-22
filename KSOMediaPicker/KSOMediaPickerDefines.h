@@ -17,12 +17,46 @@
 #define __KSO_MEDIA_PICKER_DEFINES__
 
 #import <Photos/PhotosTypes.h>
+#import <Photos/PHPhotoLibrary.h>
+
+typedef NS_ENUM(NSInteger, KSOMediaPickerAuthorizationStatus) {
+    KSOMediaPickerAuthorizationStatusNotDetermined = PHAuthorizationStatusNotDetermined,
+    KSOMediaPickerAuthorizationStatusRestricted = PHAuthorizationStatusRestricted,
+    KSOMediaPickerAuthorizationStatusDenied = PHAuthorizationStatusDenied,
+    KSOMediaPickerAuthorizationStatusAuthorized = PHAuthorizationStatusAuthorized
+};
 
 typedef NS_ENUM(NSInteger, KSOMediaPickerMediaType) {
     KSOMediaPickerMediaTypeUnknown = PHAssetMediaTypeUnknown,
     KSOMediaPickerMediaTypeImage = PHAssetMediaTypeImage,
     KSOMediaPickerMediaTypeVideo = PHAssetMediaTypeVideo,
     KSOMediaPickerMediaTypeAudio = PHAssetMediaTypeAudio
+};
+
+/**
+ Mask describing the types of media that should be displayed when using the library.
+ */
+typedef NS_OPTIONS(NSUInteger, KSOMediaPickerMediaTypes) {
+    /**
+     Unknown media should be displayed.
+     */
+    KSOMediaPickerMediaTypesUnknown = 1 << 0,
+    /**
+     Image media should be displayed.
+     */
+    KSOMediaPickerMediaTypesImage = 1 << 1,
+    /**
+     Video media should be displayed.
+     */
+    KSOMediaPickerMediaTypesVideo = 1 << 2,
+    /**
+     Audio media should be displayed.
+     */
+    KSOMediaPickerMediaTypesAudio = 1 << 3,
+    /**
+     All media should be displayed.
+     */
+    KSOMediaPickerMediaTypesAll = KSOMediaPickerMediaTypesUnknown | KSOMediaPickerMediaTypesImage | KSOMediaPickerMediaTypesVideo | KSOMediaPickerMediaTypesAudio
 };
 
 typedef NS_ENUM(NSInteger, KSOMediaPickerAssetCollectionSubtype) {
@@ -105,32 +139,6 @@ typedef NS_ENUM(NSInteger, KSOMediaPickerAssetCollectionSubtype) {
      A smart album that groups all images captured using the device's screenshot function.
      */
     KSOMediaPickerAssetCollectionSubtypeSmartAlbumScreenshots = PHAssetCollectionSubtypeSmartAlbumScreenshots
-};
-
-/**
- Mask describing the types of media that should be displayed when using the library.
- */
-typedef NS_OPTIONS(NSUInteger, KSOMediaPickerMediaTypes) {
-    /**
-     Unknown media should be displayed.
-     */
-    KSOMediaPickerMediaTypesUnknown = 1 << 0,
-    /**
-     Image media should be displayed.
-     */
-    KSOMediaPickerMediaTypesImage = 1 << 1,
-    /**
-     Video media should be displayed.
-     */
-    KSOMediaPickerMediaTypesVideo = 1 << 2,
-    /**
-     Audio media should be displayed.
-     */
-    KSOMediaPickerMediaTypesAudio = 1 << 3,
-    /**
-     All media should be displayed.
-     */
-    KSOMediaPickerMediaTypesAll = KSOMediaPickerMediaTypesUnknown | KSOMediaPickerMediaTypesImage | KSOMediaPickerMediaTypesVideo | KSOMediaPickerMediaTypesAudio
 };
 
 #endif

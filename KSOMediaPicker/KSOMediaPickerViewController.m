@@ -18,6 +18,7 @@
 #import "KSOMediaPickerAssetModel.h"
 #import "KSOMediaPickerTheme.h"
 #import "KSOMediaPickerTitleView.h"
+#import "KSOMediaPickerBackgroundView.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
@@ -25,6 +26,7 @@
 @interface KSOMediaPickerViewController ()
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @property (strong,nonatomic) UIView<KSOMediaPickerTitleView> *titleView;
+@property (strong,nonatomic) KSOMediaPickerBackgroundView *backgroundView;
 
 - (void)_updateTitleViewProperties;
 - (void)_updateTitleViewTitleAndSubtitle;
@@ -62,6 +64,13 @@
     
     [self setTitleView:[[self.model.theme.titleViewClass alloc] initWithFrame:CGRectZero]];
     
+    [self setBackgroundView:[[KSOMediaPickerBackgroundView alloc] initWithModel:self.model]];
+    [self.backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addSubview:self.backgroundView];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": self.backgroundView}]];
+    
     [self.navigationItem setLeftBarButtonItems:@[self.model.cancelBarButtonItem]];
     [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
     
@@ -74,6 +83,7 @@
             [self.navigationItem setTitleView:_titleView];
         }
     }];
+    
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,title),@kstKeypath(self.model,subtitle)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
@@ -81,6 +91,20 @@
         });
     }];
     
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        if ([self.titleView respondsToSelector:@selector(setTheme:)]) {
+            [self.titleView setTheme:value];
+        }
+    }];
+}
+
+@dynamic theme;
+- (KSOMediaPickerTheme *)theme {
+    return self.model.theme;
+}
+- (void)setTheme:(KSOMediaPickerTheme *)theme {
+    [self.model setTheme:theme];
 }
 
 - (void)_updateTitleViewProperties; {

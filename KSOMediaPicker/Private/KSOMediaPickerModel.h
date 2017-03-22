@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KSOMediaPickerModel : NSObject
 
+@property (readonly,assign,nonatomic) KSOMediaPickerAuthorizationStatus authorizationStatus;
+
 @property (assign,nonatomic) BOOL hidesEmptyAssetCollections;
 
 @property (assign,nonatomic) KSOMediaPickerMediaTypes mediaTypes;
@@ -30,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign,nonatomic) KSOMediaPickerAssetCollectionSubtype initiallySelectedAssetCollectionSubtype;
 @property (copy,nonatomic) NSSet<NSNumber *> *allowedAssetCollectionSubtypes;
 
-@property (strong,nonatomic) KSOMediaPickerTheme *theme;
+@property (strong,nonatomic,null_resettable) KSOMediaPickerTheme *theme;
 
 @property (readonly,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (copy,nonatomic) dispatch_block_t doneBarButtonItemBlock;

@@ -27,6 +27,8 @@
 #import <Photos/Photos.h>
 
 @interface KSOMediaPickerModel ()
+@property (readwrite,assign,nonatomic) KSOMediaPickerAuthorizationStatus authorizationStatus;
+
 @property (readwrite,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (readwrite,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
 
@@ -50,6 +52,8 @@
 - (instancetype)init {
     if (!(self = [super init]))
         return nil;
+    
+    _authorizationStatus = (KSOMediaPickerAuthorizationStatus)[PHPhotoLibrary authorizationStatus];
     
     _hidesEmptyAssetCollections = YES;
     _mediaTypes = KSOMediaPickerMediaTypesAll;
@@ -97,6 +101,10 @@
     [self _reloadAssetCollectionModels];
     
     return self;
+}
+
+- (void)setTheme:(KSOMediaPickerTheme *)theme {
+    _theme = theme ?: KSOMediaPickerTheme.defaultTheme;
 }
 
 - (NSArray<KSOMediaPickerAssetModel *> *)selectedAssetModels {
@@ -148,7 +156,10 @@
 }
 - (void)_reloadAssetCollectionModels; {
     __block __weak void(^weakBlock)(PHAuthorizationStatus) = nil;
+    
     void(^block)(PHAuthorizationStatus) = ^(PHAuthorizationStatus status){
+        [self setAuthorizationStatus:(KSOMediaPickerAuthorizationStatus)status];
+        
         switch (status) {
             case PHAuthorizationStatusAuthorized: {
                 NSMutableArray<PHAssetCollection *> *retval = [[NSMutableArray alloc] init];

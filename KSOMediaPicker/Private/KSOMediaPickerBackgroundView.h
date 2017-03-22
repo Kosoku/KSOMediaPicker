@@ -1,8 +1,8 @@
 //
-//  KSOMediaPickerViewController.h
+//  KSOMediaPickerBackgroundView.h
 //  KSOMediaPicker
 //
-//  Created by William Towe on 3/17/17.
+//  Created by William Towe on 3/22/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,25 +15,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import <KSOMediaPicker/KSOMediaPickerMedia.h>
+@class KSOMediaPickerModel,KSOMediaPickerTheme;
 
-NS_ASSUME_NONNULL_BEGIN
+@interface KSOMediaPickerBackgroundView : UIView
 
-@class KSOMediaPickerTheme;
-@protocol KSOMediaPickerViewControllerDelegate;
+@property (strong,nonatomic) KSOMediaPickerTheme *theme;
 
-@interface KSOMediaPickerViewController : UIViewController
-
-@property (weak,nonatomic) id<KSOMediaPickerViewControllerDelegate> delegate;
-
-@property (strong,nonatomic,null_resettable) KSOMediaPickerTheme *theme;
+- (instancetype)initWithModel:(KSOMediaPickerModel *)model;
 
 @end
-
-@protocol KSOMediaPickerViewControllerDelegate <NSObject>
-@required
-- (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController;
-- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia> > *)media;
-@end
-
-NS_ASSUME_NONNULL_END
