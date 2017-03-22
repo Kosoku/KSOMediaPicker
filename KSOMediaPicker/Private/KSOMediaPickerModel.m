@@ -87,6 +87,11 @@
         }
     }];
     
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,selectedAssetIdentifiers)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, NSOrderedSet<NSString *> * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        [self.doneBarButtonItem setEnabled:value.count > 0];
+    }];
+    
     [self _updateTitle];
     [self _updateSubtitle];
     [self _reloadAssetCollectionModels];
