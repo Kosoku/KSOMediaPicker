@@ -20,6 +20,7 @@
 
 #import <Agamotto/Agamotto.h>
 #import <Stanley/Stanley.h>
+#import <Ditko/Ditko.h>
 
 @interface KSOMediaPickerBackgroundView ()
 @property (strong,nonatomic) UIView *containerView;
@@ -50,6 +51,9 @@
     _button = [UIButton buttonWithType:UIButtonTypeSystem];
     [_button setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_button setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_PRIVACY_SETTINGS_BUTTON", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Privacy Settings", @"media picker background view privacy settings button") forState:UIControlStateNormal];
+    [_button KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey: [NSBundle mainBundle].KST_bundleIdentifier} completionHandler:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
     [_containerView addSubview:_button];
     
     [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _label}]];
