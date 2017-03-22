@@ -1,8 +1,8 @@
 //
-//  KSOMediaPickerAssetCollectionModel.h
+//  KSOMediaPickerAssetCollectionViewLayout.h
 //  KSOMediaPicker
 //
-//  Created by William Towe on 3/18/17.
+//  Created by William Towe on 3/22/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -14,35 +14,9 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <UIKit/UIKit.h>
-#import <Photos/PHCollection.h>
-#import <Photos/PHFetchResult.h>
 
-#import <KSOMediaPicker/KSOMediaPickerDefines.h>
+@interface KSOMediaPickerAssetCollectionViewLayout : UICollectionViewFlowLayout
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class KSOMediaPickerModel,KSOMediaPickerAssetModel;
-
-@interface KSOMediaPickerAssetCollectionModel : NSObject
-
-@property (readonly,weak,nonatomic,nullable) KSOMediaPickerModel *model;
-
-@property (readonly,strong,nonatomic) PHAssetCollection *assetCollection;
-@property (readonly,strong,nonatomic) PHFetchResult<PHAsset *> *fetchResult;
-
-@property (readonly,nonatomic) NSString *identifier;
-@property (readonly,nonatomic) KSOMediaPickerAssetCollectionSubtype subtype;
-@property (readonly,nonatomic) NSString *title;
-@property (readonly,nonatomic) NSString *subtitle;
-@property (readonly,nonatomic,nullable) UIImage *typeImage;
-
-@property (readonly,nonatomic) NSUInteger countOfAssetModels;
-- (KSOMediaPickerAssetModel *)assetModelAtIndex:(NSUInteger)index;
-
-- (instancetype)initWithAssetCollection:(PHAssetCollection *)assetCollection model:(nullable KSOMediaPickerModel *)model;
-
-- (void)reloadFetchResult;
+@property (assign,nonatomic) NSInteger numberOfColumns;
 
 @end
-
-NS_ASSUME_NONNULL_END

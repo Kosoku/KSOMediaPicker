@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)initWithAsset:(PHAsset *)asset;
 
+- (void)requestThumbnailImageOfSize:(CGSize)size completion:(void(^)(UIImage * _Nullable thumbnailImage))completion;
+- (void)cancelAllThumbnailRequests;
+
 @end
 
 NS_ASSUME_NONNULL_END

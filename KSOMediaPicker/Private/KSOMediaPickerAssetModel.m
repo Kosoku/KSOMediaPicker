@@ -15,8 +15,11 @@
 
 #import "KSOMediaPickerAssetModel.h"
 
+#import <Photos/Photos.h>
+
 @interface KSOMediaPickerAssetModel ()
 @property (readwrite,strong,nonatomic) PHAsset *asset;
+@property (assign,nonatomic) PHImageRequestID imageRequestID;
 @end
 
 @implementation KSOMediaPickerAssetModel
@@ -39,6 +42,34 @@
     _asset = asset;
     
     return self;
+}
+
+- (void)requestThumbnailImageOfSize:(CGSize)size completion:(void(^)(UIImage * _Nullable thumbnailImage))completion; {
+    NSParameterAssert(completion);
+    
+    if (CGSizeEqualToSize(CGSizeZero, size)) {
+        completion(nil);
+        return;
+    }
+
+    [self cancelAllThumbnailRequests];
+    
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        
+    [options setDeliveryMode:PHImageRequestOptionsDeliveryModeFastFormat];
+    [options setResizeMode:PHImageRequestOptionsResizeModeFast];
+    [options setNetworkAccessAllowed:YES];
+    
+    [self setImageRequestID:[[PHCachingImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        completion(result);
+    }]];
+}
+- (void)cancelAllThumbnailRequests; {
+    if (self.imageRequestID != PHInvalidImageRequestID) {
+        [[PHCachingImageManager defaultManager] cancelImageRequest:self.imageRequestID];
+    }
+    
+    [self setImageRequestID:PHInvalidImageRequestID];
 }
 
 @end

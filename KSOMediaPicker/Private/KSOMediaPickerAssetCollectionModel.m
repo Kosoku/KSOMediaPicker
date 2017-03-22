@@ -30,6 +30,10 @@
 
 @implementation KSOMediaPickerAssetCollectionModel
 
++ (NSSet *)keyPathsForValuesAffectingCountOfAssetModels {
+    return [NSSet setWithObject:@kstKeypath(KSOMediaPickerAssetCollectionModel.new,fetchResult)];
+}
+
 - (instancetype)initWithAssetCollection:(PHAssetCollection *)assetCollection model:(KSOMediaPickerModel *)model; {
     if (!(self = [super init]))
         return nil;
@@ -42,6 +46,10 @@
     [self reloadFetchResult];
     
     return self;
+}
+
+- (KSOMediaPickerAssetModel *)assetModelAtIndex:(NSUInteger)index; {
+    return [[KSOMediaPickerAssetModel alloc] initWithAsset:[self.fetchResult objectAtIndex:index]];
 }
 
 - (void)reloadFetchResult {

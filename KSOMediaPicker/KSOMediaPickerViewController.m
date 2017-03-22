@@ -19,6 +19,7 @@
 #import "KSOMediaPickerTheme.h"
 #import "KSOMediaPickerTitleView.h"
 #import "KSOMediaPickerBackgroundView.h"
+#import "KSOMediaPickerAssetCollectionViewController.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
@@ -27,6 +28,7 @@
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @property (strong,nonatomic) UIView<KSOMediaPickerTitleView> *titleView;
 @property (strong,nonatomic) KSOMediaPickerBackgroundView *backgroundView;
+@property (strong,nonatomic) KSOMediaPickerAssetCollectionViewController *collectionViewController;
 
 - (void)_updateTitleViewProperties;
 - (void)_updateTitleViewTitleAndSubtitle;
@@ -103,6 +105,22 @@
         if ([self.titleView respondsToSelector:@selector(setTheme:)]) {
             [self.titleView setTheme:value];
         }
+    }];
+    
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,authorizationStatus)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            if ([value integerValue] == KSOMediaPickerAuthorizationStatusAuthorized) {
+                [self setCollectionViewController:[[KSOMediaPickerAssetCollectionViewController alloc] initWithModel:self.model]];
+                [self.collectionViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+                [self addChildViewController:self.collectionViewController];
+                [self.view addSubview:self.collectionViewController.view];
+                [self.collectionViewController didMoveToParentViewController:self];
+                
+                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.collectionViewController.view}]];
+                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][view]|" options:0 metrics:nil views:@{@"view": self.collectionViewController.view, @"top": self.topLayoutGuide}]];
+            }
+        });
     }];
 }
 
