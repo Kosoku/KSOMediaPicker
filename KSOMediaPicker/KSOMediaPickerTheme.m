@@ -24,20 +24,39 @@
 + (UIFont *)_defaultSubtitleFont;
 + (UIColor *)_defaultSubtitleColor;
 + (Class)_defaultTitleViewClass;
+
++ (UIColor *)_defaultAssetBackgroundColor;
 @end
 
 @implementation KSOMediaPickerTheme
+
+- (id)copyWithZone:(NSZone *)zone {
+    KSOMediaPickerTheme *retval = [[[self class] alloc] initWithIdentifier:[NSString stringWithFormat:@"%@.copy",self.identifier]];
+    
+    retval->_titleFont = _titleFont;
+    retval->_titleColor = _titleColor;
+    retval->_subtitleFont = _subtitleFont;
+    retval->_subtitleColor = _subtitleColor;
+    retval->_titleViewClass = _titleViewClass;
+    
+    retval->_assetBackgroundColor = _assetBackgroundColor;
+    
+    return retval;
+}
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     if (!(self = [super init]))
         return nil;
     
     _identifier = [identifier copy];
+    
     _titleFont = [self.class _defaultTitleFont];
     _titleColor = [self.class _defaultTitleColor];
     _subtitleFont = [self.class _defaultSubtitleFont];
     _subtitleColor = [self.class _defaultSubtitleColor];
     _titleViewClass = [self.class _defaultTitleViewClass];
+    
+    _assetBackgroundColor = [self.class _defaultAssetBackgroundColor];
     
     return self;
 }
@@ -67,6 +86,10 @@
     _titleViewClass = titleViewClass ?: [self.class _defaultTitleViewClass];
 }
 
+- (void)setAssetBackgroundColor:(UIColor *)assetBackgroundColor {
+    _assetBackgroundColor = assetBackgroundColor ?: [self.class _defaultAssetBackgroundColor];
+}
+
 + (UIFont *)_defaultTitleFont; {
     return [UIFont boldSystemFontOfSize:17.0];
 }
@@ -81,6 +104,10 @@
 }
 + (Class)_defaultTitleViewClass; {
     return [KSOMediaPickerDefaultTitleView class];
+}
+
++ (UIColor *)_defaultAssetBackgroundColor; {
+    return [UIColor whiteColor];
 }
 
 @end

@@ -17,7 +17,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KSOMediaPickerTheme : NSObject
+@interface KSOMediaPickerTheme : NSObject <NSCopying>
 
 /**
  Returns the default theme.
@@ -58,6 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
  @see BBMediaPickerTitleView
  */
 @property (strong,nonatomic,null_resettable) Class titleViewClass;
+
+/**
+ Set and get the asset background color, which is used as the background color of the asset collection view.
+ 
+ The default is [UIColor whiteColor].
+ */
+@property (strong,nonatomic,null_resettable) UIColor *assetBackgroundColor;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
 
