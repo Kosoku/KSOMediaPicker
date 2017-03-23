@@ -14,7 +14,6 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "KSOMediaPickerTheme.h"
-#import "KSOMediaPickerDefaultTitleView.h"
 
 @interface KSOMediaPickerTheme ()
 @property (readwrite,copy,nonatomic) NSString *identifier;
@@ -37,7 +36,6 @@
     retval->_titleColor = _titleColor;
     retval->_subtitleFont = _subtitleFont;
     retval->_subtitleColor = _subtitleColor;
-    retval->_titleViewClass = _titleViewClass;
     
     retval->_assetBackgroundColor = _assetBackgroundColor;
     
@@ -54,7 +52,6 @@
     _titleColor = [self.class _defaultTitleColor];
     _subtitleFont = [self.class _defaultSubtitleFont];
     _subtitleColor = [self.class _defaultSubtitleColor];
-    _titleViewClass = [self.class _defaultTitleViewClass];
     
     _assetBackgroundColor = [self.class _defaultAssetBackgroundColor];
     
@@ -82,9 +79,6 @@
 - (void)setSubtitleColor:(UIColor *)subtitleColor {
     _subtitleColor = subtitleColor ?: [self.class _defaultSubtitleColor];
 }
-- (void)setTitleViewClass:(Class)titleViewClass {
-    _titleViewClass = titleViewClass ?: [self.class _defaultTitleViewClass];
-}
 
 - (void)setAssetBackgroundColor:(UIColor *)assetBackgroundColor {
     _assetBackgroundColor = assetBackgroundColor ?: [self.class _defaultAssetBackgroundColor];
@@ -101,9 +95,6 @@
 }
 + (UIColor *)_defaultSubtitleColor; {
     return [UIColor darkGrayColor];
-}
-+ (Class)_defaultTitleViewClass; {
-    return [KSOMediaPickerDefaultTitleView class];
 }
 
 + (UIColor *)_defaultAssetBackgroundColor; {

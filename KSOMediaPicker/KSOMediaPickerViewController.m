@@ -17,7 +17,6 @@
 #import "KSOMediaPickerModel.h"
 #import "KSOMediaPickerAssetModel.h"
 #import "KSOMediaPickerTheme.h"
-#import "KSOMediaPickerTitleView.h"
 #import "KSOMediaPickerBackgroundView.h"
 #import "KSOMediaPickerAssetCollectionViewController.h"
 
@@ -26,12 +25,9 @@
 
 @interface KSOMediaPickerViewController () <KSOMediaPickerModelDelegate>
 @property (strong,nonatomic) KSOMediaPickerModel *model;
-@property (strong,nonatomic) UIView<KSOMediaPickerTitleView> *titleView;
 @property (strong,nonatomic) KSOMediaPickerBackgroundView *backgroundView;
 @property (strong,nonatomic) KSOMediaPickerAssetCollectionViewController *collectionViewController;
 
-- (void)_updateTitleViewProperties;
-- (void)_updateTitleViewTitleAndSubtitle;
 @end
 
 @implementation KSOMediaPickerViewController
@@ -65,8 +61,6 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    [self setTitleView:[[self.model.theme.titleViewClass alloc] initWithFrame:CGRectZero]];
-    
     [self setBackgroundView:[[KSOMediaPickerBackgroundView alloc] initWithModel:self.model]];
     [self.backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.backgroundView];
@@ -85,27 +79,18 @@
     }
     
     kstWeakify(self);
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,titleView)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
-        kstStrongify(self);
-        if (self.titleView != nil) {
-            [self _updateTitleViewProperties];
-            
-            [self.navigationItem setTitleView:_titleView];
-        }
-    }];
-    
-    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,title),@kstKeypath(self.model,subtitle)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,title)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            [self _updateTitleViewTitleAndSubtitle];
+            [self setTitle:value];
         });
     }];
     
-    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:0 block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        if ([self.titleView respondsToSelector:@selector(setTheme:)]) {
-            [self.titleView setTheme:value];
-        }
+        KSTDispatchMainAsync(^{
+            [self.view setBackgroundColor:value.assetBackgroundColor];
+        });
     }];
     
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,authorizationStatus)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
@@ -201,40 +186,6 @@
 }
 - (void)setHidesEmptyAssetCollections:(BOOL)hidesEmptyAssetCollections {
     [self.model setHidesEmptyAssetCollections:hidesEmptyAssetCollections];
-}
-
-- (void)_updateTitleViewProperties; {
-    for (UIGestureRecognizer *gr in self.titleView.gestureRecognizers) {
-        [self.titleView removeGestureRecognizer:gr];
-    }
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapGestureRecognizerAction:)];
-    
-    [tapGestureRecognizer setNumberOfTapsRequired:1];
-#if (TARGET_OS_IOS)
-    [tapGestureRecognizer setNumberOfTouchesRequired:1];
-#endif
-    
-    [self.titleView addGestureRecognizer:tapGestureRecognizer];
-    
-    if ([self.titleView respondsToSelector:@selector(setTheme:)]) {
-        [self.titleView setTheme:self.model.theme];
-    }
-    
-    [self _updateTitleViewTitleAndSubtitle];
-}
-- (void)_updateTitleViewTitleAndSubtitle; {
-    [self.titleView setTitle:self.model.title];
-    
-    if ([self.titleView respondsToSelector:@selector(setSubtitle:)]) {
-        [self.titleView setSubtitle:self.model.subtitle];
-    }
-    
-    [self.titleView sizeToFit];
-}
-
-- (IBAction)_tapGestureRecognizerAction:(id)sender {
-    
 }
 
 @end

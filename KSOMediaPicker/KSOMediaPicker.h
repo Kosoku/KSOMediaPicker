@@ -25,7 +25,6 @@ FOUNDATION_EXPORT const unsigned char KSOMediaPickerVersionString[];
 
 #import <KSOMediaPicker/KSOMediaPickerDefines.h>
 #import <KSOMediaPicker/KSOMediaPickerMedia.h>
-#import <KSOMediaPicker/KSOMediaPickerTitleView.h>
 #import <KSOMediaPicker/KSOMediaPickerAssetCollectionCellSelectedOverlayView.h>
 #import <KSOMediaPicker/KSOMediaPickerTheme.h>
 #import <KSOMediaPicker/KSOMediaPickerViewController.h>

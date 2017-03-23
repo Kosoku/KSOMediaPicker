@@ -19,9 +19,12 @@
 #import <Ditko/Ditko.h>
 #import <KSOMediaPicker/KSOMediaPicker.h>
 
-@interface ViewController () <KSOMediaPickerViewControllerDelegate>
+#import <MobileCoreServices/MobileCoreServices.h>
+
+@interface ViewController () <KSOMediaPickerViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong,nonatomic) UIButton *modalButton;
 @property (strong,nonatomic) UIButton *pushButton;
+@property (strong,nonatomic) UIButton *systemButton;
 @end
 
 @implementation ViewController
@@ -47,11 +50,35 @@
     [self.pushButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventPrimaryActionTriggered];
     [self.view addSubview:self.pushButton];
     
+    [self setSystemButton:[UIButton buttonWithType:UIButtonTypeSystem]];
+    [self.systemButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.systemButton setTitle:@"UIImagePickerController" forState:UIControlStateNormal];
+    [self.systemButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        
+        [imagePickerController setDelegate:self];
+        [imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [imagePickerController setMediaTypes:@[(__bridge id)kUTTypeImage,(__bridge id)kUTTypeMovie]];
+        
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.systemButton];
+    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top]-[view]" options:0 metrics:nil views:@{@"view": self.modalButton, @"top": self.topLayoutGuide}]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.modalButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]" options:0 metrics:nil views:@{@"view": self.pushButton, @"subview": self.modalButton}]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pushButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]" options:0 metrics:nil views:@{@"view": self.systemButton, @"subview": self.pushButton}]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.systemButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia>> *)media {

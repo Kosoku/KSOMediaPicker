@@ -40,13 +40,11 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
 @property (readwrite,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
 
 @property (readwrite,copy,nonatomic) NSString *title;
-@property (readwrite,copy,nonatomic,nullable) NSString *subtitle;
 
 @property (readwrite,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (readwrite,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
 
 - (void)_updateTitle;
-- (void)_updateSubtitle;
 - (void)_reloadAssetCollectionModels;
 @end
 
@@ -127,7 +125,6 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     }];
     
     [self _updateTitle];
-    [self _updateSubtitle];
     [self _reloadAssetCollectionModels];
     
     return self;
@@ -289,9 +286,6 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
         [self setTitle:self.selectedAssetCollectionModel.title];
     }
 }
-- (void)_updateSubtitle; {
-    [self setSubtitle:self.selectedAssetCollectionModel == nil ? nil : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_DEFAULT_SUBTITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Tap to select album ▼", @"media picker default subtitle")];
-}
 - (void)_reloadAssetCollectionModels; {
     __block __weak void(^weakBlock)(PHAuthorizationStatus) = nil;
     
@@ -365,7 +359,6 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
         }
         
         [self _updateTitle];
-        [self _updateSubtitle];
     };
     
     weakBlock = block;

@@ -52,12 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
  The default is [UIColor darkGrayColor].
  */
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
-/**
- Set and get the title view class, which is instantiated and set as the navigation item's `titleView` property. A default class is provided, but if a custom class is set, instances must conform to the BBMediaPickerTitleView protocol.
- 
- @see BBMediaPickerTitleView
- */
-@property (strong,nonatomic,null_resettable) Class titleViewClass;
 
 /**
  Set and get the asset background color, which is used as the background color of the asset collection view.
