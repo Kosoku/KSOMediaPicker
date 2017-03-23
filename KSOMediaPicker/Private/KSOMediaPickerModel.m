@@ -83,7 +83,6 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     _allowsMixedMediaSelection = YES;
     _hidesEmptyAssetCollections = YES;
     _mediaTypes = KSOMediaPickerMediaTypesAll;
-    _initiallySelectedAssetCollectionSubtype = KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary;
     
     _theme = KSOMediaPickerTheme.defaultTheme;
     
@@ -326,19 +325,15 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
                     }
                 }
                 
-                // select camera roll by default
-                if (self.selectedAssetCollectionModel == nil) {
+                if (self.selectedAssetCollectionModel == nil &&
+                    self.initiallySelectedAssetCollectionSubtype != KSOMediaPickerAssetCollectionSubtypeNone) {
+                    
                     for (KSOMediaPickerAssetCollectionModel *collection in self.assetCollectionModels) {
                         if (collection.subtype == self.initiallySelectedAssetCollectionSubtype) {
                             [self setSelectedAssetCollectionModel:collection];
                             break;
                         }
                     }
-                }
-                
-                // if still no selection, select the first asset collection
-                if (self.selectedAssetCollectionModel == nil) {
-                    [self setSelectedAssetCollectionModel:self.assetCollectionModels.firstObject];
                 }
             }
                 break;

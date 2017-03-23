@@ -62,6 +62,7 @@ typedef NS_OPTIONS(NSUInteger, KSOMediaPickerMediaTypes) {
 };
 
 typedef NS_ENUM(NSInteger, KSOMediaPickerAssetCollectionSubtype) {
+    KSOMediaPickerAssetCollectionSubtypeNone = 0,
     /**
      An album created in the photos app.
      */

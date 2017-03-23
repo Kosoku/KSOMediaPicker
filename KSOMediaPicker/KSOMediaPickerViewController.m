@@ -19,6 +19,7 @@
 #import "KSOMediaPickerTheme.h"
 #import "KSOMediaPickerBackgroundView.h"
 #import "KSOMediaPickerAssetCollectionViewController.h"
+#import "KSOMediaPickerAssetCollectionTableViewController.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
@@ -26,7 +27,7 @@
 @interface KSOMediaPickerViewController () <KSOMediaPickerModelDelegate>
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @property (strong,nonatomic) KSOMediaPickerBackgroundView *backgroundView;
-@property (strong,nonatomic) KSOMediaPickerAssetCollectionViewController *collectionViewController;
+@property (strong,nonatomic) KSOMediaPickerAssetCollectionTableViewController *tableViewController;
 
 @end
 
@@ -97,14 +98,14 @@
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             if ([value integerValue] == KSOMediaPickerAuthorizationStatusAuthorized) {
-                [self setCollectionViewController:[[KSOMediaPickerAssetCollectionViewController alloc] initWithModel:self.model]];
-                [self.collectionViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
-                [self addChildViewController:self.collectionViewController];
-                [self.view addSubview:self.collectionViewController.view];
-                [self.collectionViewController didMoveToParentViewController:self];
+                [self setTableViewController:[[KSOMediaPickerAssetCollectionTableViewController alloc] initWithModel:self.model]];
+                [self.tableViewController.view setTranslatesAutoresizingMaskIntoConstraints:NO];
+                [self addChildViewController:self.tableViewController];
+                [self.view addSubview:self.tableViewController.view];
+                [self.tableViewController didMoveToParentViewController:self];
                 
-                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.collectionViewController.view}]];
-                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][view]|" options:0 metrics:nil views:@{@"view": self.collectionViewController.view, @"top": self.topLayoutGuide}]];
+                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view}]];
+                [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top][view]|" options:0 metrics:nil views:@{@"view": self.tableViewController.view, @"top": self.topLayoutGuide}]];
             }
         });
     }];
