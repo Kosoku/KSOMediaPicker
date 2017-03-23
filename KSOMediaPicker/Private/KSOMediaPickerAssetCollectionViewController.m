@@ -93,14 +93,14 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     KSOMediaPickerAssetModel *model = [(KSOMediaPickerAssetCollectionViewCell *)cell model];
     
+    [(KSOMediaPickerAssetCollectionViewCell *)cell reloadSelectedOverlayView];
+    
     if ([self.model isAssetModelSelected:model]) {
         [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
     }
     else {
         [collectionView deselectItemAtIndexPath:indexPath animated:NO];
     }
-    
-    [(KSOMediaPickerAssetCollectionViewCell *)cell reloadSelectedOverlayView];
 }
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
