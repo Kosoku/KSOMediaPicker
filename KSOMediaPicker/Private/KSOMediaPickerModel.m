@@ -125,6 +125,49 @@
     return self;
 }
 
+- (BOOL)isAssetModelSelected:(KSOMediaPickerAssetModel *)assetModel; {
+    return [self.selectedAssetIdentifiers containsObject:assetModel.identifier];
+}
+- (BOOL)shouldSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel; {
+    return [self.delegate mediaPickerModelShouldSelectAssetModel:assetModel];
+}
+- (BOOL)shouldDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel; {
+    return [self.delegate mediaPickerModelShouldDeselectAssetModel:assetModel];
+}
+- (void)selectAssetModel:(KSOMediaPickerAssetModel *)assetModel; {
+    [self selectAssetModel:assetModel notifyDelegate:YES];
+}
+- (void)selectAssetModel:(KSOMediaPickerAssetModel *)assetModel notifyDelegate:(BOOL)notifyDelegate; {
+    NSMutableOrderedSet *temp = self.allowsMultipleSelection ? [NSMutableOrderedSet orderedSetWithOrderedSet:self.selectedAssetIdentifiers] : [[NSMutableOrderedSet alloc] init];
+    
+    [temp addObject:assetModel.identifier];
+    
+    [self setSelectedAssetIdentifiers:temp];
+    
+    if (self.allowsMultipleSelection) {
+        if (notifyDelegate) {
+            [self.delegate mediaPickerModelDidSelectAssetModel:assetModel];
+        }
+    }
+    else {
+        self.doneBarButtonItemBlock();
+    }
+}
+- (void)deselectAssetModel:(KSOMediaPickerAssetModel *)assetModel; {
+    NSMutableOrderedSet *temp = [NSMutableOrderedSet orderedSetWithOrderedSet:self.selectedAssetIdentifiers];
+    
+    [temp removeObject:assetModel.identifier];
+    
+    [self setSelectedAssetIdentifiers:temp];
+    
+    [self.delegate mediaPickerModelDidDeselectAssetModel:assetModel];
+}
+- (void)deselectAllAssetModels; {
+    for (KSOMediaPickerAssetModel *assetModel in self.selectedAssetModels) {
+        [self deselectAssetModel:assetModel];
+    }
+}
+
 - (void)setTheme:(KSOMediaPickerTheme *)theme {
     _theme = theme ?: KSOMediaPickerTheme.defaultTheme;
 }

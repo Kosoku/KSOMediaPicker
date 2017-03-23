@@ -24,7 +24,7 @@
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
 
-@interface KSOMediaPickerViewController ()
+@interface KSOMediaPickerViewController () <KSOMediaPickerModelDelegate>
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @property (strong,nonatomic) UIView<KSOMediaPickerTitleView> *titleView;
 @property (strong,nonatomic) KSOMediaPickerBackgroundView *backgroundView;
@@ -45,6 +45,7 @@
         return nil;
     
     _model = [[KSOMediaPickerModel alloc] init];
+    [_model setDelegate:self];
     
     kstWeakify(self);
     [_model setDoneBarButtonItemBlock:^{
@@ -122,6 +123,21 @@
             }
         });
     }];
+}
+- (void)mediaPickerModelDidError:(NSError *)error {
+    
+}
+- (BOOL)mediaPickerModelShouldSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
+    return YES;
+}
+- (BOOL)mediaPickerModelShouldDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
+    return YES;
+}
+- (void)mediaPickerModelDidSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
+    
+}
+- (void)mediaPickerModelDidDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
+    
 }
 
 @dynamic theme;

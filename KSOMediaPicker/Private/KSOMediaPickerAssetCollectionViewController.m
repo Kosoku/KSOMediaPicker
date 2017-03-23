@@ -74,6 +74,27 @@
     return cell;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    return [self.model shouldSelectAssetModel:cell.model];
+}
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    return [self.model shouldDeselectAssetModel:cell.model];
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    [self.model selectAssetModel:cell.model];
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    [self.model deselectAssetModel:cell.model];
+}
+
 - (instancetype)initWithModel:(KSOMediaPickerModel *)model; {
     KSOMediaPickerAssetCollectionViewLayout *layout = [[KSOMediaPickerAssetCollectionViewLayout alloc] init];
     

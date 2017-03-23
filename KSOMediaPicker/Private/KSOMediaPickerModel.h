@@ -20,8 +20,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class KSOMediaPickerAssetCollectionModel,KSOMediaPickerAssetModel,KSOMediaPickerTheme;
+@protocol KSOMediaPickerModelDelegate;
 
 @interface KSOMediaPickerModel : NSObject
+
+@property (weak,nonatomic) id<KSOMediaPickerModelDelegate> delegate;
 
 @property (readonly,assign,nonatomic) KSOMediaPickerAuthorizationStatus authorizationStatus;
 
@@ -48,6 +51,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
 @property (readonly,nonatomic,nullable) NSArray<KSOMediaPickerAssetModel *> *selectedAssetModels;
 
+- (BOOL)isAssetModelSelected:(KSOMediaPickerAssetModel *)assetModel;
+- (BOOL)shouldSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (BOOL)shouldDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (void)selectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (void)selectAssetModel:(KSOMediaPickerAssetModel *)assetModel notifyDelegate:(BOOL)notifyDelegate;
+- (void)deselectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (void)deselectAllAssetModels;
+
+@end
+
+@protocol KSOMediaPickerModelDelegate <NSObject>
+@required
+- (void)mediaPickerModelDidError:(NSError *)error;
+- (BOOL)mediaPickerModelShouldSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (BOOL)mediaPickerModelShouldDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (void)mediaPickerModelDidSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (void)mediaPickerModelDidDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
 @end
 
 NS_ASSUME_NONNULL_END
