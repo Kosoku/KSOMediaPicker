@@ -1,5 +1,5 @@
 //
-//  KSOMediaPickerAssetCollectionViewCell.h
+//  KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView.h
 //  KSOMediaPicker
 //
 //  Created by William Towe on 3/22/17.
@@ -15,13 +15,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class KSOMediaPickerAssetModel;
+#import <KSOMediaPicker/KSOMediaPickerAssetCollectionCellSelectedOverlayView.h>
 
-@interface KSOMediaPickerAssetCollectionViewCell : UICollectionViewCell
-
-@property (strong,nonatomic) KSOMediaPickerAssetModel *model;
-
-- (void)reloadSelectedOverlayView;
-- (void)reloadThumbnailImage;
+@interface KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView : UIView <KSOMediaPickerAssetCollectionCellSelectedOverlayView>
 
 @end

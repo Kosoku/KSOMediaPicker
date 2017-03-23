@@ -189,7 +189,7 @@
     }
     
     return [retval KQS_map:^id _Nullable(PHAsset * _Nonnull object, NSInteger index) {
-        return [[KSOMediaPickerAssetModel alloc] initWithAsset:object];
+        return [[KSOMediaPickerAssetModel alloc] initWithAsset:object assetCollectionModel:nil];
     }];
 }
 

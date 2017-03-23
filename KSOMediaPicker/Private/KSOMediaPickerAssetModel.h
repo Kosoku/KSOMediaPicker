@@ -19,9 +19,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class KSOMediaPickerAssetCollectionModel;
+
 @interface KSOMediaPickerAssetModel : NSObject <KSOMediaPickerMedia>
 
 @property (readonly,strong,nonatomic) PHAsset *asset;
+
+@property (readonly,weak,nonatomic) KSOMediaPickerAssetCollectionModel *assetCollectionModel;
 
 @property (readonly,nonatomic) NSString *identifier;
 @property (readonly,nonatomic) KSOMediaPickerMediaType mediaType;
@@ -30,8 +34,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly,nonatomic) NSTimeInterval duration;
 @property (readonly,nonatomic,nullable) NSString *formattedDuration;
 @property (readonly,nonatomic) NSDate *creationDate;
+@property (readonly,nonatomic) NSUInteger selectedIndex;
 
-- (nullable instancetype)initWithAsset:(PHAsset *)asset;
+- (nullable instancetype)initWithAsset:(PHAsset *)asset assetCollectionModel:(nullable KSOMediaPickerAssetCollectionModel *)assetCollectionModel;
 
 - (void)requestThumbnailImageOfSize:(CGSize)size completion:(void(^)(UIImage * _Nullable thumbnailImage))completion;
 - (void)cancelAllThumbnailRequests;

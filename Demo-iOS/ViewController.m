@@ -76,6 +76,7 @@
     KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
     
     [viewController setDelegate:self];
+    [viewController setAllowsMultipleSelection:YES];
     
     if (sender == self.modalButton) {
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];

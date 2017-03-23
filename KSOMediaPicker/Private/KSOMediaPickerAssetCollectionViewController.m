@@ -39,6 +39,22 @@
     [self.collectionView registerClass:[KSOMediaPickerAssetCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([KSOMediaPickerAssetCollectionViewCell class])];
     
     kstWeakify(self);
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,selectedAssetIdentifiers)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        for (NSIndexPath *indexPath in self.collectionView.indexPathsForVisibleItems) {
+            KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            
+            [cell reloadSelectedOverlayView];
+            
+            if ([self.model isAssetModelSelected:cell.model]) {
+                [self.collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+            }
+            else {
+                [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            }
+        }
+    }];
+    
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         [self.collectionView setBackgroundColor:value.assetBackgroundColor];
@@ -74,6 +90,18 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    KSOMediaPickerAssetModel *model = [(KSOMediaPickerAssetCollectionViewCell *)cell model];
+    
+    if ([self.model isAssetModelSelected:model]) {
+        [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    }
+    else {
+        [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    }
+    
+    [(KSOMediaPickerAssetCollectionViewCell *)cell reloadSelectedOverlayView];
+}
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     

@@ -15,11 +15,14 @@
 
 #import "KSOMediaPickerAssetModel.h"
 #import "NSBundle+KSOMediaPickerPrivateExtensions.h"
+#import "KSOMediaPickerAssetCollectionModel.h"
+#import "KSOMediaPickerModel.h"
 
 #import <Photos/Photos.h>
 
 @interface KSOMediaPickerAssetModel ()
 @property (readwrite,strong,nonatomic) PHAsset *asset;
+@property (readwrite,weak,nonatomic) KSOMediaPickerAssetCollectionModel *assetCollectionModel;
 @property (assign,nonatomic) PHImageRequestID imageRequestID;
 @end
 
@@ -36,7 +39,7 @@
     return (KSOMediaPickerMediaType)self.asset.mediaType;
 }
 
-- (instancetype)initWithAsset:(PHAsset *)asset; {
+- (instancetype)initWithAsset:(PHAsset *)asset assetCollectionModel:(KSOMediaPickerAssetCollectionModel *)assetCollectionModel; {
     if (!(self = [super init]))
         return nil;
     
@@ -45,6 +48,7 @@
     }
     
     _asset = asset;
+    _assetCollectionModel = assetCollectionModel;
     
     return self;
 }
@@ -116,6 +120,12 @@
 }
 - (NSDate *)creationDate {
     return self.asset.creationDate;
+}
+- (NSUInteger)selectedIndex {
+    if ([self.assetCollectionModel.model.selectedAssetIdentifiers containsObject:self.identifier]) {
+        return [self.assetCollectionModel.model.selectedAssetIdentifiers indexOfObject:self.identifier];
+    }
+    return NSNotFound;
 }
 
 @end

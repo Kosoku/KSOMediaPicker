@@ -15,16 +15,22 @@
 
 #import "KSOMediaPickerAssetCollectionViewCell.h"
 #import "KSOMediaPickerAssetModel.h"
+#import "KSOMediaPickerAssetCollectionModel.h"
+#import "KSOMediaPickerModel.h"
+#import "KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView.h"
 
 #import <Stanley/Stanley.h>
 #import <Ditko/Ditko.h>
 #import <Loki/Loki.h>
+#import <Agamotto/Agamotto.h>
 
 @interface KSOMediaPickerAssetCollectionViewCell ()
 @property (strong,nonatomic) UIImageView *thumbnailImageView;
 @property (strong,nonatomic) KDIGradientView *gradientView;
 @property (strong,nonatomic) UIImageView *typeImageView;
 @property (strong,nonatomic) UILabel *durationLabel;
+
+@property (strong,nonatomic) UIView<KSOMediaPickerAssetCollectionCellSelectedOverlayView> *selectedOverlayView;
 @end
 
 @implementation KSOMediaPickerAssetCollectionViewCell
@@ -55,6 +61,8 @@
     [_durationLabel setTextAlignment:NSTextAlignmentRight];
     [_gradientView addSubview:_durationLabel];
     
+    _selectedOverlayView = [[KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero];
+    
     CGFloat const kMargin = 4.0;
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _thumbnailImageView}]];
@@ -70,6 +78,33 @@
     [_gradientView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-margin-|" options:0 metrics:@{@"margin": @(kMargin)} views:@{@"view": _durationLabel, @"subview": _typeImageView}]];
     [_gradientView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[view]-margin-|" options:0 metrics:@{@"margin": @(kMargin)} views:@{@"view": _durationLabel}]];
     
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,selectedOverlayView)] options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionOld block:^(NSString * _Nonnull keyPath, UIView<KSOMediaPickerAssetCollectionCellSelectedOverlayView> *  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        
+        UIView<KSOMediaPickerAssetCollectionCellSelectedOverlayView> *oldView = [change[NSKeyValueChangeOldKey] conformsToProtocol:@protocol(KSOMediaPickerAssetCollectionCellSelectedOverlayView)] ? change[NSKeyValueChangeOldKey] : nil;
+        
+        [oldView removeFromSuperview];
+        
+        if (value != nil) {
+            [value setTranslatesAutoresizingMaskIntoConstraints:NO];
+            [value setHidden:!self.isSelected];
+            
+            if ([value respondsToSelector:@selector(setTheme:)]) {
+                [value setTheme:self.model.assetCollectionModel.model.theme];
+            }
+            
+            if ([value respondsToSelector:@selector(setAllowsMultipleSelection:)]) {
+                [value setAllowsMultipleSelection:self.model.assetCollectionModel.model.allowsMultipleSelection];
+            }
+            
+            [self.contentView addSubview:value];
+            
+            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": value}]];
+            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": value}]];
+        }
+    }];
+    
     return self;
 }
 
@@ -79,6 +114,21 @@
     [self.model cancelAllThumbnailRequests];
 }
 
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    
+    [self.selectedOverlayView setHidden:!selected];
+}
+
+- (void)reloadSelectedOverlayView; {
+    if ([self.selectedOverlayView respondsToSelector:@selector(setAllowsMultipleSelection:)]) {
+        [self.selectedOverlayView setAllowsMultipleSelection:self.model.assetCollectionModel.model.allowsMultipleSelection];
+    }
+    
+    if ([self.selectedOverlayView respondsToSelector:@selector(setSelectedIndex:)]) {
+        [self.selectedOverlayView setSelectedIndex:self.model.selectedIndex];
+    }
+}
 - (void)reloadThumbnailImage; {
     kstWeakify(self);
     [self.model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.frame.size) completion:^(UIImage *thumbnailImage) {
@@ -93,6 +143,10 @@
     [self.typeImageView setImage:[_model.typeImage KLO_imageByRenderingWithColor:[UIColor whiteColor]]];
     [self.durationLabel setText:_model.formattedDuration];
     [self.gradientView setHidden:self.typeImageView.image == nil && self.durationLabel.text.length == 0];
+    
+    if ([self.selectedOverlayView respondsToSelector:@selector(setSelectedIndex:)]) {
+        [self.selectedOverlayView setSelectedIndex:_model.selectedIndex];
+    }
     
     [self reloadThumbnailImage];
 }

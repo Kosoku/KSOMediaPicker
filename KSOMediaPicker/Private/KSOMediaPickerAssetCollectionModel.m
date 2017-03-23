@@ -49,7 +49,7 @@
 }
 
 - (KSOMediaPickerAssetModel *)assetModelAtIndex:(NSUInteger)index; {
-    return [[KSOMediaPickerAssetModel alloc] initWithAsset:[self.fetchResult objectAtIndex:index]];
+    return [[KSOMediaPickerAssetModel alloc] initWithAsset:[self.fetchResult objectAtIndex:index] assetCollectionModel:self];
 }
 
 - (void)reloadFetchResult {
