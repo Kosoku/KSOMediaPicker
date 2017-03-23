@@ -26,7 +26,7 @@
 
 #import <Photos/Photos.h>
 
-@interface KSOMediaPickerModel ()
+@interface KSOMediaPickerModel () <PHPhotoLibraryChangeObserver>
 @property (readwrite,assign,nonatomic) KSOMediaPickerAuthorizationStatus authorizationStatus;
 
 @property (readwrite,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
@@ -47,6 +47,26 @@
 
 - (void)dealloc {
     KSTLogObject(self.class);
+    
+    [[PHPhotoLibrary sharedPhotoLibrary] unregisterChangeObserver:self];
+}
+
+- (void)photoLibraryDidChange:(PHChange *)changeInstance {
+    for (KSOMediaPickerAssetCollectionModel *model in self.assetCollectionModels) {
+        PHFetchResultChangeDetails *details = [changeInstance changeDetailsForFetchResult:model.fetchResult];
+        
+        if (!details) {
+            continue;
+        }
+        
+        if (details.hasIncrementalChanges &&
+            (details.removedIndexes.count > 0 || details.insertedIndexes.count > 0 || details.changedIndexes.count > 0)) {
+            [model reloadFetchResult];
+        }
+        else if (details.fetchResultAfterChanges) {
+            [model reloadFetchResult];
+        }
+    }
 }
 
 - (instancetype)init {
@@ -63,6 +83,8 @@
     
     _doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:NULL];
     _cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:NULL];
+    
+    [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
     
     kstWeakify(self);
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,doneBarButtonItemBlock),@kstKeypath(self,cancelBarButtonItemBlock)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
