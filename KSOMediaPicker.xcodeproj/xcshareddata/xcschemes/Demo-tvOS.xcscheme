@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
-               BuildableName = "Demo.app"
-               BlueprintName = "Demo"
+               BlueprintIdentifier = "073B35511E83451000C003A1"
+               BuildableName = "Demo-tvOS.app"
+               BlueprintName = "Demo-tvOS"
                ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BlueprintIdentifier = "073B35511E83451000C003A1"
+            BuildableName = "Demo-tvOS.app"
+            BlueprintName = "Demo-tvOS"
             ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BlueprintIdentifier = "073B35511E83451000C003A1"
+            BuildableName = "Demo-tvOS.app"
+            BlueprintName = "Demo-tvOS"
             ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
-            BuildableName = "Demo.app"
-            BlueprintName = "Demo"
+            BlueprintIdentifier = "073B35511E83451000C003A1"
+            BuildableName = "Demo-tvOS.app"
+            BlueprintName = "Demo-tvOS"
             ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

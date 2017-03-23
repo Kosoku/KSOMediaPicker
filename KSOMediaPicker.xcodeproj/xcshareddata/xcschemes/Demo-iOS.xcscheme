@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07A5498E1E7C97AA00A6C4A1"
-               BuildableName = "KSOMediaPicker.framework"
-               BlueprintName = "KSOMediaPicker-iOS"
+               BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
+               BuildableName = "Demo-iOS.app"
+               BlueprintName = "Demo-iOS"
                ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
+            BuildableName = "Demo-iOS.app"
+            BlueprintName = "Demo-iOS"
+            ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07A5498E1E7C97AA00A6C4A1"
-            BuildableName = "KSOMediaPicker.framework"
-            BlueprintName = "KSOMediaPicker-iOS"
+            BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
+            BuildableName = "Demo-iOS.app"
+            BlueprintName = "Demo-iOS"
             ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07A5498E1E7C97AA00A6C4A1"
-            BuildableName = "KSOMediaPicker.framework"
-            BlueprintName = "KSOMediaPicker-iOS"
+            BlueprintIdentifier = "07A5499B1E7C97D400A6C4A1"
+            BuildableName = "Demo-iOS.app"
+            BlueprintName = "Demo-iOS"
             ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

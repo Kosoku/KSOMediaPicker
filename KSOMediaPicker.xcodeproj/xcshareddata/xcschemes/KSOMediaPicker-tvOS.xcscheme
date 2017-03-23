@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07A5498E1E7C97AA00A6C4A1"
+               BlueprintIdentifier = "073B352B1E8343A300C003A1"
                BuildableName = "KSOMediaPicker.framework"
-               BlueprintName = "KSOMediaPicker-iOS"
+               BlueprintName = "KSOMediaPicker-tvOS"
                ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07A5498E1E7C97AA00A6C4A1"
+            BlueprintIdentifier = "073B352B1E8343A300C003A1"
             BuildableName = "KSOMediaPicker.framework"
-            BlueprintName = "KSOMediaPicker-iOS"
+            BlueprintName = "KSOMediaPicker-tvOS"
             ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07A5498E1E7C97AA00A6C4A1"
+            BlueprintIdentifier = "073B352B1E8343A300C003A1"
             BuildableName = "KSOMediaPicker.framework"
-            BlueprintName = "KSOMediaPicker-iOS"
+            BlueprintName = "KSOMediaPicker-tvOS"
             ReferencedContainer = "container:KSOMediaPicker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

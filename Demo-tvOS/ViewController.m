@@ -1,8 +1,8 @@
 //
 //  ViewController.m
-//  Demo
+//  Demo-tvOS
 //
-//  Created by William Towe on 3/17/17.
+//  Created by William Towe on 3/22/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -15,6 +15,7 @@
 
 #import "ViewController.h"
 
+#import <Stanley/Stanley.h>
 #import <KSOMediaPicker/KSOMediaPicker.h>
 
 @interface ViewController () <KSOMediaPickerViewControllerDelegate>
@@ -24,6 +25,10 @@
 
 @implementation ViewController
 
+- (NSString *)title {
+    return [NSBundle mainBundle].KST_bundleExecutable;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,13 +37,13 @@
     [self setModalButton:[UIButton buttonWithType:UIButtonTypeSystem]];
     [self.modalButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.modalButton setTitle:@"Present Modally" forState:UIControlStateNormal];
-    [self.modalButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.modalButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventPrimaryActionTriggered];
     [self.view addSubview:self.modalButton];
     
     [self setPushButton:[UIButton buttonWithType:UIButtonTypeSystem]];
     [self.pushButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.pushButton setTitle:@"Push" forState:UIControlStateNormal];
-    [self.pushButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.pushButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventPrimaryActionTriggered];
     [self.view addSubview:self.pushButton];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top]-[view]" options:0 metrics:nil views:@{@"view": self.modalButton, @"top": self.topLayoutGuide}]];

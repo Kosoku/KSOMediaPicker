@@ -148,7 +148,9 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapGestureRecognizerAction:)];
     
     [tapGestureRecognizer setNumberOfTapsRequired:1];
+#if (TARGET_OS_IOS)
     [tapGestureRecognizer setNumberOfTouchesRequired:1];
+#endif
     
     [self.titleView addGestureRecognizer:tapGestureRecognizer];
     
