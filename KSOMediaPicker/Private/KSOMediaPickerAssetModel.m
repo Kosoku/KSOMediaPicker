@@ -14,6 +14,7 @@
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "KSOMediaPickerAssetModel.h"
+#import "NSBundle+KSOMediaPickerPrivateExtensions.h"
 
 #import <Photos/Photos.h>
 
@@ -23,6 +24,10 @@
 @end
 
 @implementation KSOMediaPickerAssetModel
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<%@: %p> identifier=%@",NSStringFromClass(self.class),self,self.identifier];
+}
 
 - (PHAsset *)mediaPickerMediaAsset {
     return self.asset;
@@ -70,6 +75,47 @@
     }
     
     [self setImageRequestID:PHInvalidImageRequestID];
+}
+
+- (NSString *)identifier {
+    return self.asset.localIdentifier;
+}
+- (KSOMediaPickerMediaType)mediaType {
+    return (KSOMediaPickerMediaType)self.asset.mediaType;
+}
+- (UIImage *)typeImage {
+    switch (self.mediaType) {
+        case KSOMediaPickerMediaTypeVideo:
+            return [UIImage imageNamed:@"type_video" inBundle:[NSBundle KSO_mediaPickerFrameworkBundle] compatibleWithTraitCollection:nil];
+        default:
+            return nil;
+    }
+}
+- (NSTimeInterval)duration {
+    return self.asset.duration;
+}
+- (NSString *)formattedDuration {
+    if (self.mediaType == KSOMediaPickerMediaTypeVideo) {
+        NSTimeInterval duration = self.duration;
+        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:duration];
+        NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:[NSDate date] toDate:[NSDate dateWithTimeIntervalSinceNow:duration] options:0];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        
+        if (comps.hour > 0) {
+            [dateFormatter setDateFormat:@"H:mm:ss"];
+        }
+        else {
+            [dateFormatter setDateFormat:@"m:ss"];
+        }
+        
+        date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+        
+        return [dateFormatter stringFromDate:date];
+    }
+    return nil;
+}
+- (NSDate *)creationDate {
+    return self.asset.creationDate;
 }
 
 @end

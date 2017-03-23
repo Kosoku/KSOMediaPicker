@@ -8,6 +8,9 @@
       location = "group:Vendor/Ditko/Ditko.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Vendor/Loki/Loki.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Vendor/Stanley/Stanley.xcodeproj">
    </FileRef>
    <FileRef

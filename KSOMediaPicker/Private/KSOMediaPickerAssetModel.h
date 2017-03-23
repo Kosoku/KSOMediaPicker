@@ -13,7 +13,7 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import <KSOMediaPicker/KSOMediaPickerMedia.h>
 
@@ -22,6 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KSOMediaPickerAssetModel : NSObject <KSOMediaPickerMedia>
 
 @property (readonly,strong,nonatomic) PHAsset *asset;
+
+@property (readonly,nonatomic) NSString *identifier;
+@property (readonly,nonatomic) KSOMediaPickerMediaType mediaType;
+
+@property (readonly,nonatomic) UIImage *typeImage;
+@property (readonly,nonatomic) NSTimeInterval duration;
+@property (readonly,nonatomic,nullable) NSString *formattedDuration;
+@property (readonly,nonatomic) NSDate *creationDate;
 
 - (nullable instancetype)initWithAsset:(PHAsset *)asset;
 

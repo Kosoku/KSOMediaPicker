@@ -70,7 +70,7 @@
     }
     
     [options setPredicate:[NSCompoundPredicate orPredicateWithSubpredicates:predicates]];
-    [options setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@kstKeypath(PHAsset.new,creationDate) ascending:YES]]];
+    [options setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@kstKeypath(PHAsset.new,creationDate) ascending:NO]]];
     
     [self setFetchResult:[PHAsset fetchAssetsInAssetCollection:self.assetCollection options:options]];
 }

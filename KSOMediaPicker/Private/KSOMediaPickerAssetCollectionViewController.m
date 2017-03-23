@@ -51,12 +51,14 @@
         kstWeakify(self);
         [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,selectedAssetCollectionModel.countOfAssetModels)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
             kstStrongify(self);
-            [self.collectionView reloadData];
-            
-            // scroll to the last item
-            if (self.model.selectedAssetCollectionModel.countOfAssetModels > 0) {
-                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.model.selectedAssetCollectionModel.countOfAssetModels - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
-            }
+            KSTDispatchMainAsync(^{
+                [self.collectionView reloadData];
+                
+                // scroll to the last item
+                if (self.model.selectedAssetCollectionModel.countOfAssetModels > 0) {
+                    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.model.selectedAssetCollectionModel.countOfAssetModels - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+                }
+            });
         }];
     }
 }
