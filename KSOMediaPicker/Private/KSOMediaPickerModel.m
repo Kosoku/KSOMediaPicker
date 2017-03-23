@@ -26,6 +26,13 @@
 
 #import <Photos/Photos.h>
 
+NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
+
+NSInteger const KSOMediaPickerErrorCodeMixedMediaSelection = 1;
+NSInteger const KSOMediaPickerErrorCodeMaximumSelectedMedia = 2;
+NSInteger const KSOMediaPickerErrorCodeMaximumSelectedImages = 3;
+NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
+
 @interface KSOMediaPickerModel () <PHPhotoLibraryChangeObserver>
 @property (readwrite,assign,nonatomic) KSOMediaPickerAuthorizationStatus authorizationStatus;
 
@@ -75,6 +82,7 @@
     
     _authorizationStatus = (KSOMediaPickerAuthorizationStatus)[PHPhotoLibrary authorizationStatus];
     
+    _allowsMixedMediaSelection = YES;
     _hidesEmptyAssetCollections = YES;
     _mediaTypes = KSOMediaPickerMediaTypesAll;
     _initiallySelectedAssetCollectionSubtype = KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary;
@@ -129,7 +137,72 @@
     return [self.selectedAssetIdentifiers containsObject:assetModel.identifier];
 }
 - (BOOL)shouldSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel; {
-    return [self.delegate mediaPickerModelShouldSelectAssetModel:assetModel];
+    BOOL retval = YES;
+    
+    // if we allow multiple selection but do not allow mixed media selection check to make sure all selected media are of the same media type
+    if (self.allowsMultipleSelection &&
+        !self.allowsMixedMediaSelection) {
+        
+        NSArray<KSOMediaPickerAssetModel *> *selectedAssetModels = self.selectedAssetModels;
+        
+        retval = [selectedAssetModels KQS_all:^BOOL(KSOMediaPickerAssetModel * _Nonnull object, NSInteger index) {
+            return object.mediaType == selectedAssetModels.firstObject.mediaType && assetModel.mediaType == selectedAssetModels.firstObject.mediaType;
+        }];
+        
+        if (!retval) {
+            NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMixedMediaSelection userInfo:@{NSLocalizedDescriptionKey: NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MIXED_MEDIA_SELECTION", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than one media type.", @"media picker error code mixed media selection")}];
+            
+            [self.delegate mediaPickerModelDidError:error];
+        }
+    }
+    
+    // if the asset model can still be selected and a maximum selected media limit has been set and selecting another media would put us over the limit, surface the appropriate error
+    if (retval &&
+        self.maximumSelectedMedia > 0 &&
+        self.selectedAssetIdentifiers.count + 1 > self.maximumSelectedMedia) {
+        
+        retval = NO;
+        
+        NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedMedia userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_MEDIA", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ media.", @"media picker error code maximum selected media"),[NSNumberFormatter localizedStringFromNumber:@(self.maximumSelectedMedia) numberStyle:NSNumberFormatterDecimalStyle]]}];
+        
+        [self.delegate mediaPickerModelDidError:error];
+    }
+    
+    // if the asset model can still be selected and a maximum selected images limit has been set and the asset model is an image and selecting it would put us over the limit, surface the appropriate error
+    if (retval &&
+        self.maximumSelectedImages > 0 &&
+        assetModel.mediaType == KSOMediaPickerMediaTypeImage &&
+        [self.selectedAssetModels KQS_reduceIntegerWithStart:0 block:^NSInteger(NSInteger sum, KSOMediaPickerAssetModel * _Nonnull object, NSInteger index) {
+        return object.mediaType == KSOMediaPickerMediaTypeImage ? sum + 1 : sum;
+    }] + 1 > self.maximumSelectedImages) {
+        
+        retval = NO;
+        
+        NSString *format = self.maximumSelectedImages == 1 ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_IMAGES_SINGLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ image.", @"media picker error code maximum selected images single") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_IMAGES_MULTIPLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ images.", @"media picker error code maximum selected images multiple");
+        NSString *title = [NSString stringWithFormat:format,[NSNumberFormatter localizedStringFromNumber:@(self.maximumSelectedImages) numberStyle:NSNumberFormatterDecimalStyle]];
+        NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedImages userInfo:@{NSLocalizedDescriptionKey: title}];
+        
+        [self.delegate mediaPickerModelDidError:error];
+    }
+    
+    // if the asset model can still be selected and a maximum selected videos limit has been set and the asset model is a video and selecting it would put us over the limit, surface the appropriate error
+    if (retval &&
+        self.maximumSelectedVideos > 0 &&
+        assetModel.mediaType == KSOMediaPickerMediaTypeVideo &&
+        [self.selectedAssetModels KQS_reduceIntegerWithStart:0 block:^NSInteger(NSInteger sum, KSOMediaPickerAssetModel * _Nonnull object, NSInteger index) {
+        return object.mediaType == KSOMediaPickerMediaTypeVideo ? sum + 1 : sum;
+    }] + 1 > self.maximumSelectedVideos) {
+        
+        retval = NO;
+        
+        NSString *format = self.maximumSelectedVideos == 1 ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_VIDEOS_SINGLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ video.", @"media picker error code maximum selected videos single") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_VIDEOS_MULTIPLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ videos.", @"media picker error code maximum selected videos multiple");
+        NSString *title = [NSString stringWithFormat:format,[NSNumberFormatter localizedStringFromNumber:@(self.maximumSelectedVideos) numberStyle:NSNumberFormatterDecimalStyle]];
+        NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedVideos userInfo:@{NSLocalizedDescriptionKey: title}];
+        
+        [self.delegate mediaPickerModelDidError:error];
+    }
+    
+    return retval ? [self.delegate mediaPickerModelShouldSelectAssetModel:assetModel] : NO;
 }
 - (BOOL)shouldDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel; {
     return [self.delegate mediaPickerModelShouldDeselectAssetModel:assetModel];

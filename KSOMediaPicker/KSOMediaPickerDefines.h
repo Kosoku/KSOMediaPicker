@@ -19,6 +19,8 @@
 #import <Photos/PhotosTypes.h>
 #import <Photos/PHPhotoLibrary.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, KSOMediaPickerAuthorizationStatus) {
     KSOMediaPickerAuthorizationStatusNotDetermined = PHAuthorizationStatusNotDetermined,
     KSOMediaPickerAuthorizationStatusRestricted = PHAuthorizationStatusRestricted,
@@ -140,5 +142,14 @@ typedef NS_ENUM(NSInteger, KSOMediaPickerAssetCollectionSubtype) {
      */
     KSOMediaPickerAssetCollectionSubtypeSmartAlbumScreenshots = PHAssetCollectionSubtypeSmartAlbumScreenshots
 };
+
+FOUNDATION_EXPORT NSString *const KSOMediaPickerErrorDomain;
+
+FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMixedMediaSelection;
+FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMaximumSelectedMedia;
+FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMaximumSelectedImages;
+FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos;
+
+NS_ASSUME_NONNULL_END
 
 #endif

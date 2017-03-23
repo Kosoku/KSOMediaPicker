@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly,assign,nonatomic) KSOMediaPickerAuthorizationStatus authorizationStatus;
 
 @property (assign,nonatomic) BOOL allowsMultipleSelection;
+@property (assign,nonatomic) BOOL allowsMixedMediaSelection;
+@property (assign,nonatomic) NSUInteger maximumSelectedMedia;
+@property (assign,nonatomic) NSUInteger maximumSelectedImages;
+@property (assign,nonatomic) NSUInteger maximumSelectedVideos;
 @property (assign,nonatomic) BOOL hidesEmptyAssetCollections;
 
 @property (assign,nonatomic) KSOMediaPickerMediaTypes mediaTypes;

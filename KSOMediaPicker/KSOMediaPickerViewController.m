@@ -125,19 +125,31 @@
     }];
 }
 - (void)mediaPickerModelDidError:(NSError *)error {
-    
+    if ([self.delegate respondsToSelector:@selector(mediaPickerViewController:didError:)]) {
+        [self.delegate mediaPickerViewController:self didError:error];
+    }
 }
 - (BOOL)mediaPickerModelShouldSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
+    if ([self.delegate respondsToSelector:@selector(mediaPickerViewController:shouldSelectMedia:)]) {
+        return [self.delegate mediaPickerViewController:self shouldSelectMedia:assetModel];
+    }
     return YES;
 }
 - (BOOL)mediaPickerModelShouldDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
+    if ([self.delegate respondsToSelector:@selector(mediaPickerViewController:shouldDeselectMedia:)]) {
+        return [self.delegate mediaPickerViewController:self shouldDeselectMedia:assetModel];
+    }
     return YES;
 }
 - (void)mediaPickerModelDidSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
-    
+    if ([self.delegate respondsToSelector:@selector(mediaPickerViewController:didSelectMedia:)]) {
+        [self.delegate mediaPickerViewController:self didSelectMedia:assetModel];
+    }
 }
 - (void)mediaPickerModelDidDeselectAssetModel:(KSOMediaPickerAssetModel *)assetModel {
-    
+    if ([self.delegate respondsToSelector:@selector(mediaPickerViewController:didDeselectMedia:)]) {
+        [self.delegate mediaPickerViewController:self didDeselectMedia:assetModel];
+    }
 }
 
 @dynamic theme;
@@ -154,6 +166,41 @@
 }
 - (void)setAllowsMultipleSelection:(BOOL)allowsMultipleSelection {
     [self.model setAllowsMultipleSelection:allowsMultipleSelection];
+}
+@dynamic allowsMixedMediaSelection;
+- (BOOL)allowsMixedMediaSelection {
+    return self.model.allowsMixedMediaSelection;
+}
+- (void)setAllowsMixedMediaSelection:(BOOL)allowsMixedMediaSelection {
+    [self.model setAllowsMixedMediaSelection:allowsMixedMediaSelection];
+}
+@dynamic maximumSelectedMedia;
+- (NSUInteger)maximumSelectedMedia {
+    return self.model.maximumSelectedMedia;
+}
+- (void)setMaximumSelectedMedia:(NSUInteger)maximumSelectedMedia {
+    [self.model setMaximumSelectedMedia:maximumSelectedMedia];
+}
+@dynamic maximumSelectedImages;
+- (NSUInteger)maximumSelectedImages {
+    return self.model.maximumSelectedImages;
+}
+- (void)setMaximumSelectedImages:(NSUInteger)maximumSelectedImages {
+    [self.model setMaximumSelectedImages:maximumSelectedImages];
+}
+@dynamic maximumSelectedVideos;
+- (NSUInteger)maximumSelectedVideos {
+    return self.model.maximumSelectedVideos;
+}
+- (void)setMaximumSelectedVideos:(NSUInteger)maximumSelectedVideos {
+    [self.model setMaximumSelectedVideos:maximumSelectedVideos];
+}
+@dynamic hidesEmptyAssetCollections;
+- (BOOL)hidesEmptyAssetCollections {
+    return self.model.hidesEmptyAssetCollections;
+}
+- (void)setHidesEmptyAssetCollections:(BOOL)hidesEmptyAssetCollections {
+    [self.model setHidesEmptyAssetCollections:hidesEmptyAssetCollections];
 }
 
 - (void)_updateTitleViewProperties; {

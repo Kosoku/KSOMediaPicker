@@ -34,13 +34,51 @@ NS_ASSUME_NONNULL_BEGIN
  The default is NO.
  */
 @property (assign,nonatomic) BOOL allowsMultipleSelection;
+/**
+ Set and get whether the media picker allows the user to select non-homogenous media types (e.g. images and videos).
+ 
+ The default is YES.
+ */
+@property (assign,nonatomic) BOOL allowsMixedMediaSelection;
+/**
+ Set and get the maximum number of selected media. A value of 0 means no limit.
+ 
+ The default is 0.
+ */
+@property (assign,nonatomic) NSUInteger maximumSelectedMedia;
+/**
+ Set and get the maximum number of selected images. A value of 0 means no limit.
+ 
+ The default is 0.
+ */
+@property (assign,nonatomic) NSUInteger maximumSelectedImages;
+/**
+ Set and get the maximum number of selected videos. A value of 0 means no limit.
+ 
+ The default is 0.
+ */
+@property (assign,nonatomic) NSUInteger maximumSelectedVideos;
+/**
+ Set and get whether the media picker hides asset collections that are empty (i.e. they contain 0 assets).
+ 
+ The default is YES.
+ */
+@property (assign,nonatomic) BOOL hidesEmptyAssetCollections;
 
 @end
 
 @protocol KSOMediaPickerViewControllerDelegate <NSObject>
 @required
-- (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController;
 - (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia> > *)media;
+- (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController;
+@optional
+- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didError:(NSError *)error;
+
+- (BOOL)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController shouldSelectMedia:(id<KSOMediaPickerMedia>)media;
+- (BOOL)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController shouldDeselectMedia:(id<KSOMediaPickerMedia>)media;
+
+- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didSelectMedia:(id<KSOMediaPickerMedia>)media;
+- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didDeselectMedia:(id<KSOMediaPickerMedia>)media;
 @end
 
 NS_ASSUME_NONNULL_END
