@@ -41,15 +41,11 @@
     
     NSAttributedString *badge = [[NSAttributedString alloc] initWithString:[NSNumberFormatter localizedStringFromNumber:@(self.selectedIndex + 1) numberStyle:NSNumberFormatterDecimalStyle] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12.0], NSForegroundColorAttributeName: [UIColor whiteColor]}];
     CGSize badgeLabelSize = [badge size];
-    UIBezierPath *path = [UIBezierPath bezierPath];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(CGRectGetWidth(self.bounds) - badgeLabelSize.width - widthAndHeight - widthAndHeight, 0, badgeLabelSize.width + widthAndHeight + widthAndHeight, badgeLabelSize.height + widthAndHeight + widthAndHeight) cornerRadius:widthAndHeight];
     
-    [path moveToPoint:CGPointMake(CGRectGetWidth(self.bounds) - widthAndHeight - (badgeLabelSize.width * 3) - widthAndHeight, widthAndHeight)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(self.bounds) - widthAndHeight, widthAndHeight)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(self.bounds) - widthAndHeight, widthAndHeight + (badgeLabelSize.height * 1.5) + widthAndHeight)];
-    [path addLineToPoint:CGPointMake(CGRectGetWidth(self.bounds) - widthAndHeight - (badgeLabelSize.width * 3) - widthAndHeight, widthAndHeight)];
     [path fill];
     
-    [badge drawAtPoint:CGPointMake(CGRectGetWidth(self.bounds) - badgeLabelSize.width - widthAndHeight - widthAndHeight, widthAndHeight)];
+    [badge drawAtPoint:CGPointMake(CGRectGetWidth(self.bounds) - badgeLabelSize.width - widthAndHeight, widthAndHeight)];
 }
 
 @synthesize allowsMultipleSelection=_allowsMultipleSelection;
