@@ -25,16 +25,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class,readonly,nonatomic) KSOMediaPickerTheme *defaultTheme;
 
 /**
+ Set and get the identifier of the theme.
+ */
+@property (readonly,copy,nonatomic) NSString *identifier;
+
+/**
  Set and get the background color, which is used as the background color of the asset collection table view, asset collection view and the navigation bar when presenting modally.
  
  The default is [UIColor whiteColor].
  */
 @property (strong,nonatomic,null_resettable) UIColor *backgroundColor;
 
-/**
- Set and get the identifier of the theme.
- */
-@property (readonly,copy,nonatomic) NSString *identifier;
 /**
  Set and get the title font, which is used to display the name of the selected asset collection in the navigation bar.
  
