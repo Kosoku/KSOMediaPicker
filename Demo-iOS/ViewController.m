@@ -119,6 +119,7 @@
     
     [theme setBackgroundColor:[UIColor blackColor]];
     [theme setTitleColor:[UIColor whiteColor]];
+    [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor purpleColor]];
     
     [viewController setTheme:theme];
     

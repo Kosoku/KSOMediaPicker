@@ -79,6 +79,17 @@
     [_gradientView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[view]-margin-|" options:0 metrics:@{@"margin": @(kMargin)} views:@{@"view": _durationLabel}]];
     
     kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,selectedOverlayView),@kstKeypath(self,model.assetCollectionModel.model.theme)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        if (self.selectedOverlayView != nil &&
+            self.model.assetCollectionModel.model.theme != nil) {
+            
+            if ([self.selectedOverlayView respondsToSelector:@selector(setTheme:)]) {
+                [self.selectedOverlayView setTheme:self.model.assetCollectionModel.model.theme];
+            }
+        }
+    }];
+    
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,selectedOverlayView)] options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionOld block:^(NSString * _Nonnull keyPath, UIView<KSOMediaPickerAssetCollectionCellSelectedOverlayView> *  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         

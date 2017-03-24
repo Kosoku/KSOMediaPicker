@@ -38,6 +38,8 @@
     retval->_subtitleFont = _subtitleFont;
     retval->_subtitleColor = _subtitleColor;
     
+    retval->_assetCollectionCellSelectedOverlayViewTintColor = _assetCollectionCellSelectedOverlayViewTintColor;
+    
     return retval;
 }
 
