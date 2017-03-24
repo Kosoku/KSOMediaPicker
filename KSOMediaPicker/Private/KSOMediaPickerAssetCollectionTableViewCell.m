@@ -100,6 +100,9 @@
             [self.titleLabel setFont:value.titleFont];
             [self.titleLabel setTextColor:value.titleColor];
             
+            [self.subtitleLabel setFont:value.subtitleFont];
+            [self.subtitleLabel setTextColor:value.subtitleColor];
+            
             [self.thumbnailView1 setBorderColor:value.backgroundColor];
             [self.thumbnailView2 setBorderColor:value.backgroundColor];
             [self.thumbnailView3 setBorderColor:value.backgroundColor];
