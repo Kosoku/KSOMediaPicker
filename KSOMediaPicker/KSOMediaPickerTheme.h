@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class,readonly,nonatomic) KSOMediaPickerTheme *defaultTheme;
 
 /**
- Set and get the identifier of the theme.
+ Get the identifier of the theme.
  */
 @property (readonly,copy,nonatomic) NSString *identifier;
 
