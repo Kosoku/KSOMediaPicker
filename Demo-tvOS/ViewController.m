@@ -16,6 +16,7 @@
 #import "ViewController.h"
 
 #import <Stanley/Stanley.h>
+#import <Ditko/Ditko.h>
 #import <KSOMediaPicker/KSOMediaPicker.h>
 
 @interface ViewController () <KSOMediaPickerViewControllerDelegate>
@@ -53,6 +54,16 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pushButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
 }
 
+- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia>> *)media {
+    NSLog(@"media: %@",media);
+    
+    if (mediaPickerViewController.presentingViewController == nil) {
+        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
 - (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController {
     if (mediaPickerViewController.presentingViewController == nil) {
         [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
@@ -61,19 +72,21 @@
         [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
-- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia>> *)media {
-    if (mediaPickerViewController.presentingViewController == nil) {
-        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
-    }
-    else {
-        [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }
+
+- (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didError:(NSError *)error {
+    [UIAlertController KDI_presentAlertControllerWithError:error];
 }
 
 - (IBAction)_buttonAction:(UIButton *)sender {
     KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
     
     [viewController setDelegate:self];
+    [viewController setAllowsMultipleSelection:YES];
+    [viewController setAllowsMixedMediaSelection:NO];
+    [viewController setMaximumSelectedImages:3];
+    [viewController setMaximumSelectedVideos:1];
+    [viewController setMediaTypes:KSOMediaPickerMediaTypesImage];
+    [viewController setInitiallySelectedAssetCollectionSubtype:KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary];
     
     if (sender == self.modalButton) {
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
