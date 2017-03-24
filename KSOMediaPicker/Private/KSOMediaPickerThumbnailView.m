@@ -1,8 +1,8 @@
 //
-//  KSOMediaPickerAssetCollectionCellSelectedOverlayView.h
+//  KSOMediaPickerThumbnailView.m
 //  KSOMediaPicker
 //
-//  Created by William Towe on 3/22/17.
+//  Created by William Towe on 3/24/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -13,29 +13,33 @@
 //
 //  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#import <Foundation/Foundation.h>
+#import "KSOMediaPickerThumbnailView.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class KSOMediaPickerTheme;
-
-/**
- KSOMediaPickerAssetSelectedOverlayView is a protocol describing an instance of the class used to draw selection chrome for selected asset collection view cells.
- */
-@protocol KSOMediaPickerAssetCollectionCellSelectedOverlayView <NSObject>
-@optional
-/**
- Set and get whether the receiver allows multiple selection.
- */
-@property (assign,nonatomic) BOOL allowsMultipleSelection;
-/**
- Set and get the index of the selected asset within the array of selected assets.
- */
-@property (assign,nonatomic) NSUInteger selectedIndex;
-/**
- Set and get the theme of the selected overlay view.
- */
-@property (strong,nonatomic,nullable) KSOMediaPickerTheme *theme;
+@interface KSOMediaPickerThumbnailView ()
+@property (readwrite,strong,nonatomic) UIImageView *thumbnailImageView;
 @end
 
-NS_ASSUME_NONNULL_END
+@implementation KSOMediaPickerThumbnailView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+    
+    [self setBackgroundColor:[UIColor clearColor]];
+    [self setBorderWidth:1.0];
+    [self setBorderOptions:KDIViewBorderOptionsTop];
+    [self setBorderColor:[UIColor whiteColor]];
+    
+    _thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [_thumbnailImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_thumbnailImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [_thumbnailImageView setClipsToBounds:YES];
+    [self addSubview:_thumbnailImageView];
+    
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _thumbnailImageView}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[view]|" options:0 metrics:@{@"margin": @(self.borderWidth)} views:@{@"view": _thumbnailImageView}]];
+    
+    return self;
+}
+
+@end

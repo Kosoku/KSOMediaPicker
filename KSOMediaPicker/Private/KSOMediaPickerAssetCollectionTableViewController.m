@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setClearsSelectionOnViewWillAppear:NO];
+    [self.tableView setEstimatedRowHeight:44.0];
     [self.tableView registerClass:[KSOMediaPickerAssetCollectionTableViewCell class] forCellReuseIdentifier:NSStringFromClass([KSOMediaPickerAssetCollectionTableViewCell class])];
     
     kstWeakify(self);

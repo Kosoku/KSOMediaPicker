@@ -26,6 +26,9 @@
 @property (readwrite,weak,nonatomic,nullable) KSOMediaPickerModel *model;
 @property (readwrite,strong,nonatomic) PHAssetCollection *assetCollection;
 @property (readwrite,strong,nonatomic) PHFetchResult<PHAsset *> *fetchResult;
+@property (strong,nonatomic) NSMutableDictionary *thumbnailIndexesToImageRequestIDs;
+
+- (void)_cancelThumbnailImageRequestAtIndex:(NSUInteger)thumbnailIndex;
 @end
 
 @implementation KSOMediaPickerAssetCollectionModel
@@ -42,6 +45,7 @@
     
     _assetCollection = assetCollection;
     _model = model;
+    _thumbnailIndexesToImageRequestIDs = [[NSMutableDictionary alloc] init];
     
     [self reloadFetchResult];
     
@@ -75,6 +79,37 @@
     [self setFetchResult:[PHAsset fetchAssetsInAssetCollection:self.assetCollection options:options]];
 }
 
+- (void)requestThumbnailImageOfSize:(CGSize)size thumbnailIndex:(NSUInteger)thumbnailIndex completion:(void(^)(UIImage * _Nullable  thumbnailImage))completion; {
+    NSParameterAssert(completion);
+    
+    if (self.countOfAssetModels == 0 ||
+        thumbnailIndex >= self.countOfAssetModels) {
+        
+        completion(nil);
+        return;
+    }
+    
+    [self _cancelThumbnailImageRequestAtIndex:thumbnailIndex];
+    
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    
+    [options setDeliveryMode:PHImageRequestOptionsDeliveryModeFastFormat];
+    [options setResizeMode:PHImageRequestOptionsResizeModeFast];
+    [options setNetworkAccessAllowed:YES];
+    
+    PHAsset *asset = [self.fetchResult objectAtIndex:thumbnailIndex];
+    PHImageRequestID imageRequestID = [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        completion(result);
+    }];
+    
+    [self.thumbnailIndexesToImageRequestIDs setObject:@(imageRequestID) forKey:@(thumbnailIndex)];
+}
+- (void)cancelAllThumbnailRequests; {
+    for (NSNumber *thumbnailIndex in self.thumbnailIndexesToImageRequestIDs.allKeys) {
+        [self _cancelThumbnailImageRequestAtIndex:thumbnailIndex.unsignedIntegerValue];
+    }
+}
+
 - (NSString *)identifier {
     return self.assetCollection.localIdentifier;
 }
@@ -99,6 +134,18 @@
 
 - (NSUInteger)countOfAssetModels {
     return self.fetchResult.count;
+}
+
+- (void)_cancelThumbnailImageRequestAtIndex:(NSUInteger)thumbnailIndex; {
+    PHImageRequestID imageRequestID = [self.thumbnailIndexesToImageRequestIDs[@(thumbnailIndex)] intValue];
+    
+    if (imageRequestID == PHInvalidImageRequestID) {
+        return;
+    }
+    
+    [self.thumbnailIndexesToImageRequestIDs removeObjectForKey:@(thumbnailIndex)];
+    
+    [[PHCachingImageManager defaultManager] cancelImageRequest:imageRequestID];
 }
 
 @end

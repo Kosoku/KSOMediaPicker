@@ -43,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reloadFetchResult;
 
+- (void)requestThumbnailImageOfSize:(CGSize)size thumbnailIndex:(NSUInteger)thumbnailIndex completion:(void(^)(UIImage * _Nullable thumbnailImage))completion;
+- (void)cancelAllThumbnailRequests;
+
 @end
 
 NS_ASSUME_NONNULL_END
