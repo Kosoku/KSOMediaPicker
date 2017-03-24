@@ -68,8 +68,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
-    
     [self setBackgroundView:[[KSOMediaPickerBackgroundView alloc] initWithModel:self.model]];
     [self.backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:self.backgroundView];
@@ -86,10 +84,27 @@
         [self.navigationItem setRightBarButtonItems:@[self.model.cancelBarButtonItem]];
     }
     
+    if (self.initiallySelectedAssetCollectionSubtype != KSOMediaPickerAssetCollectionSubtypeNone &&
+        [self.model.assetCollectionModels KQS_any:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
+        return self.initiallySelectedAssetCollectionSubtype == object.subtype;
+    }]) {
+        [self setHasPushedInitiallySelectedAssetCollectionModel:YES];
+        
+        [self.model setSelectedAssetCollectionModel:[self.model.assetCollectionModels KQS_find:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
+            return self.initiallySelectedAssetCollectionSubtype == object.subtype;
+        }]];
+        
+        [self.navigationController pushViewController:[[KSOMediaPickerAssetCollectionViewController alloc] initWithModel:self.model] animated:NO];
+    }
+    
     kstWeakify(self);
-    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:0 block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
+            if (self.presentingViewController != nil) {
+                [self.navigationController.navigationBar setBarTintColor:value.backgroundColor];
+            }
+            
             [self.view setBackgroundColor:value.backgroundColor];
         });
     }];
@@ -109,24 +124,6 @@
             }
         });
     }];
-}
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if (!self.hasPushedInitiallySelectedAssetCollectionModel) {
-        if (self.initiallySelectedAssetCollectionSubtype != KSOMediaPickerAssetCollectionSubtypeNone &&
-            [self.model.assetCollectionModels KQS_any:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
-            return self.initiallySelectedAssetCollectionSubtype == object.subtype;
-        }]) {
-            [self setHasPushedInitiallySelectedAssetCollectionModel:YES];
-            
-            [self.model setSelectedAssetCollectionModel:[self.model.assetCollectionModels KQS_find:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
-                return self.initiallySelectedAssetCollectionSubtype == object.subtype;
-            }]];
-            
-            [self.navigationController pushViewController:[[KSOMediaPickerAssetCollectionViewController alloc] initWithModel:self.model] animated:NO];
-        }
-    }
 }
 
 - (void)mediaPickerModelDidError:(NSError *)error {
