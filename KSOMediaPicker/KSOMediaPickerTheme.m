@@ -18,12 +18,12 @@
 @interface KSOMediaPickerTheme ()
 @property (readwrite,copy,nonatomic) NSString *identifier;
 
++ (UIColor *)_defaultBackgroundColor;
+
 + (UIFont *)_defaultTitleFont;
 + (UIColor *)_defaultTitleColor;
 + (UIFont *)_defaultSubtitleFont;
 + (UIColor *)_defaultSubtitleColor;
-
-+ (UIColor *)_defaultBackgroundColor;
 @end
 
 @implementation KSOMediaPickerTheme
@@ -31,12 +31,12 @@
 - (id)copyWithZone:(NSZone *)zone {
     KSOMediaPickerTheme *retval = [[[self class] alloc] initWithIdentifier:[NSString stringWithFormat:@"%@.copy",self.identifier]];
     
+    retval->_backgroundColor = _backgroundColor;
+    
     retval->_titleFont = _titleFont;
     retval->_titleColor = _titleColor;
     retval->_subtitleFont = _subtitleFont;
     retval->_subtitleColor = _subtitleColor;
-    
-    retval->_backgroundColor = _backgroundColor;
     
     return retval;
 }
@@ -47,12 +47,12 @@
     
     _identifier = [identifier copy];
     
+    _backgroundColor = [self.class _defaultBackgroundColor];
+    
     _titleFont = [self.class _defaultTitleFont];
     _titleColor = [self.class _defaultTitleColor];
     _subtitleFont = [self.class _defaultSubtitleFont];
     _subtitleColor = [self.class _defaultSubtitleColor];
-    
-    _backgroundColor = [self.class _defaultBackgroundColor];
     
     return self;
 }
@@ -64,6 +64,10 @@
         kRetval = [[KSOMediaPickerTheme alloc] initWithIdentifier:@"com.kosoku.ksomediapicker.theme.default"];
     });
     return kRetval;
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    _backgroundColor = backgroundColor ?: [self.class _defaultBackgroundColor];
 }
 
 - (void)setTitleFont:(UIFont *)titleFont {
@@ -79,12 +83,12 @@
     _subtitleColor = subtitleColor ?: [self.class _defaultSubtitleColor];
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor {
-    _backgroundColor = backgroundColor ?: [self.class _defaultBackgroundColor];
++ (UIColor *)_defaultBackgroundColor; {
+    return [UIColor whiteColor];
 }
 
 + (UIFont *)_defaultTitleFont; {
-    return [UIFont boldSystemFontOfSize:17.0];
+    return [UIFont systemFontOfSize:17.0];
 }
 + (UIColor *)_defaultTitleColor; {
     return [UIColor blackColor];
@@ -94,10 +98,6 @@
 }
 + (UIColor *)_defaultSubtitleColor; {
     return [UIColor darkGrayColor];
-}
-
-+ (UIColor *)_defaultBackgroundColor; {
-    return [UIColor whiteColor];
 }
 
 @end

@@ -97,6 +97,9 @@
         KSTDispatchMainAsync(^{
             [self setBackgroundColor:value.backgroundColor];
             
+            [self.titleLabel setFont:value.titleFont];
+            [self.titleLabel setTextColor:value.titleColor];
+            
             [self.thumbnailView1 setBorderColor:value.backgroundColor];
             [self.thumbnailView2 setBorderColor:value.backgroundColor];
             [self.thumbnailView3 setBorderColor:value.backgroundColor];

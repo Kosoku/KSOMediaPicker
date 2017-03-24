@@ -118,6 +118,7 @@
     KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:@"com.kosoku.theme.demo"];
     
     [theme setBackgroundColor:[UIColor blackColor]];
+    [theme setTitleColor:[UIColor whiteColor]];
     
     [viewController setTheme:theme];
     

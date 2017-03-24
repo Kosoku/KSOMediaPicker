@@ -103,6 +103,8 @@
         KSTDispatchMainAsync(^{
             if (self.presentingViewController != nil) {
                 [self.navigationController.navigationBar setBarTintColor:value.backgroundColor];
+                [self.navigationController.navigationBar setTintColor:value.titleColor];
+                [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: value.titleColor}];
             }
             
             [self.view setBackgroundColor:value.backgroundColor];
