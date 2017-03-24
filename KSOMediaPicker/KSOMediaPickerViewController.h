@@ -65,6 +65,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (assign,nonatomic) BOOL hidesEmptyAssetCollections;
 
+@property (assign,nonatomic) KSOMediaPickerMediaTypes mediaTypes;
+
+@property (assign,nonatomic) KSOMediaPickerAssetCollectionSubtype initiallySelectedAssetCollectionSubtype;
+
+@property (copy,nonatomic,nullable) NSSet<NSNumber *> *allowedAssetCollectionSubtypes;
+
 @end
 
 @protocol KSOMediaPickerViewControllerDelegate <NSObject>

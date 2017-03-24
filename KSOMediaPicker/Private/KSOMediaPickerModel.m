@@ -91,6 +91,11 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     [self _reloadAssetCollectionModels];
     
     kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,hidesEmptyAssetCollections),@kstKeypath(self,mediaTypes),@kstKeypath(self,allowedAssetCollectionSubtypes)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        [self _reloadAssetCollectionModels];
+    }];
+    
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,doneBarButtonItemBlock),@kstKeypath(self,cancelBarButtonItemBlock)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         if ([keyPath isEqualToString:@kstKeypath(self,doneBarButtonItemBlock)]) {
@@ -306,17 +311,6 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
                     for (KSOMediaPickerAssetCollectionModel *model in self.assetCollectionModels) {
                         if ([model.identifier isEqualToString:oldSelectedAssetCollectionModel.identifier]) {
                             [self setSelectedAssetCollectionModel:model];
-                            break;
-                        }
-                    }
-                }
-                
-                if (self.selectedAssetCollectionModel == nil &&
-                    self.initiallySelectedAssetCollectionSubtype != KSOMediaPickerAssetCollectionSubtypeNone) {
-                    
-                    for (KSOMediaPickerAssetCollectionModel *collection in self.assetCollectionModels) {
-                        if (collection.subtype == self.initiallySelectedAssetCollectionSubtype) {
-                            [self setSelectedAssetCollectionModel:collection];
                             break;
                         }
                     }

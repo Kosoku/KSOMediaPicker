@@ -21,15 +21,18 @@
 #import "KSOMediaPickerAssetCollectionViewController.h"
 #import "KSOMediaPickerAssetCollectionTableViewController.h"
 #import "NSBundle+KSOMediaPickerPrivateExtensions.h"
+#import "KSOMediaPickerAssetCollectionModel.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
+#import <Quicksilver/Quicksilver.h>
 
 @interface KSOMediaPickerViewController () <KSOMediaPickerModelDelegate>
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @property (strong,nonatomic) KSOMediaPickerBackgroundView *backgroundView;
 @property (strong,nonatomic) KSOMediaPickerAssetCollectionTableViewController *tableViewController;
 
+@property (assign,nonatomic) BOOL hasPushedInitiallySelectedAssetCollectionModel;
 @end
 
 @implementation KSOMediaPickerViewController
@@ -107,6 +110,25 @@
         });
     }];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (!self.hasPushedInitiallySelectedAssetCollectionModel) {
+        if (self.initiallySelectedAssetCollectionSubtype != KSOMediaPickerAssetCollectionSubtypeNone &&
+            [self.model.assetCollectionModels KQS_any:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
+            return self.initiallySelectedAssetCollectionSubtype == object.subtype;
+        }]) {
+            [self setHasPushedInitiallySelectedAssetCollectionModel:YES];
+            
+            [self.model setSelectedAssetCollectionModel:[self.model.assetCollectionModels KQS_find:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
+                return self.initiallySelectedAssetCollectionSubtype == object.subtype;
+            }]];
+            
+            [self.navigationController pushViewController:[[KSOMediaPickerAssetCollectionViewController alloc] initWithModel:self.model] animated:NO];
+        }
+    }
+}
+
 - (void)mediaPickerModelDidError:(NSError *)error {
     if ([self.delegate respondsToSelector:@selector(mediaPickerViewController:didError:)]) {
         [self.delegate mediaPickerViewController:self didError:error];
@@ -184,6 +206,30 @@
 }
 - (void)setHidesEmptyAssetCollections:(BOOL)hidesEmptyAssetCollections {
     [self.model setHidesEmptyAssetCollections:hidesEmptyAssetCollections];
+}
+
+@dynamic mediaTypes;
+- (KSOMediaPickerMediaTypes)mediaTypes {
+    return self.model.mediaTypes;
+}
+- (void)setMediaTypes:(KSOMediaPickerMediaTypes)mediaTypes {
+    [self.model setMediaTypes:mediaTypes];
+}
+
+@dynamic initiallySelectedAssetCollectionSubtype;
+- (KSOMediaPickerAssetCollectionSubtype)initiallySelectedAssetCollectionSubtype {
+    return self.model.initiallySelectedAssetCollectionSubtype;
+}
+- (void)setInitiallySelectedAssetCollectionSubtype:(KSOMediaPickerAssetCollectionSubtype)initiallySelectedAssetCollectionSubtype {
+    [self.model setInitiallySelectedAssetCollectionSubtype:initiallySelectedAssetCollectionSubtype];
+}
+
+@dynamic allowedAssetCollectionSubtypes;
+- (NSSet<NSNumber *> *)allowedAssetCollectionSubtypes {
+    return self.model.allowedAssetCollectionSubtypes;
+}
+- (void)setAllowedAssetCollectionSubtypes:(NSSet<NSNumber *> *)allowedAssetCollectionSubtypes {
+    [self.model setAllowedAssetCollectionSubtypes:allowedAssetCollectionSubtypes];
 }
 
 @end

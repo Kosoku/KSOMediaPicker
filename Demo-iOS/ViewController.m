@@ -112,6 +112,8 @@
     [viewController setAllowsMixedMediaSelection:NO];
     [viewController setMaximumSelectedImages:3];
     [viewController setMaximumSelectedVideos:1];
+    [viewController setMediaTypes:KSOMediaPickerMediaTypesImage];
+    [viewController setInitiallySelectedAssetCollectionSubtype:KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary];
     
     if (sender == self.modalButton) {
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
