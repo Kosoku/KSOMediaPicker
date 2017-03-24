@@ -39,12 +39,9 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
 @property (readwrite,strong,nonatomic) UIBarButtonItem *doneBarButtonItem;
 @property (readwrite,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
 
-@property (readwrite,copy,nonatomic) NSString *title;
-
 @property (readwrite,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (readwrite,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
 
-- (void)_updateTitle;
 - (void)_reloadAssetCollectionModels;
 @end
 
@@ -91,6 +88,8 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
     
+    [self _reloadAssetCollectionModels];
+    
     kstWeakify(self);
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,doneBarButtonItemBlock),@kstKeypath(self,cancelBarButtonItemBlock)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
@@ -118,13 +117,15 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
         }
     }];
     
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,selectedAssetCollectionModel)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        [self deselectAllAssetModelsAndNotifyDelegate:NO];
+    }];
+    
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,selectedAssetIdentifiers)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, NSOrderedSet<NSString *> * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         [self.doneBarButtonItem setEnabled:value.count > 0];
     }];
-    
-    [self _updateTitle];
-    [self _reloadAssetCollectionModels];
     
     return self;
 }
@@ -223,17 +224,25 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     }
 }
 - (void)deselectAssetModel:(KSOMediaPickerAssetModel *)assetModel; {
+    [self deselectAssetModel:assetModel notifyDelegate:YES];
+}
+- (void)deselectAssetModel:(KSOMediaPickerAssetModel *)assetModel notifyDelegate:(BOOL)notifyDelegate; {
     NSMutableOrderedSet *temp = [NSMutableOrderedSet orderedSetWithOrderedSet:self.selectedAssetIdentifiers];
     
     [temp removeObject:assetModel.identifier];
     
     [self setSelectedAssetIdentifiers:temp];
     
-    [self.delegate mediaPickerModelDidDeselectAssetModel:assetModel];
+    if (notifyDelegate) {
+        [self.delegate mediaPickerModelDidDeselectAssetModel:assetModel];
+    }
 }
 - (void)deselectAllAssetModels; {
+    [self deselectAllAssetModelsAndNotifyDelegate:YES];
+}
+- (void)deselectAllAssetModelsAndNotifyDelegate:(BOOL)notifyDelegate; {
     for (KSOMediaPickerAssetModel *assetModel in self.selectedAssetModels) {
-        [self deselectAssetModel:assetModel];
+        [self deselectAssetModel:assetModel notifyDelegate:notifyDelegate];
     }
 }
 
@@ -262,29 +271,6 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     }];
 }
 
-- (void)_updateTitle; {
-    if (self.selectedAssetCollectionModel == nil) {
-        switch ([PHPhotoLibrary authorizationStatus]) {
-            case PHAuthorizationStatusAuthorized:
-                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_AUTHORIZED_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Authorized", @"media picker authorized title")];
-                break;
-            case PHAuthorizationStatusDenied:
-                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_DENIED_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Denied", @"media picker denied title")];
-                break;
-            case PHAuthorizationStatusNotDetermined:
-                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_REQUESTING_AUTHORIZATION_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Requesting Authorization", @"media picker requesting authorization title")];
-                break;
-            case PHAuthorizationStatusRestricted:
-                [self setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_RESTRICTED_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Restricted", @"media picker restricted title")];
-                break;
-            default:
-                break;
-        }
-    }
-    else {
-        [self setTitle:self.selectedAssetCollectionModel.title];
-    }
-}
 - (void)_reloadAssetCollectionModels; {
     __block __weak void(^weakBlock)(PHAuthorizationStatus) = nil;
     
@@ -352,8 +338,6 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
             default:
                 break;
         }
-        
-        [self _updateTitle];
     };
     
     weakBlock = block;

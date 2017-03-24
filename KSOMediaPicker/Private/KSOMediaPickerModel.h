@@ -47,8 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly,strong,nonatomic) UIBarButtonItem *cancelBarButtonItem;
 @property (copy,nonatomic) dispatch_block_t cancelBarButtonItemBlock;
 
-@property (readonly,copy,nonatomic) NSString *title;
-
 @property (readonly,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (strong,nonatomic,nullable) KSOMediaPickerAssetCollectionModel *selectedAssetCollectionModel;
 @property (readonly,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
@@ -60,7 +58,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)selectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
 - (void)selectAssetModel:(KSOMediaPickerAssetModel *)assetModel notifyDelegate:(BOOL)notifyDelegate;
 - (void)deselectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
+- (void)deselectAssetModel:(KSOMediaPickerAssetModel *)assetModel notifyDelegate:(BOOL)notifyDelegate;
 - (void)deselectAllAssetModels;
+- (void)deselectAllAssetModelsAndNotifyDelegate:(BOOL)notifyDelegate;
 
 @end
 

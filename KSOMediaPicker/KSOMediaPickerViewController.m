@@ -20,6 +20,7 @@
 #import "KSOMediaPickerBackgroundView.h"
 #import "KSOMediaPickerAssetCollectionViewController.h"
 #import "KSOMediaPickerAssetCollectionTableViewController.h"
+#import "NSBundle+KSOMediaPickerPrivateExtensions.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
@@ -32,6 +33,10 @@
 @end
 
 @implementation KSOMediaPickerViewController
+
+- (NSString *)title {
+    return NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Photos", @"media picker title");
+}
 
 - (void)dealloc {
     KSTLogObject(self.class);
@@ -71,22 +76,14 @@
     
     if (self.allowsMultipleSelection) {
         if (self.presentingViewController != nil) {
-            [self.navigationItem setLeftBarButtonItems:@[self.model.cancelBarButtonItem]];
+            [self.navigationItem setRightBarButtonItems:@[self.model.cancelBarButtonItem]];
         }
-        [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
     }
     else {
         [self.navigationItem setRightBarButtonItems:@[self.model.cancelBarButtonItem]];
     }
     
     kstWeakify(self);
-    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,title)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
-        kstStrongify(self);
-        KSTDispatchMainAsync(^{
-            [self setTitle:value];
-        });
-    }];
-    
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:0 block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
