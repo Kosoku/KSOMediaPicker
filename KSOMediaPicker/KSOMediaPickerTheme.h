@@ -61,6 +61,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
 
+/**
+ Create and return a new theme with the provided *identifier*.
+ 
+ @param identifier The theme identifier
+ @return The initialized instance
+ */
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
