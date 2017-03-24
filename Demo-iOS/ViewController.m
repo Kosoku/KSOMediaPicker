@@ -85,7 +85,7 @@
     NSLog(@"media: %@",media);
     
     if (mediaPickerViewController.presentingViewController == nil) {
-        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
+        [mediaPickerViewController.navigationController popToViewController:self animated:YES];
     }
     else {
         [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -93,7 +93,7 @@
 }
 - (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController {
     if (mediaPickerViewController.presentingViewController == nil) {
-        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
+        [mediaPickerViewController.navigationController popToViewController:self animated:YES];
     }
     else {
         [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -114,6 +114,12 @@
     [viewController setMaximumSelectedVideos:1];
     [viewController setMediaTypes:KSOMediaPickerMediaTypesImage];
     [viewController setInitiallySelectedAssetCollectionSubtype:KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary];
+    
+    KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:@"com.kosoku.theme.demo"];
+    
+    [theme setBackgroundColor:[UIColor blackColor]];
+    
+    [viewController setTheme:theme];
     
     if (sender == self.modalButton) {
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];

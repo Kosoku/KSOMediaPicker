@@ -18,6 +18,7 @@
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerAssetCollectionTableViewCell.h"
 #import "KSOMediaPickerAssetCollectionViewController.h"
+#import "KSOMediaPickerTheme.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
@@ -39,6 +40,13 @@
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             [self.tableView reloadData];
+        });
+    }];
+    
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            [self.tableView setBackgroundColor:value.backgroundColor];
         });
     }];
 }

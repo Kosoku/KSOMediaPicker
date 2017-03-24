@@ -54,11 +54,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
 
 /**
- Set and get the asset background color, which is used as the background color of the asset collection view.
+ Set and get the asset background color, which is used as the background color of the asset collection table view and asset collection view.
  
  The default is [UIColor whiteColor].
  */
-@property (strong,nonatomic,null_resettable) UIColor *assetBackgroundColor;
+@property (strong,nonatomic,null_resettable) UIColor *backgroundColor;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
 

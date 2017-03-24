@@ -58,7 +58,7 @@
     NSLog(@"media: %@",media);
     
     if (mediaPickerViewController.presentingViewController == nil) {
-        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
+        [mediaPickerViewController.navigationController popToViewController:self animated:YES];
     }
     else {
         [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
@@ -66,7 +66,7 @@
 }
 - (void)mediaPickerViewControllerDidCancel:(KSOMediaPickerViewController *)mediaPickerViewController {
     if (mediaPickerViewController.presentingViewController == nil) {
-        [mediaPickerViewController.navigationController popViewControllerAnimated:YES];
+        [mediaPickerViewController.navigationController popToViewController:self animated:YES];
     }
     else {
         [mediaPickerViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];

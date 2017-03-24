@@ -22,9 +22,8 @@
 + (UIColor *)_defaultTitleColor;
 + (UIFont *)_defaultSubtitleFont;
 + (UIColor *)_defaultSubtitleColor;
-+ (Class)_defaultTitleViewClass;
 
-+ (UIColor *)_defaultAssetBackgroundColor;
++ (UIColor *)_defaultBackgroundColor;
 @end
 
 @implementation KSOMediaPickerTheme
@@ -37,7 +36,7 @@
     retval->_subtitleFont = _subtitleFont;
     retval->_subtitleColor = _subtitleColor;
     
-    retval->_assetBackgroundColor = _assetBackgroundColor;
+    retval->_backgroundColor = _backgroundColor;
     
     return retval;
 }
@@ -53,7 +52,7 @@
     _subtitleFont = [self.class _defaultSubtitleFont];
     _subtitleColor = [self.class _defaultSubtitleColor];
     
-    _assetBackgroundColor = [self.class _defaultAssetBackgroundColor];
+    _backgroundColor = [self.class _defaultBackgroundColor];
     
     return self;
 }
@@ -80,8 +79,8 @@
     _subtitleColor = subtitleColor ?: [self.class _defaultSubtitleColor];
 }
 
-- (void)setAssetBackgroundColor:(UIColor *)assetBackgroundColor {
-    _assetBackgroundColor = assetBackgroundColor ?: [self.class _defaultAssetBackgroundColor];
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    _backgroundColor = backgroundColor ?: [self.class _defaultBackgroundColor];
 }
 
 + (UIFont *)_defaultTitleFont; {
@@ -97,7 +96,7 @@
     return [UIColor darkGrayColor];
 }
 
-+ (UIColor *)_defaultAssetBackgroundColor; {
++ (UIColor *)_defaultBackgroundColor; {
     return [UIColor whiteColor];
 }
 

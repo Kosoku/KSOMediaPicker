@@ -21,6 +21,7 @@
 
 #import <Stanley/Stanley.h>
 #import <Ditko/Ditko.h>
+#import <Agamotto/Agamotto.h>
 
 @interface KSOMediaPickerAssetCollectionTableViewCell ()
 @property (strong,nonatomic) KSOMediaPickerThumbnailView *thumbnailView1, *thumbnailView2, *thumbnailView3;
@@ -89,6 +90,18 @@
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[subview]-[view]-|" options:0 metrics:nil views:@{@"view": _labelContainerView, @"subview": _thumbnailView1}]];
     [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_labelContainerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    kstWeakify(self);
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model.model.theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+        kstStrongify(self);
+        KSTDispatchMainAsync(^{
+            [self setBackgroundColor:value.backgroundColor];
+            
+            [self.thumbnailView1 setBorderColor:value.backgroundColor];
+            [self.thumbnailView2 setBorderColor:value.backgroundColor];
+            [self.thumbnailView3 setBorderColor:value.backgroundColor];
+        });
+    }];
     
     return self;
 }

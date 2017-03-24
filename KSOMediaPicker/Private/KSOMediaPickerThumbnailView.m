@@ -28,7 +28,6 @@
     [self setBackgroundColor:[UIColor clearColor]];
     [self setBorderWidth:1.0];
     [self setBorderOptions:KDIViewBorderOptionsTop];
-    [self setBorderColor:[UIColor whiteColor]];
     
     _thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [_thumbnailImageView setTranslatesAutoresizingMaskIntoConstraints:NO];

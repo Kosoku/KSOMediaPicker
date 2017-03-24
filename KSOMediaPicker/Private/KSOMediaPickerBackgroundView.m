@@ -68,7 +68,7 @@
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        [self setBackgroundColor:value.assetBackgroundColor];
+        [self setBackgroundColor:value.backgroundColor];
         
         [self.label setFont:value.titleFont];
         [self.label setTextColor:value.titleColor];

@@ -68,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     
     [self setBackgroundView:[[KSOMediaPickerBackgroundView alloc] initWithModel:self.model]];
     [self.backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -90,7 +90,7 @@
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:0 block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            [self.view setBackgroundColor:value.assetBackgroundColor];
+            [self.view setBackgroundColor:value.backgroundColor];
         });
     }];
     

@@ -39,6 +39,7 @@
     [super viewDidLoad];
     
     [self setClearsSelectionOnViewWillAppear:NO];
+    [self.collectionView setAlwaysBounceVertical:YES];
     [self.collectionView setAllowsMultipleSelection:self.model.allowsMultipleSelection];
     [self.collectionView registerClass:[KSOMediaPickerAssetCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([KSOMediaPickerAssetCollectionViewCell class])];
     
@@ -63,7 +64,9 @@
     
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        [self.collectionView setBackgroundColor:value.assetBackgroundColor];
+        KSTDispatchMainAsync(^{
+            [self.collectionView setBackgroundColor:value.backgroundColor];
+        });
     }];
 }
 - (void)viewWillLayoutSubviews {
