@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  The default is [UIColor blackColor].
  */
 @property (strong,nonatomic,null_resettable) UIColor *titleColor;
+@property (strong,nonatomic,null_resettable) UIColor *highlightedTitleColor;
 /**
  Set and get the subtitle font, which is used to display descriptive text telling the user to tap in order to change the selected asset collection.
  

@@ -22,6 +22,7 @@
 
 + (UIFont *)_defaultTitleFont;
 + (UIColor *)_defaultTitleColor;
++ (UIColor *)_defaultHighlightedTitleColor;
 + (UIFont *)_defaultSubtitleFont;
 + (UIColor *)_defaultSubtitleColor;
 
@@ -38,6 +39,7 @@
     
     retval->_titleFont = _titleFont;
     retval->_titleColor = _titleColor;
+    retval->_highlightedTitleColor = _highlightedTitleColor;
     retval->_subtitleFont = _subtitleFont;
     retval->_subtitleColor = _subtitleColor;
     
@@ -60,6 +62,7 @@
     
     _titleFont = [self.class _defaultTitleFont];
     _titleColor = [self.class _defaultTitleColor];
+    _highlightedTitleColor = [self.class _defaultHighlightedTitleColor];
     _subtitleFont = [self.class _defaultSubtitleFont];
     _subtitleColor = [self.class _defaultSubtitleColor];
     
@@ -88,6 +91,9 @@
 - (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor ?: [self.class _defaultTitleColor];
 }
+- (void)setHighlightedTitleColor:(UIColor *)highlightedTitleColor {
+    _highlightedTitleColor = highlightedTitleColor ?: [self.class _defaultHighlightedTitleColor];
+}
 - (void)setSubtitleFont:(UIFont *)subtitleFont {
     _subtitleFont = subtitleFont ?: [self.class _defaultSubtitleFont];
 }
@@ -110,6 +116,9 @@
     return [UIFont systemFontOfSize:17.0];
 }
 + (UIColor *)_defaultTitleColor; {
+    return [UIColor blackColor];
+}
++ (UIColor *)_defaultHighlightedTitleColor; {
     return [UIColor blackColor];
 }
 + (UIFont *)_defaultSubtitleFont; {

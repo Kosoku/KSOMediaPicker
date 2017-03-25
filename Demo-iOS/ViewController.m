@@ -136,6 +136,7 @@
     
     [theme setBackgroundColor:[UIColor blackColor]];
     [theme setTitleColor:[UIColor whiteColor]];
+    [theme setHighlightedTitleColor:[UIColor blackColor]];
     [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
     [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
     [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];

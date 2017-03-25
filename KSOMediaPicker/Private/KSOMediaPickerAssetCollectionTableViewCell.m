@@ -100,6 +100,7 @@
             
             [self.titleLabel setFont:value.titleFont];
             [self.titleLabel setTextColor:value.titleColor];
+            [self.titleLabel setHighlightedTextColor:value.highlightedTitleColor];
             
             [self.subtitleLabel setFont:value.subtitleFont];
             [self.subtitleLabel setTextColor:value.subtitleColor];
