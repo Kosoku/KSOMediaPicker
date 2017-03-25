@@ -42,7 +42,11 @@
     _thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [_thumbnailImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_thumbnailImageView setContentMode:UIViewContentModeScaleAspectFill];
+#if (TARGET_OS_TV)
+    [_thumbnailImageView setAdjustsImageWhenAncestorFocused:YES];
+#else
     [_thumbnailImageView setClipsToBounds:YES];
+#endif
     [self.contentView addSubview:_thumbnailImageView];
     
     _gradientView = [[KDIGradientView alloc] initWithFrame:CGRectZero];
@@ -130,6 +134,15 @@
     
     [self.selectedOverlayView setHidden:!selected];
 }
+
+//- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator {
+//    if (self.isFocused) {
+//        
+//    }
+//    else {
+//        
+//    }
+//}
 
 - (void)reloadSelectedOverlayView; {
     if ([self.selectedOverlayView respondsToSelector:@selector(setAllowsMultipleSelection:)]) {
