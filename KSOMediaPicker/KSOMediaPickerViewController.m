@@ -31,8 +31,6 @@
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @property (strong,nonatomic) KSOMediaPickerBackgroundView *backgroundView;
 @property (strong,nonatomic) KSOMediaPickerAssetCollectionTableViewController *tableViewController;
-
-@property (assign,nonatomic) BOOL hasPushedInitiallySelectedAssetCollectionModel;
 @end
 
 @implementation KSOMediaPickerViewController
@@ -88,7 +86,6 @@
         [self.model.assetCollectionModels KQS_any:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
         return self.initiallySelectedAssetCollectionSubtype == object.subtype;
     }]) {
-        [self setHasPushedInitiallySelectedAssetCollectionModel:YES];
         
         [self.model setSelectedAssetCollectionModel:[self.model.assetCollectionModels KQS_find:^BOOL(KSOMediaPickerAssetCollectionModel * _Nonnull object, NSInteger index) {
             return self.initiallySelectedAssetCollectionSubtype == object.subtype;
