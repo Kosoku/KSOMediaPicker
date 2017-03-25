@@ -41,6 +41,8 @@
     retval->_subtitleFont = _subtitleFont;
     retval->_subtitleColor = _subtitleColor;
     
+    retval->_assetCollectionTableViewCellSelectedBackgroundViewClass = _assetCollectionTableViewCellSelectedBackgroundViewClass;
+    
     retval->_assetCollectionCellSelectedOverlayViewTintColor = _assetCollectionCellSelectedOverlayViewTintColor;
     retval->_assetCollectionCellSelectedOverlayViewFont = _assetCollectionCellSelectedOverlayViewFont;
     retval->_assetCollectionCellSelectedOverlayViewTextColor = _assetCollectionCellSelectedOverlayViewTextColor;

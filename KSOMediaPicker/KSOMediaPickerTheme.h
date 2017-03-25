@@ -61,13 +61,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
 
+@property (strong,nonatomic,nullable) Class assetCollectionTableViewCellSelectedBackgroundViewClass;
+
 /**
  Set and get the asset collection cell selected overlay view tint color. This is used to draw the selection chrome.
  
  The default is the tintColor of the view.
  */
 @property (strong,nonatomic,nullable) UIColor *assetCollectionCellSelectedOverlayViewTintColor;
-
 @property (strong,nonatomic,null_resettable) UIFont *assetCollectionCellSelectedOverlayViewFont;
 @property (strong,nonatomic,null_resettable) UIColor *assetCollectionCellSelectedOverlayViewTextColor;
 

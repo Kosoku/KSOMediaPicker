@@ -96,6 +96,7 @@
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             [self setBackgroundColor:value.backgroundColor];
+            [self setSelectedBackgroundView:value.assetCollectionTableViewCellSelectedBackgroundViewClass == Nil ? Nil : [[value.assetCollectionTableViewCellSelectedBackgroundViewClass alloc] initWithFrame:CGRectZero]];
             
             [self.titleLabel setFont:value.titleFont];
             [self.titleLabel setTextColor:value.titleColor];

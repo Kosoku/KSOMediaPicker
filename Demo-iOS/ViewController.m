@@ -21,6 +21,23 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+@interface SelectedBackgroundView : UIView
+
+@end
+
+@implementation SelectedBackgroundView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+    
+    [self setBackgroundColor:[UIColor whiteColor]];
+    
+    return self;
+}
+
+@end
+
 @interface ViewController () <KSOMediaPickerViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong,nonatomic) UIButton *modalButton;
 @property (strong,nonatomic) UIButton *pushButton;
@@ -121,6 +138,7 @@
     [theme setTitleColor:[UIColor whiteColor]];
     [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
     [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
+    [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
     
     [viewController setTheme:theme];
     
