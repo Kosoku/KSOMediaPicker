@@ -19,6 +19,23 @@
 #import <Ditko/Ditko.h>
 #import <KSOMediaPicker/KSOMediaPicker.h>
 
+@interface SelectedBackgroundView : UIView
+
+@end
+
+@implementation SelectedBackgroundView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (!(self = [super initWithFrame:frame]))
+        return nil;
+    
+    [self setBackgroundColor:[UIColor whiteColor]];
+    
+    return self;
+}
+
+@end
+
 @interface ViewController () <KSOMediaPickerViewControllerDelegate>
 @property (strong,nonatomic) UIButton *modalButton;
 @property (strong,nonatomic) UIButton *pushButton;
@@ -87,6 +104,17 @@
     [viewController setMaximumSelectedVideos:1];
     [viewController setMediaTypes:KSOMediaPickerMediaTypesImage];
     [viewController setInitiallySelectedAssetCollectionSubtype:KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary];
+    
+    KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:@"com.kosoku.theme.demo"];
+    
+    [theme setBackgroundColor:[UIColor blackColor]];
+    [theme setTitleColor:[UIColor whiteColor]];
+    [theme setHighlightedTitleColor:[UIColor blackColor]];
+    [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
+    [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
+    [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
+    
+    [viewController setTheme:theme];
     
     if (sender == self.modalButton) {
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];

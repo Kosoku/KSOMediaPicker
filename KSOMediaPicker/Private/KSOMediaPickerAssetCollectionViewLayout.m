@@ -22,7 +22,19 @@
     if (!(self = [super init]))
         return nil;
     
-    _numberOfColumns = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad ? 5 : 4;
+    switch ([UIDevice currentDevice].userInterfaceIdiom) {
+        case UIUserInterfaceIdiomTV:
+            _numberOfColumns = 8;
+            break;
+        case UIUserInterfaceIdiomPad:
+            _numberOfColumns = 5;
+            break;
+        case UIUserInterfaceIdiomPhone:
+            _numberOfColumns = 4;
+            break;
+        default:
+            break;
+    };
     
     [self setSectionInset:UIEdgeInsetsZero];
     
