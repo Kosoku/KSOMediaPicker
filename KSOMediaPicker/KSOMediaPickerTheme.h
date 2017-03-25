@@ -68,6 +68,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,nullable) UIColor *assetCollectionCellSelectedOverlayViewTintColor;
 
+@property (strong,nonatomic,null_resettable) UIFont *assetCollectionCellSelectedOverlayViewFont;
+@property (strong,nonatomic,null_resettable) UIColor *assetCollectionCellSelectedOverlayViewTextColor;
+
 /**
  Create and return a new theme with the provided *identifier*.
  

@@ -56,7 +56,7 @@
         return;
     }
     
-    NSAttributedString *badge = [[NSAttributedString alloc] initWithString:[NSNumberFormatter localizedStringFromNumber:@(self.selectedIndex + 1) numberStyle:NSNumberFormatterDecimalStyle] attributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:12.0], NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    NSAttributedString *badge = [[NSAttributedString alloc] initWithString:[NSNumberFormatter localizedStringFromNumber:@(self.selectedIndex + 1) numberStyle:NSNumberFormatterDecimalStyle] attributes:@{NSFontAttributeName: self.theme.assetCollectionCellSelectedOverlayViewFont, NSForegroundColorAttributeName: self.theme.assetCollectionCellSelectedOverlayViewTextColor}];
     CGSize badgeLabelSize = [badge size];
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(CGRectGetWidth(self.bounds) - badgeLabelSize.width - widthAndHeight - widthAndHeight, 0, badgeLabelSize.width + widthAndHeight + widthAndHeight, badgeLabelSize.height + widthAndHeight + widthAndHeight) cornerRadius:widthAndHeight];
     

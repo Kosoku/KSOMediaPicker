@@ -24,6 +24,9 @@
 + (UIColor *)_defaultTitleColor;
 + (UIFont *)_defaultSubtitleFont;
 + (UIColor *)_defaultSubtitleColor;
+
++ (UIFont *)_defaultAssetCollectionCellSelectedOverlayViewFont;
++ (UIColor *)_defaultAssetCollectionCellSelectedOverlayViewTextColor;
 @end
 
 @implementation KSOMediaPickerTheme
@@ -39,6 +42,8 @@
     retval->_subtitleColor = _subtitleColor;
     
     retval->_assetCollectionCellSelectedOverlayViewTintColor = _assetCollectionCellSelectedOverlayViewTintColor;
+    retval->_assetCollectionCellSelectedOverlayViewFont = _assetCollectionCellSelectedOverlayViewFont;
+    retval->_assetCollectionCellSelectedOverlayViewTextColor = _assetCollectionCellSelectedOverlayViewTextColor;
     
     return retval;
 }
@@ -55,6 +60,9 @@
     _titleColor = [self.class _defaultTitleColor];
     _subtitleFont = [self.class _defaultSubtitleFont];
     _subtitleColor = [self.class _defaultSubtitleColor];
+    
+    _assetCollectionCellSelectedOverlayViewFont = [self.class _defaultAssetCollectionCellSelectedOverlayViewFont];
+    _assetCollectionCellSelectedOverlayViewTextColor = [self.class _defaultAssetCollectionCellSelectedOverlayViewTextColor];
     
     return self;
 }
@@ -85,6 +93,13 @@
     _subtitleColor = subtitleColor ?: [self.class _defaultSubtitleColor];
 }
 
+- (void)setAssetCollectionCellSelectedOverlayViewFont:(UIFont *)assetCollectionCellSelectedOverlayViewFont {
+    _assetCollectionCellSelectedOverlayViewFont = assetCollectionCellSelectedOverlayViewFont ?: [self.class _defaultAssetCollectionCellSelectedOverlayViewFont];
+}
+- (void)setAssetCollectionCellSelectedOverlayViewTextColor:(UIColor *)assetCollectionCellSelectedOverlayViewTextColor {
+    _assetCollectionCellSelectedOverlayViewTextColor = assetCollectionCellSelectedOverlayViewTextColor ?: [self.class _defaultAssetCollectionCellSelectedOverlayViewTextColor];
+}
+
 + (UIColor *)_defaultBackgroundColor; {
     return [UIColor whiteColor];
 }
@@ -100,6 +115,13 @@
 }
 + (UIColor *)_defaultSubtitleColor; {
     return [UIColor darkGrayColor];
+}
+
++ (UIFont *)_defaultAssetCollectionCellSelectedOverlayViewFont {
+    return [UIFont boldSystemFontOfSize:12.0];
+}
++ (UIColor *)_defaultAssetCollectionCellSelectedOverlayViewTextColor; {
+    return [UIColor whiteColor];
 }
 
 @end
