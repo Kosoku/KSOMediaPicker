@@ -132,6 +132,8 @@
 }
 
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator {
+    [super didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
+    
     [coordinator addCoordinatedAnimations:^{
         [self.contentView setTransform:self.isFocused ? CGAffineTransformMakeScale(1.25, 1.25) : CGAffineTransformIdentity];
     } completion:nil];
