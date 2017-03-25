@@ -25,6 +25,7 @@
 + (UIColor *)_defaultHighlightedTitleColor;
 + (UIFont *)_defaultSubtitleFont;
 + (UIColor *)_defaultSubtitleColor;
++ (UIColor *)_defaultHighlightedSubtitleColor;
 
 + (UIFont *)_defaultAssetCollectionCellSelectedOverlayViewFont;
 + (UIColor *)_defaultAssetCollectionCellSelectedOverlayViewTextColor;
@@ -42,6 +43,7 @@
     retval->_highlightedTitleColor = _highlightedTitleColor;
     retval->_subtitleFont = _subtitleFont;
     retval->_subtitleColor = _subtitleColor;
+    retval->_highlightedSubtitleColor = _highlightedSubtitleColor;
     
     retval->_assetCollectionTableViewCellSelectedBackgroundViewClass = _assetCollectionTableViewCellSelectedBackgroundViewClass;
     
@@ -65,6 +67,7 @@
     _highlightedTitleColor = [self.class _defaultHighlightedTitleColor];
     _subtitleFont = [self.class _defaultSubtitleFont];
     _subtitleColor = [self.class _defaultSubtitleColor];
+    _highlightedSubtitleColor = [self.class _defaultHighlightedSubtitleColor];
     
     _assetCollectionCellSelectedOverlayViewFont = [self.class _defaultAssetCollectionCellSelectedOverlayViewFont];
     _assetCollectionCellSelectedOverlayViewTextColor = [self.class _defaultAssetCollectionCellSelectedOverlayViewTextColor];
@@ -100,6 +103,9 @@
 - (void)setSubtitleColor:(UIColor *)subtitleColor {
     _subtitleColor = subtitleColor ?: [self.class _defaultSubtitleColor];
 }
+- (void)setHighlightedSubtitleColor:(UIColor *)highlightedSubtitleColor {
+    _highlightedSubtitleColor = highlightedSubtitleColor ?: [self.class _defaultHighlightedSubtitleColor];
+}
 
 - (void)setAssetCollectionCellSelectedOverlayViewFont:(UIFont *)assetCollectionCellSelectedOverlayViewFont {
     _assetCollectionCellSelectedOverlayViewFont = assetCollectionCellSelectedOverlayViewFont ?: [self.class _defaultAssetCollectionCellSelectedOverlayViewFont];
@@ -126,6 +132,9 @@
 }
 + (UIColor *)_defaultSubtitleColor; {
     return [UIColor darkGrayColor];
+}
++ (UIColor *)_defaultHighlightedSubtitleColor; {
+    return [UIColor blackColor];
 }
 
 + (UIFont *)_defaultAssetCollectionCellSelectedOverlayViewFont {

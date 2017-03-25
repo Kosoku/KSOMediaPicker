@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  The default is [UIColor darkGrayColor].
  */
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
+@property (strong,nonatomic,null_resettable) UIColor *highlightedSubtitleColor;
 
 @property (strong,nonatomic,nullable) Class assetCollectionTableViewCellSelectedBackgroundViewClass;
 
