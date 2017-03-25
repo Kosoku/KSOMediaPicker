@@ -39,6 +39,11 @@
 }
 
 - (void)drawRect:(CGRect)rect {
+    if (self.isFocused) {
+        [[self.theme.assetCollectionCellSelectedOverlayViewTintColor ?: self.tintColor colorWithAlphaComponent:0.5] setFill];
+        UIRectFill(self.bounds);
+    }
+    
     if (self.selectedIndex == NSNotFound) {
         return;
     }
