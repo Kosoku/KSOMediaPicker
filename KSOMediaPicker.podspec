@@ -36,7 +36,7 @@ KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos fr
   s.private_header_files = 'KSOMediaPicker/Private/*.h'
   
   s.resource_bundles = {
-    'KSOMediaPicker' => ['KSOMediaPicker/**/*.xcassets']
+    'KSOMediaPicker' => ['KSOMediaPicker/**/*.{xcassets,lproj}']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
