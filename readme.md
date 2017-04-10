@@ -9,7 +9,7 @@
 
 ### Installation
 
-You can install *KSOMediaPicker* using [cocoapods](https://cocoapods.org/), [Carthage](https://github.com/Carthage/Carthage), or as a framework. When installing as a framework, ensure you also link to [Agamotto](https://github.com/Kosoku/Agamotto), [Ditko](https://github.com/Kosoku/Ditko), [Loki](https://github.com/Kosoku/Loki), [Stanley](https://github.com/Kosoku/Stanley), [Quicksilver](https://github.com/Kosoku/Quicksilver) as *KSOMediaPicker* relies on them.
+You can install *KSOMediaPicker* using [cocoapods](https://cocoapods.org/), [Carthage](https://github.com/Carthage/Carthage), or as a framework. When installing as a framework, ensure you also link to [Agamotto](https://github.com/Kosoku/Agamotto), [Ditko](https://github.com/Kosoku/Ditko), [Loki](https://github.com/Kosoku/Loki), [Stanley](https://github.com/Kosoku/Stanley), [Quicksilver](https://github.com/Kosoku/Quicksilver), and [Shield/Photos](https://github.com/Kosoku/Shield) as *KSOMediaPicker* relies on them.
 
 ### Dependencies
 
@@ -20,6 +20,7 @@ Third party:
 - [Ditko](https://github.com/Kosoku/Ditko)
 - [Loki](https://github.com/Kosoku/Loki)
 - [Quicksilver](https://github.com/Kosoku/Quicksilver)
+- [Shield/Photos](https://github.com/Kosoku/Shield)
 
 Apple:
 
