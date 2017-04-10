@@ -13,3 +13,6 @@
 [submodule "Vendor/Loki"]
 	path = Vendor/Loki
 	url = https://github.com/Kosoku/Loki.git
+[submodule "Vendor/Shield"]
+	path = Vendor/Shield
+	url = https://github.com/Kosoku/Shield.git

@@ -23,6 +23,7 @@
 #import <Agamotto/Agamotto.h>
 #import <Stanley/Stanley.h>
 #import <Ditko/Ditko.h>
+#import <Shield/KSHPhotosAuthorization.h>
 
 #import <Photos/Photos.h>
 
@@ -277,13 +278,13 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
 }
 
 - (void)_reloadAssetCollectionModels; {
-    __block __weak void(^weakBlock)(PHAuthorizationStatus) = nil;
+    __block __weak void(^weakBlock)(KSHPhotosAuthorizationStatus) = nil;
     
-    void(^block)(PHAuthorizationStatus) = ^(PHAuthorizationStatus status){
+    void(^block)(KSHPhotosAuthorizationStatus) = ^(KSHPhotosAuthorizationStatus status){
         [self setAuthorizationStatus:(KSOMediaPickerAuthorizationStatus)status];
         
         switch (status) {
-            case PHAuthorizationStatusAuthorized: {
+            case KSHPhotosAuthorizationStatusAuthorized: {
                 NSMutableArray<PHAssetCollection *> *retval = [[NSMutableArray alloc] init];
                 
                 [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:nil] enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -317,17 +318,17 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
                 }
             }
                 break;
-            case PHAuthorizationStatusNotDetermined: {
-                void(^strongBlock)(PHAuthorizationStatus) = weakBlock;
+            case KSHPhotosAuthorizationStatusNotDetermined: {
+                void(^strongBlock)(KSHPhotosAuthorizationStatus) = weakBlock;
                 
-                [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                [KSHPhotosAuthorization.sharedAuthorization requestPhotoLibraryAuthorizationWithCompletion:^(KSHPhotosAuthorizationStatus status, NSError * _Nullable error) {
                     strongBlock(status);
                 }];
             }
                 break;
-            case PHAuthorizationStatusDenied:
+            case KSHPhotosAuthorizationStatusDenied:
                 break;
-            case PHAuthorizationStatusRestricted:
+            case KSHPhotosAuthorizationStatusRestricted:
                 break;
             default:
                 break;
@@ -336,7 +337,7 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     
     weakBlock = block;
     
-    block([PHPhotoLibrary authorizationStatus]);
+    block(KSHPhotosAuthorization.sharedAuthorization.photoLibraryAuthorizationStatus);
 }
 
 @end

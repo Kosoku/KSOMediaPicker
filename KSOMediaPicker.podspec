@@ -41,9 +41,11 @@ KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos fr
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'Foundation', 'UIKit', 'Photos'
+  
   s.dependency 'Agamotto'
   s.dependency 'Ditko'
   s.dependency 'Loki'
   s.dependency 'Stanley'
   s.dependency 'Quicksilver'
+  s.dependency 'Shield/Photos'
 end

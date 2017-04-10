@@ -96,6 +96,10 @@
 		07AB593A1E859DC000E52340 /* KSOMediaPickerThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AB59381E859DC000E52340 /* KSOMediaPickerThumbnailView.m */; };
 		07AB593B1E859FEC00E52340 /* KSOMediaPickerThumbnailView.h in Headers */ = {isa = PBXBuildFile; fileRef = 07AB59371E859DC000E52340 /* KSOMediaPickerThumbnailView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07AB593C1E859FF200E52340 /* KSOMediaPickerThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AB59381E859DC000E52340 /* KSOMediaPickerThumbnailView.m */; };
+		07CC45DA1E9C4A6700D3DD29 /* Shield.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC45D91E9C4A6700D3DD29 /* Shield.framework */; };
+		07CC45DB1E9C4A6700D3DD29 /* Shield.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC45D91E9C4A6700D3DD29 /* Shield.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07CC45DD1E9C4A6E00D3DD29 /* Shield.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC45DC1E9C4A6E00D3DD29 /* Shield.framework */; };
+		07CC45DE1E9C4A6E00D3DD29 /* Shield.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC45DC1E9C4A6E00D3DD29 /* Shield.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07D1AC8B1E816A2A00A963B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */; };
 		07D1AC8E1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07D1AC8F1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */; };
@@ -137,6 +141,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				073B356F1E83453B00C003A1 /* Quicksilver.framework in Embed Frameworks */,
+				07CC45DE1E9C4A6E00D3DD29 /* Shield.framework in Embed Frameworks */,
 				073B356C1E83452D00C003A1 /* Ditko.framework in Embed Frameworks */,
 				073B35681E83452400C003A1 /* Agamotto.framework in Embed Frameworks */,
 				073B35A61E835C6200C003A1 /* Stanley.framework in Embed Frameworks */,
@@ -153,6 +158,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				07377F4B1E7DF58A00094D95 /* Agamotto.framework in Embed Frameworks */,
+				07CC45DB1E9C4A6700D3DD29 /* Shield.framework in Embed Frameworks */,
 				07A549BA1E7C989700A6C4A1 /* KSOMediaPicker.framework in Embed Frameworks */,
 				07377F4E1E7DF59000094D95 /* Ditko.framework in Embed Frameworks */,
 				073B35A31E835C5900C003A1 /* Stanley.framework in Embed Frameworks */,
@@ -224,6 +230,8 @@
 		07A549C21E7C9C9500A6C4A1 /* KSOMediaPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerModel.m; sourceTree = "<group>"; };
 		07AB59371E859DC000E52340 /* KSOMediaPickerThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerThumbnailView.h; sourceTree = "<group>"; };
 		07AB59381E859DC000E52340 /* KSOMediaPickerThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerThumbnailView.m; sourceTree = "<group>"; };
+		07CC45D91E9C4A6700D3DD29 /* Shield.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Shield.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		07CC45DC1E9C4A6E00D3DD29 /* Shield.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Shield.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+KSOMediaPickerPrivateExtensions.h"; sourceTree = "<group>"; };
 		07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+KSOMediaPickerPrivateExtensions.m"; sourceTree = "<group>"; };
@@ -253,6 +261,7 @@
 				073B356E1E83453B00C003A1 /* Quicksilver.framework in Frameworks */,
 				073B356B1E83452D00C003A1 /* Ditko.framework in Frameworks */,
 				073B359F1E83522000C003A1 /* Loki.framework in Frameworks */,
+				07CC45DD1E9C4A6E00D3DD29 /* Shield.framework in Frameworks */,
 				073B35671E83452400C003A1 /* Agamotto.framework in Frameworks */,
 				073B35701E83454500C003A1 /* KSOMediaPicker.framework in Frameworks */,
 			);
@@ -274,6 +283,7 @@
 				07A549C01E7C989F00A6C4A1 /* Photos.framework in Frameworks */,
 				07377F4A1E7DF58A00094D95 /* Agamotto.framework in Frameworks */,
 				073B359C1E83520F00C003A1 /* Loki.framework in Frameworks */,
+				07CC45DA1E9C4A6700D3DD29 /* Shield.framework in Frameworks */,
 				07377F4D1E7DF59000094D95 /* Ditko.framework in Frameworks */,
 				07A549B91E7C989700A6C4A1 /* KSOMediaPicker.framework in Frameworks */,
 			);
@@ -406,6 +416,8 @@
 		07A549BE1E7C989F00A6C4A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07CC45D91E9C4A6700D3DD29 /* Shield.framework */,
+				07CC45DC1E9C4A6E00D3DD29 /* Shield.framework */,
 				073B35A41E835C6200C003A1 /* Stanley.framework */,
 				073B35A11E835C5900C003A1 /* Stanley.framework */,
 				073B359E1E83522000C003A1 /* Loki.framework */,
@@ -843,6 +855,7 @@
 					"$(SRCROOT)/Vendor/Agamotto",
 					"$(SRCROOT)/Vendor/Stanley",
 					"$(SRCROOT)/Vendor/Loki",
+					"$(SRCROOT)/Vendor/Shield",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -907,6 +920,7 @@
 					"$(SRCROOT)/Vendor/Agamotto",
 					"$(SRCROOT)/Vendor/Stanley",
 					"$(SRCROOT)/Vendor/Loki",
+					"$(SRCROOT)/Vendor/Shield",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksomediapicker;
@@ -1091,6 +1105,7 @@
 					"$(SRCROOT)/Vendor/Agamotto",
 					"$(SRCROOT)/Vendor/Stanley",
 					"$(SRCROOT)/Vendor/Loki",
+					"$(SRCROOT)/Vendor/Shield",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1156,6 +1171,7 @@
 					"$(SRCROOT)/Vendor/Agamotto",
 					"$(SRCROOT)/Vendor/Stanley",
 					"$(SRCROOT)/Vendor/Loki",
+					"$(SRCROOT)/Vendor/Shield",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksomediapicker;
