@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOMediaPicker'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = 'KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos framework.'
 
 # This description is used to generate tags and improve search results.
@@ -39,7 +39,6 @@ KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos fr
     'KSOMediaPicker' => ['KSOMediaPicker/**/*.{xcassets,lproj}']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'Foundation', 'UIKit', 'Photos'
   
   s.dependency 'Agamotto'
