@@ -48,6 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
  The default is [UIColor blackColor].
  */
 @property (strong,nonatomic,null_resettable) UIColor *titleColor;
+/**
+ Set and get the highlighted title color.
+ 
+ The default is [UIColor whiteColor].
+ */
 @property (strong,nonatomic,null_resettable) UIColor *highlightedTitleColor;
 /**
  Set and get the subtitle font, which is used to display descriptive text telling the user to tap in order to change the selected asset collection.
@@ -61,8 +66,18 @@ NS_ASSUME_NONNULL_BEGIN
  The default is [UIColor darkGrayColor].
  */
 @property (strong,nonatomic,null_resettable) UIColor *subtitleColor;
+/**
+ Set and get the highlighted subtitle color.
+ 
+ The default is [UIColor blackColor].
+ */
 @property (strong,nonatomic,null_resettable) UIColor *highlightedSubtitleColor;
 
+/**
+ Set and get the class used for the asset collection table view selected background view. Use this to use a custom class to draw the selected background if desired.
+ 
+ The default is Nil.
+ */
 @property (strong,nonatomic,nullable) Class assetCollectionTableViewCellSelectedBackgroundViewClass;
 
 /**
@@ -71,7 +86,17 @@ NS_ASSUME_NONNULL_BEGIN
  The default is the tintColor of the view.
  */
 @property (strong,nonatomic,nullable) UIColor *assetCollectionCellSelectedOverlayViewTintColor;
+/**
+ Set and get the asset collection view cell selected overlay font that is used to draw the selected index.
+ 
+ The default is [UIFont boldSystemFontOfSize:12.0].
+ */
 @property (strong,nonatomic,null_resettable) UIFont *assetCollectionCellSelectedOverlayViewFont;
+/**
+ Set and get the asset collection view cell selected overlay text color.
+ 
+ The default is [UIColor whiteColor].
+ */
 @property (strong,nonatomic,null_resettable) UIColor *assetCollectionCellSelectedOverlayViewTextColor;
 
 /**

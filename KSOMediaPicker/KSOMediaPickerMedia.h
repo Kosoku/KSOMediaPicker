@@ -20,9 +20,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Protocol for objects returned by the media picker delegate methods.
+ */
 @protocol KSOMediaPickerMedia <NSObject>
 @required
+/**
+ Get the underlying PHAsset object.
+ 
+ @see PHAsset
+ */
 @property (readonly,nonatomic) PHAsset *mediaPickerMediaAsset;
+/**
+ Get the media type.
+ 
+ @see KSOMediaPickerMediaType
+ */
 @property (readonly,nonatomic) KSOMediaPickerMediaType mediaPickerMediaType;
 @end
 

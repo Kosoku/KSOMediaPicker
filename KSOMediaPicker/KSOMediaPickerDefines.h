@@ -21,17 +21,47 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Enum describing the possible values for the media picker authorization status. See PHAuthorizationStatus for more information.
+ */
 typedef NS_ENUM(NSInteger, KSOMediaPickerAuthorizationStatus) {
+    /**
+     See PHAuthorizationStatusNotDetermined for more information.
+     */
     KSOMediaPickerAuthorizationStatusNotDetermined = PHAuthorizationStatusNotDetermined,
+    /**
+     See PHAuthorizationStatusRestricted for more information.
+     */
     KSOMediaPickerAuthorizationStatusRestricted = PHAuthorizationStatusRestricted,
+    /**
+     See PHAuthorizationStatusDenied for more information.
+     */
     KSOMediaPickerAuthorizationStatusDenied = PHAuthorizationStatusDenied,
+    /**
+     See PHAuthorizationStatusAuthorized for more information.
+     */
     KSOMediaPickerAuthorizationStatusAuthorized = PHAuthorizationStatusAuthorized
 };
 
+/**
+ Enum describing the possible values for media type. See PHAssetMediaType for more information.
+ */
 typedef NS_ENUM(NSInteger, KSOMediaPickerMediaType) {
+    /**
+     See PHAssetMediaTypeUnknown for more information.
+     */
     KSOMediaPickerMediaTypeUnknown = PHAssetMediaTypeUnknown,
+    /**
+     See PHAssetMediaTypeImage for more information.
+     */
     KSOMediaPickerMediaTypeImage = PHAssetMediaTypeImage,
+    /**
+     See PHAssetMediaTypeVideo for more information.
+     */
     KSOMediaPickerMediaTypeVideo = PHAssetMediaTypeVideo,
+    /**
+     See PHAssetMediaTypeAudio for more information.
+     */
     KSOMediaPickerMediaTypeAudio = PHAssetMediaTypeAudio
 };
 
@@ -144,11 +174,26 @@ typedef NS_ENUM(NSInteger, KSOMediaPickerAssetCollectionSubtype) {
     KSOMediaPickerAssetCollectionSubtypeSmartAlbumScreenshots = PHAssetCollectionSubtypeSmartAlbumScreenshots
 };
 
+/**
+ Error domain for errors produced by the media picker.
+ */
 FOUNDATION_EXPORT NSString *const KSOMediaPickerErrorDomain;
 
+/**
+ Error code returned for when the user attempts to select mixed media (images and videos) when the allowsMixedMediaSelection is NO.
+ */
 FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMixedMediaSelection;
+/**
+ Error code returned for when the user attempts to select media that would exceed the maximumSelectedMedia property.
+ */
 FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMaximumSelectedMedia;
+/**
+ Error code returned for when the user attempts to select images that would exceed the maximumSelectedImages property.
+ */
 FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMaximumSelectedImages;
+/**
+ Error code returned for when the user attempts to select images that would exceed the maximumSelectedVideos property.
+ */
 FOUNDATION_EXPORT NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos;
 
 NS_ASSUME_NONNULL_END
