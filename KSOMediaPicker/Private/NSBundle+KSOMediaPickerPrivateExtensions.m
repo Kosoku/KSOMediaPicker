@@ -18,7 +18,7 @@
 @implementation NSBundle (KSOMediaPickerPrivateExtensions)
 
 + (NSBundle *)KSO_mediaPickerFrameworkBundle; {
-    return [NSBundle bundleWithIdentifier:@"com.kosoku.ksomediapicker"];
+    return [NSBundle bundleWithIdentifier:@"com.kosoku.ksomediapicker"] ?: [self bundleWithURL:[[[NSBundle mainBundle].privateFrameworksURL URLByAppendingPathComponent:@"KSOMediaPicker.framework" isDirectory:YES] URLByAppendingPathComponent:@"KSOMediaPicker.bundle" isDirectory:YES]] ?: [self bundleWithURL:[[NSBundle mainBundle] URLForResource:@"KSOMediaPicker" withExtension:@"bundle"]];
 }
 
 @end
