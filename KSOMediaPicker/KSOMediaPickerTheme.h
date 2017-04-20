@@ -30,6 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly,copy,nonatomic) NSString *identifier;
 
 /**
+ Set and get the bar tint color used for the barTintColor of the containing navigation bar if the media picker is presented modally.
+ */
+@property (strong,nonatomic,nullable) UIColor *barTintColor;
+/**
+ Set and get the tint color used for the tintColor of the containing navigation bar if the media picker is presented modally.
+ */
+@property (strong,nonatomic,nullable) UIColor *tintColor;
+
+/**
  Set and get the background color, which is used as the background color of the asset collection table view, asset collection view and the navigation bar when presenting modally.
  
  The default is [UIColor whiteColor].

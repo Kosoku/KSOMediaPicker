@@ -126,22 +126,24 @@
     
     [viewController setDelegate:self];
     [viewController setAllowsMultipleSelection:YES];
-//    [viewController setAllowsMixedMediaSelection:NO];
+    [viewController setAllowsMixedMediaSelection:NO];
     [viewController setMaximumSelectedImages:3];
     [viewController setMaximumSelectedVideos:1];
 //    [viewController setMediaTypes:KSOMediaPickerMediaTypesImage];
 //    [viewController setInitiallySelectedAssetCollectionSubtype:KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary];
-//    
-//    KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:@"com.kosoku.theme.demo"];
-//    
-//    [theme setBackgroundColor:[UIColor blackColor]];
-//    [theme setTitleColor:[UIColor whiteColor]];
-//    [theme setHighlightedTitleColor:[UIColor blackColor]];
-//    [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
-//    [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
-//    [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
-//    
-//    [viewController setTheme:theme];
+
+    KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:[NSBundle mainBundle].KST_bundleIdentifier];
+    
+    [theme setBarTintColor:[UIColor darkGrayColor]];
+    [theme setTintColor:[UIColor whiteColor]];
+    [theme setBackgroundColor:[UIColor blackColor]];
+    [theme setTitleColor:[UIColor whiteColor]];
+    [theme setHighlightedTitleColor:[UIColor blackColor]];
+    [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
+    [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
+    [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
+    
+    [viewController setTheme:theme];
     
     if (sender == self.modalButton) {
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
