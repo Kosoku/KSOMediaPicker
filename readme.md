@@ -7,6 +7,9 @@
 
 *KSOMediaPicker* is an iOS/tvOS framework that provides UI to access the Photos framework. It provides similar functionality to `UIImagePickerController` on iOS and a custom implementation on tvOS.
 
+![asset-collections](screenshots/asset-collections.png)
+![assets](screenshots/assets.png)
+
 ### Installation
 
 You can install *KSOMediaPicker* using [cocoapods](https://cocoapods.org/), [Carthage](https://github.com/Carthage/Carthage), or as a framework. When installing as a framework, ensure you also link to [Agamotto](https://github.com/Kosoku/Agamotto), [Ditko](https://github.com/Kosoku/Ditko), [Loki](https://github.com/Kosoku/Loki), [Stanley](https://github.com/Kosoku/Stanley), [Quicksilver](https://github.com/Kosoku/Quicksilver), and [Shield/Photos](https://github.com/Kosoku/Shield) as *KSOMediaPicker* relies on them.

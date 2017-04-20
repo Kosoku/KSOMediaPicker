@@ -55,6 +55,8 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
 }
 
 - (void)photoLibraryDidChange:(PHChange *)changeInstance {
+    BOOL hasChanges = NO;
+    
     for (KSOMediaPickerAssetCollectionModel *model in self.assetCollectionModels) {
         PHFetchResultChangeDetails *details = [changeInstance changeDetailsForFetchResult:model.fetchResult];
         
@@ -65,10 +67,17 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
         if (details.hasIncrementalChanges &&
             (details.removedIndexes.count > 0 || details.insertedIndexes.count > 0 || details.changedIndexes.count > 0)) {
             [model reloadFetchResult];
+            hasChanges = YES;
         }
         else if (details.fetchResultAfterChanges) {
             [model reloadFetchResult];
+            hasChanges = YES;
         }
+    }
+    
+    if (hasChanges) {
+        [self willChangeValueForKey:@kstKeypath(self,assetCollectionModels)];
+        [self didChangeValueForKey:@kstKeypath(self,assetCollectionModels)];
     }
 }
 
