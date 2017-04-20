@@ -7,8 +7,8 @@
 
 *KSOMediaPicker* is an iOS/tvOS framework that provides UI to access the Photos framework. It provides similar functionality to `UIImagePickerController` on iOS and a custom implementation on tvOS.
 
-![asset_collections](screenshots/asset_collections.png=){width=50%}
-![assets](screenshots/assets.png){width=50%}
+![asset_collections](screenshots/asset_collections.png = 320x568)
+![assets](screenshots/assets.png = 320x568)
 
 ### Installation
 
