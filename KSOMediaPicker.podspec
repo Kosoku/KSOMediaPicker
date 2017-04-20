@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOMediaPicker'
-  s.version          = '0.5.0'
+  s.version          = '0.6.0'
   s.summary          = 'KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos framework.'
 
 # This description is used to generate tags and improve search results.
@@ -22,7 +22,7 @@ KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos fr
                        DESC
 
   s.homepage         = 'https://github.com/Kosoku/KSOMediaPicker'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.screenshots      = 'https://github.com/Kosoku/KSOMediaPicker/blob/master/screenshots/asset_collections.png', 'https://github.com/Kosoku/KSOMediaPicker/blob/master/screenshots/assets.png'
   s.license          = { :type => 'BSD', :file => 'license.txt' }
   s.author           = { 'William Towe' => 'willbur1984@gmail.com' }
   s.source           = { :git => 'https://github.com/Kosoku/KSOMediaPicker.git', :tag => s.version.to_s }
