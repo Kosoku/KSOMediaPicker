@@ -22,7 +22,7 @@ KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos fr
                        DESC
 
   s.homepage         = 'https://github.com/Kosoku/KSOMediaPicker'
-  s.screenshots      = 'https://github.com/Kosoku/KSOMediaPicker/blob/master/screenshots/asset_collections.png', 'https://github.com/Kosoku/KSOMediaPicker/blob/master/screenshots/assets.png'
+  s.screenshots      = ['https://github.com/Kosoku/KSOMediaPicker/raw/master/screenshots/asset_collections.png','https://github.com/Kosoku/KSOMediaPicker/raw/master/screenshots/assets.png']
   s.license          = { :type => 'BSD', :file => 'license.txt' }
   s.author           = { 'William Towe' => 'willbur1984@gmail.com' }
   s.source           = { :git => 'https://github.com/Kosoku/KSOMediaPicker.git', :tag => s.version.to_s }
