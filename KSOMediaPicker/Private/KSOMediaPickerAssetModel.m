@@ -96,25 +96,28 @@
     }
 }
 - (NSTimeInterval)duration {
-    return self.asset.duration;
+    return ceil(self.asset.duration);
 }
 - (NSString *)formattedDuration {
     if (self.mediaType == KSOMediaPickerMediaTypeVideo) {
-        NSTimeInterval duration = self.duration;
-        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:duration];
-        NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:[NSDate date] toDate:[NSDate dateWithTimeIntervalSinceNow:duration] options:0];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        static NSDateComponentsFormatter *kFormatter;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            kFormatter = [[NSDateComponentsFormatter alloc] init];
+            
+            [kFormatter setAllowedUnits:NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond];
+            [kFormatter setUnitsStyle:NSDateComponentsFormatterUnitsStylePositional];
+            [kFormatter setZeroFormattingBehavior:NSDateComponentsFormatterZeroFormattingBehaviorPad];
+        });
         
-        if (comps.hour > 0) {
-            [dateFormatter setDateFormat:@"H:mm:ss"];
+        if (self.duration < 60 * 60) {
+            [kFormatter setAllowedUnits:NSCalendarUnitMinute|NSCalendarUnitSecond];
         }
         else {
-            [dateFormatter setDateFormat:@"m:ss"];
+            [kFormatter setAllowedUnits:NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond];
         }
         
-        date = [[NSCalendar currentCalendar] dateFromComponents:comps];
-        
-        return [dateFormatter stringFromDate:date];
+        return [kFormatter stringFromTimeInterval:self.duration];
     }
     return nil;
 }
