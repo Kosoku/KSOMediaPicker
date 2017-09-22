@@ -159,7 +159,7 @@
 - (void)setModel:(KSOMediaPickerAssetModel *)model {
     _model = model;
     
-    [self.typeImageView setImage:[_model.typeImage KLO_imageByRenderingWithColor:[UIColor whiteColor]]];
+    [self.typeImageView setImage:[_model.typeImage KLO_imageByTintingWithColor:[UIColor whiteColor]]];
     [self.durationLabel setText:_model.formattedDuration];
     [self.gradientView setHidden:self.typeImageView.image == nil && self.durationLabel.text.length == 0];
     
