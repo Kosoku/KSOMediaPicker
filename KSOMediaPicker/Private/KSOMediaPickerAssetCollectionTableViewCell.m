@@ -38,7 +38,7 @@
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model.model.theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            [self setBackgroundColor:value.backgroundColor];
+            [self setBackgroundColor:value.cellBackgroundColor];
             [self setSelectedBackgroundView:value.assetCollectionTableViewCellSelectedBackgroundViewClass == Nil ? Nil : [[value.assetCollectionTableViewCellSelectedBackgroundViewClass alloc] initWithFrame:CGRectZero]];
             
             [self.titleLabel setFont:value.titleFont];
@@ -49,9 +49,9 @@
             [self.subtitleLabel setTextColor:value.subtitleColor];
             [self.subtitleLabel setHighlightedTextColor:value.highlightedSubtitleColor];
             
-            [self.thumbnailView1 setBorderColor:value.backgroundColor];
-            [self.thumbnailView2 setBorderColor:value.backgroundColor];
-            [self.thumbnailView3 setBorderColor:value.backgroundColor];
+            [self.thumbnailView1 setBorderColor:value.cellBackgroundColor];
+            [self.thumbnailView2 setBorderColor:value.cellBackgroundColor];
+            [self.thumbnailView3 setBorderColor:value.cellBackgroundColor];
         });
     }];
 }

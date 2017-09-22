@@ -37,13 +37,23 @@ NS_ASSUME_NONNULL_BEGIN
  Set and get the tint color used for the tintColor of the containing navigation bar if the media picker is presented modally.
  */
 @property (strong,nonatomic,nullable) UIColor *tintColor;
+/**
+ Set and get the text color used for the navigation bar title if the picker is presented modally.
+ */
+@property (strong,nonatomic,nullable) UIColor *navigationBarTitleTextColor;
 
 /**
- Set and get the background color, which is used as the background color of the asset collection table view, asset collection view and the navigation bar when presenting modally.
+ Set and get the background color, which is used as the background color of the asset collection table view, asset collection view.
  
  The default is [UIColor whiteColor].
  */
 @property (strong,nonatomic,null_resettable) UIColor *backgroundColor;
+/**
+ Set and get the background color, which is used for the background color of the asset collection and asset cells.
+ 
+ The default is [UIColor whiteColor].
+ */
+@property (strong,nonatomic,null_resettable) UIColor *cellBackgroundColor;
 
 /**
  Set and get the title font, which is used to display the name of the selected asset collection in the navigation bar.

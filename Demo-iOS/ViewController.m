@@ -84,15 +84,17 @@
         [viewController setMaximumSelectedImages:3];
         [viewController setMaximumSelectedVideos:1];
         
-        KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:[NSBundle mainBundle].KST_bundleIdentifier];
+        KSOMediaPickerTheme *theme = [KSOMediaPickerTheme.defaultTheme copy];
         
-        [theme setBarTintColor:[UIColor darkGrayColor]];
-        [theme setTintColor:[UIColor whiteColor]];
-        [theme setBackgroundColor:[UIColor blackColor]];
-        [theme setTitleColor:[UIColor whiteColor]];
+        [theme setBarTintColor:KDIColorHexadecimal(@"067ab4")];
+        [theme setTintColor:KDIColorHexadecimal(@"ff7200")];
+        [theme setNavigationBarTitleTextColor:[UIColor whiteColor]];
+        [theme setBackgroundColor:KDIColorHexadecimal(@"cdcfd0")];
+        [theme setCellBackgroundColor:[UIColor whiteColor]];
+        [theme setTitleColor:[UIColor blackColor]];
         [theme setHighlightedTitleColor:[UIColor blackColor]];
-        [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
-        [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
+        [theme setAssetCollectionCellSelectedOverlayViewTintColor:KDIColorHexadecimal(@"ff7200")];
+        [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor whiteColor]];
         [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
         
         [viewController setTheme:theme];

@@ -19,6 +19,7 @@
 @property (readwrite,copy,nonatomic) NSString *identifier;
 
 + (UIColor *)_defaultBackgroundColor;
++ (UIColor *)_defaultCellBackgroundColor;
 
 + (UIFont *)_defaultTitleFont;
 + (UIColor *)_defaultTitleColor;
@@ -36,7 +37,12 @@
 - (id)copyWithZone:(NSZone *)zone {
     KSOMediaPickerTheme *retval = [[[self class] alloc] initWithIdentifier:[NSString stringWithFormat:@"%@.copy",self.identifier]];
     
+    retval->_barTintColor = _barTintColor;
+    retval->_tintColor = _tintColor;
+    retval->_navigationBarTitleTextColor = _navigationBarTitleTextColor;
+    
     retval->_backgroundColor = _backgroundColor;
+    retval->_cellBackgroundColor = _cellBackgroundColor;
     
     retval->_titleFont = _titleFont;
     retval->_titleColor = _titleColor;
@@ -61,6 +67,7 @@
     _identifier = [identifier copy];
     
     _backgroundColor = [self.class _defaultBackgroundColor];
+    _cellBackgroundColor = [self.class _defaultCellBackgroundColor];
     
     _titleFont = [self.class _defaultTitleFont];
     _titleColor = [self.class _defaultTitleColor];
@@ -86,6 +93,9 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     _backgroundColor = backgroundColor ?: [self.class _defaultBackgroundColor];
+}
+- (void)setCellBackgroundColor:(UIColor *)cellBackgroundColor {
+    _cellBackgroundColor = cellBackgroundColor ?: [self.class _defaultCellBackgroundColor];
 }
 
 - (void)setTitleFont:(UIFont *)titleFont {
@@ -115,6 +125,9 @@
 }
 
 + (UIColor *)_defaultBackgroundColor; {
+    return [UIColor whiteColor];
+}
++ (UIColor *)_defaultCellBackgroundColor {
     return [UIColor whiteColor];
 }
 

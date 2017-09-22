@@ -101,7 +101,14 @@
             if (self.presentingViewController != nil) {
                 [self.navigationController.navigationBar setBarTintColor:value.barTintColor];
                 [self.navigationController.navigationBar setTintColor:value.tintColor];
-                [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: value.titleColor}];
+                
+                NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
+                
+                if (value.navigationBarTitleTextColor != nil) {
+                    [attrs addEntriesFromDictionary:@{NSForegroundColorAttributeName: value.navigationBarTitleTextColor}];
+                }
+                
+                [self.navigationController.navigationBar setTitleTextAttributes:attrs];
             }
             
             [self.view setBackgroundColor:value.backgroundColor];
