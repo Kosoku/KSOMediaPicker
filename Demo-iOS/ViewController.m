@@ -66,9 +66,6 @@
         
         [viewController setDelegate:self];
         [viewController setAllowsMultipleSelection:YES];
-        [viewController setAllowsMixedMediaSelection:NO];
-        [viewController setMaximumSelectedImages:3];
-        [viewController setMaximumSelectedVideos:1];
         
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
     } forControlEvents:UIControlEventTouchUpInside];

@@ -69,17 +69,17 @@
     [self.subtitleLabel setText:_model.subtitle];
     
     kstWeakify(self);
-    [_model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.thumbnailView1.thumbnailImageView.frame.size) thumbnailIndex:0 completion:^(UIImage *thumbnailImage) {
+    [_model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.thumbnailView1.frame.size) thumbnailIndex:0 completion:^(UIImage *thumbnailImage) {
         kstStrongify(self);
         [self.thumbnailView1.thumbnailImageView setImage:thumbnailImage];
     }];
     
-    [_model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.thumbnailView2.thumbnailImageView.frame.size) thumbnailIndex:1 completion:^(UIImage *thumbnailImage) {
+    [_model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.thumbnailView2.frame.size) thumbnailIndex:1 completion:^(UIImage *thumbnailImage) {
         kstStrongify(self);
         [self.thumbnailView2.thumbnailImageView setImage:thumbnailImage];
     }];
     
-    [_model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.thumbnailView3.thumbnailImageView.frame.size) thumbnailIndex:2 completion:^(UIImage *thumbnailImage) {
+    [_model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.thumbnailView3.frame.size) thumbnailIndex:2 completion:^(UIImage *thumbnailImage) {
         kstStrongify(self);
         [self.thumbnailView3.thumbnailImageView setImage:thumbnailImage];
     }];

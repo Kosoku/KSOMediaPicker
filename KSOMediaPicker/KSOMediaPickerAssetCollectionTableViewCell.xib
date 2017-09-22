@@ -18,31 +18,31 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ku-uz-suf" customClass="KSOMediaPickerThumbnailView">
-                        <rect key="frame" x="11" y="88" width="58" height="58"/>
+                        <rect key="frame" x="11" y="84" width="66" height="66"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="58" id="nXX-nK-5cv"/>
-                            <constraint firstAttribute="width" constant="58" id="pF0-H8-cCH"/>
+                            <constraint firstAttribute="height" constant="66" id="nXX-nK-5cv"/>
+                            <constraint firstAttribute="width" constant="66" id="pF0-H8-cCH"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAW-bl-AO4" customClass="KSOMediaPickerThumbnailView">
-                        <rect key="frame" x="9" y="90" width="61" height="61"/>
+                        <rect key="frame" x="9" y="86" width="69" height="69"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="61" id="fcr-dJ-qEe"/>
-                            <constraint firstAttribute="height" constant="61" id="zcX-RY-npi"/>
+                            <constraint firstAttribute="width" constant="69" id="fcr-dJ-qEe"/>
+                            <constraint firstAttribute="height" constant="69" id="zcX-RY-npi"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnR-Iv-EcX" customClass="KSOMediaPickerThumbnailView">
-                        <rect key="frame" x="8" y="92" width="64" height="64"/>
+                        <rect key="frame" x="8" y="88" width="72" height="72"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="64" id="PYr-ik-ad8"/>
-                            <constraint firstAttribute="width" constant="64" id="n0g-Vb-w2n"/>
+                            <constraint firstAttribute="height" constant="72" id="PYr-ik-ad8"/>
+                            <constraint firstAttribute="width" constant="72" id="n0g-Vb-w2n"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-jR-96E">
-                        <rect key="frame" x="80" y="103.5" width="254" height="40.5"/>
+                        <rect key="frame" x="88" y="103.5" width="246" height="40.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYr-cV-Zxp">
                                 <rect key="frame" x="0.0" y="0.0" width="33.5" height="20.5"/>
