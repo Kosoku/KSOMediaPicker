@@ -91,6 +91,10 @@
 		074531681E9EAA9F00CEF9E0 /* Shield.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074531671E9EAA9F00CEF9E0 /* Shield.framework */; };
 		0745316A1E9EAAA300CEF9E0 /* Stanley.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074531691E9EAAA300CEF9E0 /* Stanley.framework */; };
 		0745316C1E9EAAAB00CEF9E0 /* Shield.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0745316B1E9EAAAB00CEF9E0 /* Shield.framework */; };
+		0784FE711F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0784FE721F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */; };
+		0784FE751F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */; };
 		07A549941E7C97AA00A6C4A1 /* KSOMediaPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A549921E7C97AA00A6C4A1 /* KSOMediaPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07A549A01E7C97D400A6C4A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5499F1E7C97D400A6C4A1 /* main.m */; };
 		07A549A31E7C97D400A6C4A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A549A21E7C97D400A6C4A1 /* AppDelegate.m */; };
@@ -237,6 +241,8 @@
 		074531671E9EAA9F00CEF9E0 /* Shield.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Shield.framework; path = "../../Library/Developer/Xcode/DerivedData/KSOMediaPicker-bvdclhbsyvginkcczvqybmmjulxg/Build/Products/Debug-iphonesimulator/Shield.framework"; sourceTree = "<group>"; };
 		074531691E9EAAA300CEF9E0 /* Stanley.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Stanley.framework; path = "../../Library/Developer/Xcode/DerivedData/KSOMediaPicker-bvdclhbsyvginkcczvqybmmjulxg/Build/Products/Debug-iphonesimulator/Stanley.framework"; sourceTree = "<group>"; };
 		0745316B1E9EAAAB00CEF9E0 /* Shield.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Shield.framework; path = "../../Library/Developer/Xcode/DerivedData/KSOMediaPicker-bvdclhbsyvginkcczvqybmmjulxg/Build/Products/Debug-appletvsimulator/Shield.framework"; sourceTree = "<group>"; };
+		0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSOMediaPickerDefinesPrivate.h; path = Private/KSOMediaPickerDefinesPrivate.h; sourceTree = "<group>"; };
+		0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = KSOMediaPickerAssetCollectionTableViewCell.xib; path = KSOMediaPicker/KSOMediaPickerAssetCollectionTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		07A5498F1E7C97AA00A6C4A1 /* KSOMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07A549921E7C97AA00A6C4A1 /* KSOMediaPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOMediaPicker.h; sourceTree = "<group>"; };
 		07A549931E7C97AA00A6C4A1 /* KSOMediaPicker-iOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KSOMediaPicker-iOS-Info.plist"; sourceTree = "<group>"; };
@@ -440,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				07377F211E7D9C4A00094D95 /* KSOMediaPickerDefines.h */,
+				0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */,
 				07377F1F1E7D998700094D95 /* KSOMediaPickerMedia.h */,
 				073B35A71E83630900C003A1 /* KSOMediaPickerAssetCollectionCellSelectedOverlayView.h */,
 				07D1AC9A1E81730400A963B1 /* KSOMediaPickerTheme.h */,
@@ -511,6 +518,7 @@
 				07D99D671E848E0B006657C9 /* KSOMediaPickerAssetCollectionTableViewController.m */,
 				07D99D6C1E848FD4006657C9 /* KSOMediaPickerAssetCollectionTableViewCell.h */,
 				07D99D6D1E848FD4006657C9 /* KSOMediaPickerAssetCollectionTableViewCell.m */,
+				0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */,
 				07AB59371E859DC000E52340 /* KSOMediaPickerThumbnailView.h */,
 				07AB59381E859DC000E52340 /* KSOMediaPickerThumbnailView.m */,
 			);
@@ -530,6 +538,7 @@
 				073B35351E8343F000C003A1 /* KSOMediaPickerDefines.h in Headers */,
 				07D99D6F1E848FD4006657C9 /* KSOMediaPickerAssetCollectionTableViewCell.h in Headers */,
 				073B35401E8343F000C003A1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */,
+				0784FE721F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */,
 				073B35361E8343F000C003A1 /* KSOMediaPickerMedia.h in Headers */,
 				073B353E1E8343F000C003A1 /* KSOMediaPickerAssetCollectionModel.h in Headers */,
 				07D99D691E848E0B006657C9 /* KSOMediaPickerAssetCollectionTableViewController.h in Headers */,
@@ -555,6 +564,7 @@
 				07377F251E7DE98600094D95 /* KSOMediaPickerAssetModel.h in Headers */,
 				07D99D6E1E848FD4006657C9 /* KSOMediaPickerAssetCollectionTableViewCell.h in Headers */,
 				07A549B71E7C980600A6C4A1 /* KSOMediaPickerViewController.h in Headers */,
+				0784FE711F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */,
 				07A549C31E7C9C9500A6C4A1 /* KSOMediaPickerModel.h in Headers */,
 				073B351D1E82FFFE00C003A1 /* KSOMediaPickerAssetCollectionViewController.h in Headers */,
 				07D99D681E848E0B006657C9 /* KSOMediaPickerAssetCollectionTableViewController.h in Headers */,
@@ -705,6 +715,7 @@
 			files = (
 				073B35771E83470A00C003A1 /* Assets.xcassets in Resources */,
 				073B35761E83470300C003A1 /* Localizable.strings in Resources */,
+				0784FE751F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -722,6 +733,7 @@
 			files = (
 				07D1AC8B1E816A2A00A963B1 /* Assets.xcassets in Resources */,
 				07D1AC931E8171CF00A963B1 /* Localizable.strings in Resources */,
+				0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1302,7 +1314,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.Demo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.KSOMediaPicker.Demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1349,7 +1361,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.Demo-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kosoku.KSOMediaPicker.Demo-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

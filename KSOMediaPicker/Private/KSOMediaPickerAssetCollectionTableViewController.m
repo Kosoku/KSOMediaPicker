@@ -19,6 +19,7 @@
 #import "KSOMediaPickerAssetCollectionTableViewCell.h"
 #import "KSOMediaPickerAssetCollectionViewController.h"
 #import "KSOMediaPickerTheme.h"
+#import "NSBundle+KSOMediaPickerPrivateExtensions.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
@@ -33,7 +34,7 @@
     [super viewDidLoad];
     
     [self.tableView setEstimatedRowHeight:44.0];
-    [self.tableView registerClass:[KSOMediaPickerAssetCollectionTableViewCell class] forCellReuseIdentifier:NSStringFromClass([KSOMediaPickerAssetCollectionTableViewCell class])];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass(KSOMediaPickerAssetCollectionTableViewCell.class) bundle:[NSBundle KSO_mediaPickerFrameworkBundle]] forCellReuseIdentifier:NSStringFromClass(KSOMediaPickerAssetCollectionTableViewCell.class)];
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
     kstWeakify(self);

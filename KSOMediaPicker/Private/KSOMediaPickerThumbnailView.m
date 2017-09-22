@@ -17,6 +17,8 @@
 
 @interface KSOMediaPickerThumbnailView ()
 @property (readwrite,strong,nonatomic) UIImageView *thumbnailImageView;
+
+- (void)_KSOMediaPickerThumbnailViewInit;
 @end
 
 @implementation KSOMediaPickerThumbnailView
@@ -25,6 +27,21 @@
     if (!(self = [super initWithFrame:frame]))
         return nil;
     
+    [self _KSOMediaPickerThumbnailViewInit];
+    
+    return self;
+}
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (!(self = [super initWithCoder:aDecoder]))
+        return nil;
+    
+    [self _KSOMediaPickerThumbnailViewInit];
+    
+    return self;
+}
+
+- (void)_KSOMediaPickerThumbnailViewInit; {
+    [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self setBackgroundColor:[UIColor clearColor]];
     [self setBorderWidth:1.0];
     [self setBorderOptions:KDIBorderOptionsTop];
@@ -35,10 +52,8 @@
     [_thumbnailImageView setClipsToBounds:YES];
     [self addSubview:_thumbnailImageView];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _thumbnailImageView}]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[view]|" options:0 metrics:@{@"margin": @(self.borderWidth)} views:@{@"view": _thumbnailImageView}]];
-    
-    return self;
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _thumbnailImageView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[view]|" options:0 metrics:@{@"margin": @(self.borderWidth)} views:@{@"view": _thumbnailImageView}]];
 }
 
 @end

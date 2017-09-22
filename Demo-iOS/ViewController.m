@@ -39,7 +39,7 @@
 @end
 
 @interface ViewController () <KSOMediaPickerViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property (strong,nonatomic) UIButton *modalButton;
+@property (strong,nonatomic) UIButton *modalButton, *modalCustomButton;
 @property (strong,nonatomic) UIButton *pushButton;
 @property (strong,nonatomic) UIButton *systemButton;
 @end
@@ -53,24 +53,77 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    kstWeakify(self);
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     [self setModalButton:[UIButton buttonWithType:UIButtonTypeSystem]];
     [self.modalButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.modalButton setTitle:@"Present Modally" forState:UIControlStateNormal];
-    [self.modalButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventPrimaryActionTriggered];
+    [self.modalButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
+        
+        [viewController setDelegate:self];
+        [viewController setAllowsMultipleSelection:YES];
+        [viewController setAllowsMixedMediaSelection:NO];
+        [viewController setMaximumSelectedImages:3];
+        [viewController setMaximumSelectedVideos:1];
+        
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.modalButton];
+    
+    [self setModalCustomButton:[UIButton buttonWithType:UIButtonTypeSystem]];
+    [self.modalCustomButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.modalCustomButton setTitle:@"Present Custom Modally" forState:UIControlStateNormal];
+    [self.modalCustomButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
+        
+        [viewController setDelegate:self];
+        [viewController setAllowsMultipleSelection:YES];
+        [viewController setAllowsMixedMediaSelection:NO];
+        [viewController setMaximumSelectedImages:3];
+        [viewController setMaximumSelectedVideos:1];
+        
+        KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:[NSBundle mainBundle].KST_bundleIdentifier];
+        
+        [theme setBarTintColor:[UIColor darkGrayColor]];
+        [theme setTintColor:[UIColor whiteColor]];
+        [theme setBackgroundColor:[UIColor blackColor]];
+        [theme setTitleColor:[UIColor whiteColor]];
+        [theme setHighlightedTitleColor:[UIColor blackColor]];
+        [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
+        [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
+        [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
+        
+        [viewController setTheme:theme];
+        
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.modalCustomButton];
     
     [self setPushButton:[UIButton buttonWithType:UIButtonTypeSystem]];
     [self.pushButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.pushButton setTitle:@"Push" forState:UIControlStateNormal];
-    [self.pushButton addTarget:self action:@selector(_buttonAction:) forControlEvents:UIControlEventPrimaryActionTriggered];
+    [self.pushButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
+        
+        [viewController setDelegate:self];
+        [viewController setAllowsMultipleSelection:YES];
+        
+        [self.navigationController pushViewController:viewController animated:YES];
+    } forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.pushButton];
     
     [self setSystemButton:[UIButton buttonWithType:UIButtonTypeSystem]];
     [self.systemButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.systemButton setTitle:@"UIImagePickerController" forState:UIControlStateNormal];
     [self.systemButton KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+        kstStrongify(self);
+        
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         
         [imagePickerController setDelegate:self];
@@ -84,7 +137,10 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[top]-[view]" options:0 metrics:nil views:@{@"view": self.modalButton, @"top": self.topLayoutGuide}]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.modalButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]" options:0 metrics:nil views:@{@"view": self.pushButton, @"subview": self.modalButton}]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]" options:0 metrics:nil views:@{@"view": self.modalCustomButton, @"subview": self.modalButton}]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.modalCustomButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]" options:0 metrics:nil views:@{@"view": self.pushButton, @"subview": self.modalCustomButton}]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pushButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]" options:0 metrics:nil views:@{@"view": self.systemButton, @"subview": self.pushButton}]];
@@ -117,38 +173,6 @@
 
 - (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didError:(NSError *)error {
     [UIAlertController KDI_presentAlertControllerWithError:error];
-}
-
-- (IBAction)_buttonAction:(UIButton *)sender {
-    KSOMediaPickerViewController *viewController = [[KSOMediaPickerViewController alloc] init];
-    
-    [viewController setDelegate:self];
-    [viewController setAllowsMultipleSelection:YES];
-    [viewController setAllowsMixedMediaSelection:NO];
-    [viewController setMaximumSelectedImages:3];
-    [viewController setMaximumSelectedVideos:1];
-//    [viewController setMediaTypes:KSOMediaPickerMediaTypesImage];
-//    [viewController setInitiallySelectedAssetCollectionSubtype:KSOMediaPickerAssetCollectionSubtypeSmartAlbumUserLibrary];
-
-    KSOMediaPickerTheme *theme = [[KSOMediaPickerTheme alloc] initWithIdentifier:[NSBundle mainBundle].KST_bundleIdentifier];
-    
-    [theme setBarTintColor:[UIColor darkGrayColor]];
-    [theme setTintColor:[UIColor whiteColor]];
-    [theme setBackgroundColor:[UIColor blackColor]];
-    [theme setTitleColor:[UIColor whiteColor]];
-    [theme setHighlightedTitleColor:[UIColor blackColor]];
-    [theme setAssetCollectionCellSelectedOverlayViewTintColor:[UIColor whiteColor]];
-    [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor blackColor]];
-    [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
-    
-    [viewController setTheme:theme];
-    
-    if (sender == self.modalButton) {
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
-    }
-    else {
-        [self.navigationController pushViewController:viewController animated:YES];
-    }
 }
 
 @end
