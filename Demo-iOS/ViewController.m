@@ -38,6 +38,16 @@
 
 @end
 
+@interface NavigationController : UINavigationController
+
+@end
+
+@implementation NavigationController
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+@end
+
 @interface ViewController () <KSOMediaPickerViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong,nonatomic) UIButton *modalButton, *modalCustomButton;
 @property (strong,nonatomic) UIButton *pushButton;
@@ -99,7 +109,7 @@
         
         [viewController setTheme:theme];
         
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
+        [self presentViewController:[[NavigationController alloc] initWithRootViewController:viewController] animated:YES completion:nil];
     } forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.modalCustomButton];
     
