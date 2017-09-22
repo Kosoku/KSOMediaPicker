@@ -95,8 +95,8 @@
 		0758D4081F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D4051F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0758D4091F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D4061F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m */; };
 		0758D40A1F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D4061F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m */; };
-		0758D40D1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */; };
-		0758D40E1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */; };
+		0758D40D1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0758D40E1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0758D40F1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */; };
 		0758D4101F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */; };
 		0784FE711F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
