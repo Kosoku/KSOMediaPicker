@@ -20,6 +20,7 @@
 #import "KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView.h"
 #import "KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h"
 #import "KSOMediaPickerTheme.h"
+#import "KSOMediaPickerVideoPlayerView.h"
 
 #import <Stanley/Stanley.h>
 #import <Ditko/Ditko.h>
@@ -28,6 +29,7 @@
 
 @interface KSOMediaPickerAssetCollectionViewCell ()
 @property (strong,nonatomic) UIImageView *thumbnailImageView;
+@property (strong,nonatomic) KSOMediaPickerVideoPlayerView *playerView;
 @property (strong,nonatomic) KDIGradientView *gradientView;
 @property (strong,nonatomic) UIImageView *typeImageView;
 @property (strong,nonatomic) UILabel *durationLabel;
@@ -46,6 +48,10 @@
     [_thumbnailImageView setContentMode:UIViewContentModeScaleAspectFill];
     [_thumbnailImageView setClipsToBounds:YES];
     [self.contentView addSubview:_thumbnailImageView];
+    
+    _playerView = [[KSOMediaPickerVideoPlayerView alloc] initWithFrame:CGRectZero];
+    [_playerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.contentView addSubview:_playerView];
     
     _gradientView = [[KDIGradientView alloc] initWithFrame:CGRectZero];
     [_gradientView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -67,6 +73,9 @@
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _thumbnailImageView}]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _thumbnailImageView}]];
+    
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _playerView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{@"view": _playerView}]];
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _gradientView}]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view]|" options:0 metrics:nil views:@{@"view": _gradientView}]];
@@ -130,12 +139,14 @@
     [super prepareForReuse];
     
     [self.model cancelAllThumbnailRequests];
+    [self.playerView setModel:nil];
 }
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
     [self.selectedOverlayView setHidden:!selected];
+    [self.playerView setModel:selected ? self.model : nil];
 }
 
 - (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator {

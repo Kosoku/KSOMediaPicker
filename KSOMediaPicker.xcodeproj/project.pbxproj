@@ -95,6 +95,10 @@
 		0758D4081F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D4051F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0758D4091F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D4061F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m */; };
 		0758D40A1F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D4061F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m */; };
+		0758D40D1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */; };
+		0758D40E1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */; };
+		0758D40F1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */; };
+		0758D4101F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */; };
 		0784FE711F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE721F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */; };
@@ -247,6 +251,8 @@
 		0745316B1E9EAAAB00CEF9E0 /* Shield.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Shield.framework; path = "../../Library/Developer/Xcode/DerivedData/KSOMediaPicker-bvdclhbsyvginkcczvqybmmjulxg/Build/Products/Debug-appletvsimulator/Shield.framework"; sourceTree = "<group>"; };
 		0758D4051F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h; sourceTree = "<group>"; };
 		0758D4061F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m; sourceTree = "<group>"; };
+		0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerVideoPlayerView.h; sourceTree = "<group>"; };
+		0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerVideoPlayerView.m; sourceTree = "<group>"; };
 		0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSOMediaPickerDefinesPrivate.h; path = Private/KSOMediaPickerDefinesPrivate.h; sourceTree = "<group>"; };
 		0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = KSOMediaPickerAssetCollectionTableViewCell.xib; path = KSOMediaPicker/KSOMediaPickerAssetCollectionTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		07A5498F1E7C97AA00A6C4A1 /* KSOMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -353,6 +359,8 @@
 				073B35201E8301FA00C003A1 /* KSOMediaPickerAssetCollectionViewLayout.m */,
 				073B35231E83030900C003A1 /* KSOMediaPickerAssetCollectionViewCell.h */,
 				073B35241E83030900C003A1 /* KSOMediaPickerAssetCollectionViewCell.m */,
+				0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */,
+				0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */,
 				073B35AA1E83635300C003A1 /* KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView.h */,
 				073B35AB1E83635300C003A1 /* KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView.m */,
 				0758D4051F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h */,
@@ -552,6 +560,7 @@
 				07D99D691E848E0B006657C9 /* KSOMediaPickerAssetCollectionTableViewController.h in Headers */,
 				073B353A1E8343F000C003A1 /* KSOMediaPickerViewController.h in Headers */,
 				073B35381E8343F000C003A1 /* KSOMediaPickerTheme.h in Headers */,
+				0758D40E1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */,
 				073B35A91E83630900C003A1 /* KSOMediaPickerAssetCollectionCellSelectedOverlayView.h in Headers */,
 				073B354C1E8343F000C003A1 /* KSOMediaPickerAssetCollectionViewCell.h in Headers */,
 				073B35481E8343F000C003A1 /* KSOMediaPickerAssetCollectionViewController.h in Headers */,
@@ -579,6 +588,7 @@
 				07D99D681E848E0B006657C9 /* KSOMediaPickerAssetCollectionTableViewController.h in Headers */,
 				07D1AC8E1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */,
 				07377F221E7D9C4A00094D95 /* KSOMediaPickerDefines.h in Headers */,
+				0758D40D1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */,
 				073B35A81E83630900C003A1 /* KSOMediaPickerAssetCollectionCellSelectedOverlayView.h in Headers */,
 				073B35251E83030900C003A1 /* KSOMediaPickerAssetCollectionViewCell.h in Headers */,
 				07D1AC9C1E81730400A963B1 /* KSOMediaPickerTheme.h in Headers */,
@@ -784,6 +794,7 @@
 				073B35471E8343F000C003A1 /* KSOMediaPickerAssetModel.m in Sources */,
 				073B35491E8343F000C003A1 /* KSOMediaPickerAssetCollectionViewController.m in Sources */,
 				07D99D711E848FD4006657C9 /* KSOMediaPickerAssetCollectionTableViewCell.m in Sources */,
+				0758D4101F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */,
 				073B35411E8343F000C003A1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */,
 				073B354B1E8343F000C003A1 /* KSOMediaPickerAssetCollectionViewLayout.m in Sources */,
 				0758D40A1F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m in Sources */,
@@ -816,6 +827,7 @@
 				07A549C41E7C9C9500A6C4A1 /* KSOMediaPickerModel.m in Sources */,
 				07D1AC8F1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */,
 				07D99D701E848FD4006657C9 /* KSOMediaPickerAssetCollectionTableViewCell.m in Sources */,
+				0758D40F1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */,
 				073B35221E8301FA00C003A1 /* KSOMediaPickerAssetCollectionViewLayout.m in Sources */,
 				07D1AC9D1E81730400A963B1 /* KSOMediaPickerTheme.m in Sources */,
 				0758D4091F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m in Sources */,
