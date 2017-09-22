@@ -17,7 +17,7 @@
 #import "KSOMediaPickerAssetModel.h"
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerModel.h"
-#import "KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView.h"
+#import "KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView.h"
 
 #import <Stanley/Stanley.h>
 #import <Ditko/Ditko.h>
@@ -61,7 +61,7 @@
     [_durationLabel setTextAlignment:NSTextAlignmentRight];
     [_gradientView addSubview:_durationLabel];
     
-    _selectedOverlayView = [[KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero];
+    _selectedOverlayView = [[KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero];
     
     CGFloat const kMargin = 4.0;
     

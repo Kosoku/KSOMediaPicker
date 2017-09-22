@@ -17,6 +17,6 @@
 
 #import <KSOMediaPicker/KSOMediaPickerAssetCollectionCellSelectedOverlayView.h>
 
-@interface KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView : UIView <KSOMediaPickerAssetCollectionCellSelectedOverlayView>
+@interface KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView : UIView <KSOMediaPickerAssetCollectionCellSelectedOverlayView>
 
 @end
