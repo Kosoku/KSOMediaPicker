@@ -56,13 +56,13 @@
     } forControlEvents:UIControlEventTouchUpInside];
     [_containerView addSubview:_button];
     
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _label}]];
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]" options:0 metrics:nil views:@{@"view": _label}]];
+    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": _label}]];
+    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]" options:0 metrics:nil views:@{@"view": _label}]];
     
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _button}]];
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]|" options:0 metrics:nil views:@{@"view": _button, @"subview": _label}]];
+    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": _button}]];
+    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]-|" options:0 metrics:nil views:@{@"view": _button, @"subview": _label}]];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": _containerView}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _containerView}]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
     
     kstWeakify(self);
@@ -70,10 +70,13 @@
         kstStrongify(self);
         [self setBackgroundColor:value.backgroundColor];
         
+        [self.containerView setBackgroundColor:value.cellBackgroundColor];
+        
         [self.label setFont:value.titleFont];
         [self.label setTextColor:value.titleColor];
         
         [self.button.titleLabel setFont:value.titleFont];
+        [self.button setTintColor:value.tintColor];
     }];
     
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,authorizationStatus)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
