@@ -99,8 +99,6 @@
 }
 
 - (void)mediaPickerViewController:(KSOMediaPickerViewController *)mediaPickerViewController didFinishPickingMedia:(NSArray<id<KSOMediaPickerMedia>> *)media {
-    NSLog(@"media: %@",media);
-    
     if (mediaPickerViewController.presentingViewController == nil) {
         [mediaPickerViewController.navigationController popToViewController:self animated:YES];
     }

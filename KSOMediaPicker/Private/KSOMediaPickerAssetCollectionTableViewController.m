@@ -34,6 +34,7 @@
     
     [self.tableView setEstimatedRowHeight:44.0];
     [self.tableView registerClass:[KSOMediaPickerAssetCollectionTableViewCell class] forCellReuseIdentifier:NSStringFromClass([KSOMediaPickerAssetCollectionTableViewCell class])];
+    [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,assetCollectionModels)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
