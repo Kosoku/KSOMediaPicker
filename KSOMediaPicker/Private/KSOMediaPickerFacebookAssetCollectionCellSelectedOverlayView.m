@@ -50,7 +50,7 @@
     
     [self.theme.assetCollectionCellSelectedOverlayViewTintColor ?: self.tintColor setFill];
     
-    CGFloat widthAndHeight = 3.0;
+    CGFloat widthAndHeight = 5.0;
     
     UIRectFill(CGRectMake(0, 0, CGRectGetWidth(self.bounds), widthAndHeight));
     UIRectFill(CGRectMake(CGRectGetWidth(self.bounds) - widthAndHeight, 0, widthAndHeight, CGRectGetHeight(self.bounds)));
