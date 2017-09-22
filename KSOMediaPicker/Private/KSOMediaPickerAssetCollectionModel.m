@@ -97,7 +97,7 @@
     [options setResizeMode:PHImageRequestOptionsResizeModeFast];
     [options setNetworkAccessAllowed:YES];
     
-    PHAsset *asset = [self.fetchResult objectAtIndex:thumbnailIndex];
+    PHAsset *asset = [self.fetchResult objectAtIndex:self.countOfAssetModels - thumbnailIndex - 1];
     PHImageRequestID imageRequestID = [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         completion(result);
     }];
