@@ -1,8 +1,8 @@
 //
-//  KSOMediaPickerDefaultAssetCollectionCellSelectedOverlayView.h
+//  KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h
 //  KSOMediaPicker
 //
-//  Created by William Towe on 3/22/17.
+//  Created by William Towe on 9/22/17.
 //  Copyright © 2017 Kosoku Interactive, LLC. All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -16,6 +16,6 @@
 #import <UIKit/UIKit.h>
 #import <KSOMediaPicker/KSOMediaPickerAssetCollectionCellSelectedOverlayView.h>
 
-@interface KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView : UIView <KSOMediaPickerAssetCollectionCellSelectedOverlayView>
+@interface KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView : UIView <KSOMediaPickerAssetCollectionCellSelectedOverlayView>
 
 @end

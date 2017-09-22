@@ -18,6 +18,8 @@
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerModel.h"
 #import "KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView.h"
+#import "KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.h"
+#import "KSOMediaPickerTheme.h"
 
 #import <Stanley/Stanley.h>
 #import <Ditko/Ditko.h>
@@ -61,8 +63,6 @@
     [_durationLabel setTextAlignment:NSTextAlignmentRight];
     [_gradientView addSubview:_durationLabel];
     
-    _selectedOverlayView = [[KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero];
-    
     CGFloat const kMargin = 4.0;
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _thumbnailImageView}]];
@@ -79,14 +79,21 @@
     [_gradientView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[view]-margin-|" options:0 metrics:@{@"margin": @(kMargin)} views:@{@"view": _durationLabel}]];
     
     kstWeakify(self);
-    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,selectedOverlayView),@kstKeypath(self,model.assetCollectionModel.model.theme)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model.assetCollectionModel.model.theme)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        if (self.selectedOverlayView != nil &&
-            self.model.assetCollectionModel.model.theme != nil) {
-            
-            if ([self.selectedOverlayView respondsToSelector:@selector(setTheme:)]) {
-                [self.selectedOverlayView setTheme:self.model.assetCollectionModel.model.theme];
-            }
+        if (self.model.assetCollectionModel.model.theme == nil) {
+            return;
+        }
+        
+        switch (self.model.assetCollectionModel.model.theme.assetSelectedOverlayStyle) {
+            case KSOMediaPickerThemeAssetSelectedOverlayStyleFacebook:
+                [self setSelectedOverlayView:[[KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero]];
+                break;
+            case KSOMediaPickerThemeAssetSelectedOverlayStyleApple:
+                [self setSelectedOverlayView:[[KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero]];
+                break;
+            default:
+                break;
         }
     }];
     

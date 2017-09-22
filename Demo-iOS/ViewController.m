@@ -106,8 +106,9 @@
         [theme setCellBackgroundColor:[UIColor whiteColor]];
         [theme setTitleColor:[UIColor blackColor]];
         [theme setHighlightedTitleColor:[UIColor blackColor]];
+        [theme setAssetSelectedOverlayStyle:KSOMediaPickerThemeAssetSelectedOverlayStyleFacebook];
         [theme setAssetCollectionCellSelectedOverlayViewTintColor:KDIColorHexadecimal(@"ff7200")];
-        [theme setAssetCollectionCellSelectedOverlayViewTextColor:[UIColor whiteColor]];
+        [theme setAssetCollectionCellSelectedOverlayViewTextColor:UIColor.whiteColor];
         [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
         
         [viewController setTheme:theme];

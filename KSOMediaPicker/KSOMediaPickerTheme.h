@@ -17,6 +17,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, KSOMediaPickerThemeAssetSelectedOverlayStyle) {
+    KSOMediaPickerThemeAssetSelectedOverlayStyleApple,
+    KSOMediaPickerThemeAssetSelectedOverlayStyleFacebook
+};
+
 @interface KSOMediaPickerTheme : NSObject <NSCopying>
 
 /**
@@ -99,6 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong,nonatomic,nullable) Class assetCollectionTableViewCellSelectedBackgroundViewClass;
 
+@property (assign,nonatomic) KSOMediaPickerThemeAssetSelectedOverlayStyle assetSelectedOverlayStyle;
 /**
  Set and get the asset collection cell selected overlay view tint color. This is used to draw the selection chrome.
  
