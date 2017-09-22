@@ -46,6 +46,9 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+- (UIModalPresentationStyle)modalPresentationStyle {
+    return UIModalPresentationFormSheet;
+}
 @end
 
 @interface ViewController () <KSOMediaPickerViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
