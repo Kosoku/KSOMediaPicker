@@ -17,8 +17,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Enum for possible asset selected overlay style values.
+ */
 typedef NS_ENUM(NSInteger, KSOMediaPickerThemeAssetSelectedOverlayStyle) {
+    /**
+     Apple style with a transparent overlay and a circled checkbox to show selection.
+     */
     KSOMediaPickerThemeAssetSelectedOverlayStyleApple,
+    /**
+     Facebook style with a solid color outline with a numbered index in the top right corner to show selection.
+     */
     KSOMediaPickerThemeAssetSelectedOverlayStyleFacebook
 };
 
@@ -104,6 +113,11 @@ typedef NS_ENUM(NSInteger, KSOMediaPickerThemeAssetSelectedOverlayStyle) {
  */
 @property (strong,nonatomic,nullable) Class assetCollectionTableViewCellSelectedBackgroundViewClass;
 
+/**
+ Set and get the asset selected overlay style. This affects the display of the selected asset overlay view.
+ 
+ The default is KSOMediaPickerThemeAssetSelectedOverlayStyleApple.
+ */
 @property (assign,nonatomic) KSOMediaPickerThemeAssetSelectedOverlayStyle assetSelectedOverlayStyle;
 /**
  Set and get the asset collection cell selected overlay view tint color. This is used to draw the selection chrome.

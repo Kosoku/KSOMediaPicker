@@ -56,8 +56,9 @@
     [super layoutSubviews];
     
     CGSize badgeSize = [self.badgeView sizeThatFits:CGSizeZero];
+    CGFloat margin = 4.0;
     
-    [self.badgeView setFrame:CGRectMake(CGRectGetWidth(self.bounds) - badgeSize.width - 8, CGRectGetHeight(self.bounds) - badgeSize.height - 8, badgeSize.width, badgeSize.height)];
+    [self.badgeView setFrame:CGRectMake(CGRectGetWidth(self.bounds) - badgeSize.width - margin, CGRectGetHeight(self.bounds) - badgeSize.height - margin, badgeSize.width, badgeSize.height)];
 }
 
 @synthesize allowsMultipleSelection=_allowsMultipleSelection;
