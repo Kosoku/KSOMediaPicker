@@ -39,7 +39,7 @@
         UIColor *baseColor = self.theme.assetCollectionCellSelectedOverlayViewTintColor ?: self.tintColor;
         UIColor *overlayColor = [baseColor KDI_contrastingColor];
         
-        [self setBackgroundColor:[overlayColor colorWithAlphaComponent:0.33]];
+        [self setBackgroundColor:[overlayColor colorWithAlphaComponent:0.25]];
         [self.badgeView setBadgeFont:self.theme.assetCollectionCellSelectedOverlayViewFont];
         [self.badgeView setBadgeBackgroundColor:baseColor];
         [self.badgeView setBadgeHighlightedBackgroundColor:baseColor];
@@ -58,7 +58,7 @@
     CGSize badgeSize = [self.badgeView sizeThatFits:CGSizeZero];
     CGFloat margin = 4.0;
     
-    [self.badgeView setFrame:CGRectMake(CGRectGetWidth(self.bounds) - badgeSize.width - margin, margin, badgeSize.width, badgeSize.height)];
+    [self.badgeView setFrame:CGRectMake(CGRectGetWidth(self.bounds) - badgeSize.width - margin, CGRectGetHeight(self.bounds) - badgeSize.height - margin, badgeSize.width, badgeSize.height)];
 }
 
 @synthesize allowsMultipleSelection=_allowsMultipleSelection;
