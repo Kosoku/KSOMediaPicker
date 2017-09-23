@@ -41,10 +41,7 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
 @property (readwrite,strong,nonatomic) PHCachingImageManager *assetCollectionImageManager;
 @property (readwrite,strong,nonatomic) PHCachingImageManager *assetImageManager;
 
-@property (assign,nonatomic) CGRect assetCachingRect;
-
 - (void)_reloadAssetCollectionModels;
-- (void)_getAddedAssetRect:(CGRect *)addedRect removedAssetRect:(CGRect *)removedRect forOldRect:(CGRect)oldRect newRect:(CGRect)newRect;
 @end
 
 @implementation KSOMediaPickerModel
@@ -77,10 +74,10 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
     }
     
     if (hasChanges) {
+        [self stopCachingAssets];
+        
         [self willChangeValueForKey:@kstKeypath(self,assetCollectionModels)];
         [self didChangeValueForKey:@kstKeypath(self,assetCollectionModels)];
-        
-        [self resetAssetCaching];
     }
 }
 
@@ -267,46 +264,18 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
     }
 }
 
-- (void)resetAssetCaching; {
-    [self.assetImageManager stopCachingImagesForAllAssets];
-    [self setAssetCachingRect:CGRectZero];
-}
-- (void)updateAssetCachingForCollectionViewController:(UICollectionViewController *)collectionViewController; {
-    if (!collectionViewController.isViewLoaded ||
-        collectionViewController.view.window == nil) {
-        return;
-    }
-    
-    CGRect visibleRect = {.origin=collectionViewController.collectionView.contentOffset, .size=collectionViewController.collectionView.bounds.size};
-    CGRect cachingRect = CGRectInset(visibleRect, 0, CGRectGetHeight(visibleRect) * -0.5);
-    CGFloat delta = ABS(CGRectGetMidY(cachingRect) - CGRectGetMidY(self.assetCachingRect));
-    
-    if (delta < CGRectGetHeight(collectionViewController.view.bounds) * 0.33) {
-        return;
-    }
-    
-    CGRect addedRect;
-    CGRect removedRect;
-    
-    [self _getAddedAssetRect:&addedRect removedAssetRect:&removedRect forOldRect:self.assetCachingRect newRect:cachingRect];
-    
-    NSArray *addedAssets = [[[collectionViewController.collectionView.collectionViewLayout layoutAttributesForElementsInRect:addedRect] KQS_map:^id _Nullable(__kindof UICollectionViewLayoutAttributes * _Nonnull object, NSInteger index) {
-        return object.indexPath;
-    }] KQS_map:^id _Nullable(NSIndexPath * _Nonnull object, NSInteger index) {
-        return [self.selectedAssetCollectionModel assetAtIndex:object.item];
-    }];
-    NSArray *removedAssets = [[[collectionViewController.collectionView.collectionViewLayout layoutAttributesForElementsInRect:removedRect] KQS_map:^id _Nullable(__kindof UICollectionViewLayoutAttributes * _Nonnull object, NSInteger index) {
-        return object.indexPath;
-    }] KQS_map:^id _Nullable(NSIndexPath * _Nonnull object, NSInteger index) {
-        return [self.selectedAssetCollectionModel assetAtIndex:object.item];
-    }];
-    
+- (void)startCachingForAssets:(NSArray<PHAsset *> *)assets collectionViewController:(nonnull UICollectionViewController *)collectionViewController {
     CGSize size = KDICGSizeAdjustedForMainScreenScale([(UICollectionViewFlowLayout *)collectionViewController.collectionViewLayout itemSize]);
     
-    [self.assetImageManager startCachingImagesForAssets:addedAssets targetSize:size contentMode:PHImageContentModeAspectFill options:self.assetImageRequestOptions];
-    [self.assetImageManager stopCachingImagesForAssets:removedAssets targetSize:size contentMode:PHImageContentModeAspectFill options:self.assetImageRequestOptions];
+    [self.assetImageManager startCachingImagesForAssets:assets targetSize:size contentMode:PHImageContentModeAspectFill options:self.assetImageRequestOptions];
+}
+- (void)stopCachingForAssets:(NSArray<PHAsset *> *)assets collectionViewController:(nonnull UICollectionViewController *)collectionViewController {
+    CGSize size = KDICGSizeAdjustedForMainScreenScale([(UICollectionViewFlowLayout *)collectionViewController.collectionViewLayout itemSize]);
     
-    [self setAssetCachingRect:cachingRect];
+    [self.assetImageManager stopCachingImagesForAssets:assets targetSize:size contentMode:PHImageContentModeAspectFill options:self.assetImageRequestOptions];
+}
+- (void)stopCachingAssets; {
+    [self.assetImageManager stopCachingImagesForAllAssets];
 }
 
 - (void)setTheme:(KSOMediaPickerTheme *)theme {
@@ -404,34 +373,6 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
     weakBlock = block;
     
     block(KSHPhotosAuthorization.sharedAuthorization.photoLibraryAuthorizationStatus);
-}
-- (void)_getAddedAssetRect:(CGRect *)addedRect removedAssetRect:(CGRect *)removedRect forOldRect:(CGRect)oldRect newRect:(CGRect)newRect; {
-    if (CGRectIntersectsRect(newRect, oldRect)) {
-        CGRect added = CGRectZero;
-        
-        if (CGRectGetMaxY(newRect) > CGRectGetMaxY(oldRect)) {
-            added = CGRectMake(CGRectGetMinX(newRect), CGRectGetMaxY(oldRect), CGRectGetWidth(newRect), CGRectGetMaxY(newRect) - CGRectGetMaxY(oldRect));
-        }
-        if (CGRectGetMinY(oldRect) > CGRectGetMinY(newRect)) {
-            added = CGRectMake(CGRectGetMinX(newRect), CGRectGetMinY(newRect), CGRectGetWidth(newRect), CGRectGetMinY(oldRect) - CGRectGetMinY(newRect));
-        }
-        
-        CGRect removed = CGRectZero;
-        
-        if (CGRectGetMaxY(newRect) < CGRectGetMaxY(oldRect)) {
-            removed = CGRectMake(CGRectGetMinX(newRect), CGRectGetMaxY(newRect), CGRectGetWidth(newRect), CGRectGetMaxY(oldRect) - CGRectGetMaxY(newRect));
-        }
-        if (CGRectGetMinY(oldRect) < CGRectGetMinY(newRect)) {
-            removed = CGRectMake(CGRectGetMinX(newRect), CGRectGetMinY(oldRect), CGRectGetWidth(newRect), CGRectGetMinY(newRect) - CGRectGetMinY(oldRect));
-        }
-        
-        *addedRect = added;
-        *removedRect = removed;
-    }
-    else {
-        *addedRect = newRect;
-        *removedRect = oldRect;
-    }
 }
 
 @end

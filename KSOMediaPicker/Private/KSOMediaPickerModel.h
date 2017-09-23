@@ -66,8 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)deselectAllAssetModels;
 - (void)deselectAllAssetModelsAndNotifyDelegate:(BOOL)notifyDelegate;
 
-- (void)resetAssetCaching;
-- (void)updateAssetCachingForCollectionViewController:(UICollectionViewController *)collectionViewController;
+- (void)startCachingForAssets:(NSArray<PHAsset *> *)assets collectionViewController:(UICollectionViewController *)collectionViewController;
+- (void)stopCachingForAssets:(NSArray<PHAsset *> *)assets collectionViewController:(UICollectionViewController *)collectionViewController;
+- (void)stopCachingAssets;
 
 @end
 

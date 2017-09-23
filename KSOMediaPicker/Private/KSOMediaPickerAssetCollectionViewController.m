@@ -22,8 +22,9 @@
 
 #import <Agamotto/Agamotto.h>
 #import <Stanley/Stanley.h>
+#import <Quicksilver/Quicksilver.h>
 
-@interface KSOMediaPickerAssetCollectionViewController ()
+@interface KSOMediaPickerAssetCollectionViewController () <UICollectionViewDataSourcePrefetching>
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 
 @property (assign,nonatomic) BOOL hasPerformedSetup;
@@ -46,6 +47,7 @@
     [self.collectionView setAlwaysBounceVertical:YES];
     [self.collectionView setAllowsMultipleSelection:self.model.allowsMultipleSelection];
     [self.collectionView registerClass:[KSOMediaPickerAssetCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([KSOMediaPickerAssetCollectionViewCell class])];
+    [self.collectionView setPrefetchDataSource:self];
     
     [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
     
@@ -93,9 +95,10 @@
         }];
     }
 }
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.model updateAssetCachingForCollectionViewController:self];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.model stopCachingAssets];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -107,6 +110,17 @@
     [cell setModel:[self.model.selectedAssetCollectionModel assetModelAtIndex:indexPath.item]];
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView prefetchItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths {
+    [self.model startCachingForAssets:[indexPaths KQS_map:^id _Nullable(NSIndexPath * _Nonnull object, NSInteger index) {
+        return [self.model.selectedAssetCollectionModel assetAtIndex:object.item];
+    }] collectionViewController:self];
+}
+- (void)collectionView:(UICollectionView *)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths {
+    [self.model stopCachingForAssets:[indexPaths KQS_map:^id _Nullable(NSIndexPath * _Nonnull object, NSInteger index) {
+        return [self.model.selectedAssetCollectionModel assetAtIndex:object.item];
+    }] collectionViewController:self];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -152,7 +166,6 @@
         return nil;
     
     _model = model;
-    [_model resetAssetCaching];
     
     return self;
 }
