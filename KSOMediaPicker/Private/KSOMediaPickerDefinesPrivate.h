@@ -19,6 +19,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CGBase.h>
 
-static CGFloat const KSOSubviewMargin = 8.0;
+static CGFloat const KSOMediaPickerSubviewMargin = 8.0;
 
 #endif

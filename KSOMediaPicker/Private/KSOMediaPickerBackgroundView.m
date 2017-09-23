@@ -17,13 +17,16 @@
 #import "KSOMediaPickerTheme.h"
 #import "KSOMediaPickerModel.h"
 #import "NSBundle+KSOMediaPickerPrivateExtensions.h"
+#import "KSOMediaPickerDefinesPrivate.h"
 
 #import <Agamotto/Agamotto.h>
 #import <Stanley/Stanley.h>
 #import <Ditko/Ditko.h>
+#import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
 @interface KSOMediaPickerBackgroundView ()
-@property (strong,nonatomic) UIView *containerView;
+@property (strong,nonatomic) UIStackView *containerView;
+@property (strong,nonatomic) UIImageView *imageView;
 @property (strong,nonatomic) UILabel *label;
 @property (strong,nonatomic) UIButton *button;
 
@@ -38,15 +41,23 @@
     
     _model = model;
     
-    _containerView = [[UIView alloc] initWithFrame:CGRectZero];
+    _containerView = [[UIStackView alloc] initWithFrame:CGRectZero];
     [_containerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_containerView setAxis:UILayoutConstraintAxisVertical];
+    [_containerView setSpacing:KSOMediaPickerSubviewMargin];
+    [_containerView setAlignment:UIStackViewAlignmentLeading];
     [self addSubview:_containerView];
+    
+    _imageView = [[UIImageView alloc] initWithImage:[[UIImage KSO_fontAwesomeImageWithString:@"\uf03e" size:CGSizeMake(144, 144)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    [_imageView setContentMode:UIViewContentModeCenter];
+    [_imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_containerView addArrangedSubview:_imageView];
     
     _label = [[UILabel alloc] initWithFrame:CGRectZero];
     [_label setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_label setNumberOfLines:0];
     [_label setTextAlignment:NSTextAlignmentCenter];
-    [_containerView addSubview:_label];
+    [_containerView addArrangedSubview:_label];
     
     _button = [UIButton buttonWithType:UIButtonTypeSystem];
     [_button setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -54,23 +65,18 @@
     [_button KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey: [NSBundle mainBundle].KST_bundleIdentifier} completionHandler:nil];
     } forControlEvents:UIControlEventTouchUpInside];
-    [_containerView addSubview:_button];
+    [_containerView addArrangedSubview:_button];
     
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": _label}]];
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view]" options:0 metrics:nil views:@{@"view": _label}]];
-    
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:0 metrics:nil views:@{@"view": _button}]];
-    [_containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[subview]-[view]-|" options:0 metrics:nil views:@{@"view": _button, @"subview": _label}]];
-    
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _containerView}]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _containerView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:9 metrics:nil views:@{@"view": _label}]];
+    [NSLayoutConstraint activateConstraints:@[[NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0],[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_containerView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0],[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_containerView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]]];
     
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         [self setBackgroundColor:value.backgroundColor];
         
-        [self.containerView setBackgroundColor:value.cellBackgroundColor];
+        [self.imageView setTintColor:[value.backgroundColor KDI_contrastingColor]];
         
         [self.label setFont:value.titleFont];
         [self.label setTextColor:value.titleColor];
