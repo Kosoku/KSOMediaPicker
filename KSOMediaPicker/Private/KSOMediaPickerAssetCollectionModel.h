@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly,nonatomic) NSUInteger countOfAssetModels;
 - (KSOMediaPickerAssetModel *)assetModelAtIndex:(NSUInteger)index;
+- (PHAsset *)assetAtIndex:(NSUInteger)index;
 
 - (instancetype)initWithAssetCollection:(PHAssetCollection *)assetCollection model:(nullable KSOMediaPickerModel *)model;
 

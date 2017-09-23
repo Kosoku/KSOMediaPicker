@@ -52,18 +52,20 @@
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,selectedAssetIdentifiers)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
-        for (NSIndexPath *indexPath in self.collectionView.indexPathsForVisibleItems) {
-            KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-            
-            [cell reloadSelectedOverlayView];
-            
-            if ([self.model isAssetModelSelected:cell.model]) {
-                [self.collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        KSTDispatchMainAsync(^{
+            for (NSIndexPath *indexPath in self.collectionView.indexPathsForVisibleItems) {
+                KSOMediaPickerAssetCollectionViewCell *cell = (KSOMediaPickerAssetCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+                
+                [cell reloadSelectedOverlayView];
+                
+                if ([self.model isAssetModelSelected:cell.model]) {
+                    [self.collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+                }
+                else {
+                    [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+                }
             }
-            else {
-                [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-            }
-        }
+        });
     }];
     
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
@@ -90,6 +92,10 @@
             });
         }];
     }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.model updateAssetCachingForCollectionViewController:self];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -146,6 +152,7 @@
         return nil;
     
     _model = model;
+    [_model resetAssetCaching];
     
     return self;
 }

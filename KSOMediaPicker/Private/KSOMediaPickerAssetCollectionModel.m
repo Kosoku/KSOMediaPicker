@@ -56,6 +56,9 @@
 - (KSOMediaPickerAssetModel *)assetModelAtIndex:(NSUInteger)index; {
     return [[KSOMediaPickerAssetModel alloc] initWithAsset:[self.fetchResult objectAtIndex:index] assetCollectionModel:self];
 }
+- (PHAsset *)assetAtIndex:(NSUInteger)index {
+    return [self.fetchResult objectAtIndex:index];
+}
 
 - (void)reloadFetchResult {
     PHFetchOptions *options = [[PHFetchOptions alloc] init];

@@ -54,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly,strong,nonatomic) PHCachingImageManager *assetCollectionImageManager;
 @property (readonly,strong,nonatomic) PHCachingImageManager *assetImageManager;
+@property (readonly,nonatomic) PHImageRequestOptions *assetImageRequestOptions;
 
 - (BOOL)isAssetModelSelected:(KSOMediaPickerAssetModel *)assetModel;
 - (BOOL)shouldSelectAssetModel:(KSOMediaPickerAssetModel *)assetModel;
@@ -64,6 +65,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)deselectAssetModel:(KSOMediaPickerAssetModel *)assetModel notifyDelegate:(BOOL)notifyDelegate;
 - (void)deselectAllAssetModels;
 - (void)deselectAllAssetModelsAndNotifyDelegate:(BOOL)notifyDelegate;
+
+- (void)resetAssetCaching;
+- (void)updateAssetCachingForCollectionViewController:(UICollectionViewController *)collectionViewController;
 
 @end
 

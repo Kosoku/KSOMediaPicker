@@ -70,13 +70,7 @@
 
     [self cancelAllThumbnailRequests];
     
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-        
-    [options setDeliveryMode:PHImageRequestOptionsDeliveryModeFastFormat];
-    [options setResizeMode:PHImageRequestOptionsResizeModeFast];
-    [options setNetworkAccessAllowed:YES];
-    
-    [self setImageRequestID:[self.assetCollectionModel.model.assetImageManager requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    [self setImageRequestID:[self.assetCollectionModel.model.assetImageManager requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:self.assetCollectionModel.model.assetImageRequestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         completion(result);
     }]];
     
@@ -84,7 +78,7 @@
     if (self.asset.mediaType == PHAssetMediaTypeImage) {
         for (PHAssetResource *res in [PHAssetResource assetResourcesForAsset:self.asset]) {
             if ([res.uniformTypeIdentifier isEqualToString:(__bridge NSString *)kUTTypeGIF]) {
-                [self setDataRequestID:[self.assetCollectionModel.model.assetImageManager requestImageDataForAsset:self.asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                [self setDataRequestID:[self.assetCollectionModel.model.assetImageManager requestImageDataForAsset:self.asset options:self.assetCollectionModel.model.assetImageRequestOptions resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                     completion([[FLAnimatedImage alloc] initWithAnimatedGIFData:imageData optimalFrameCacheSize:0 predrawingEnabled:YES]);
                 }]];
                 break;
