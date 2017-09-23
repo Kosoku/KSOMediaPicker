@@ -20,6 +20,7 @@
 #import "KSOMediaPickerAssetCollectionViewController.h"
 #import "KSOMediaPickerTheme.h"
 #import "NSBundle+KSOMediaPickerPrivateExtensions.h"
+#import "KSOMediaPickerBackgroundView.h"
 
 #import <Stanley/Stanley.h>
 #import <Agamotto/Agamotto.h>
@@ -34,8 +35,13 @@
     [super viewDidLoad];
     
     [self.tableView setEstimatedRowHeight:44.0];
+#if (TARGET_OS_IOS)
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass(KSOMediaPickerAssetCollectionTableViewCell.class) bundle:[NSBundle KSO_mediaPickerFrameworkBundle]] forCellReuseIdentifier:NSStringFromClass(KSOMediaPickerAssetCollectionTableViewCell.class)];
+#else
+    [self.tableView registerClass:KSOMediaPickerAssetCollectionTableViewCell.class forCellReuseIdentifier:NSStringFromClass(KSOMediaPickerAssetCollectionTableViewCell.class)];
+#endif
     [self.tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    [self.tableView setBackgroundView:[[KSOMediaPickerBackgroundView alloc] initWithModel:self.model]];
     
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,assetCollectionModels)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {

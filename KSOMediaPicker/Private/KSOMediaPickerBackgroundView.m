@@ -57,10 +57,12 @@
     [_label setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_label setNumberOfLines:0];
     [_label setTextAlignment:NSTextAlignmentCenter];
+    [_label setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
     [_containerView addArrangedSubview:_label];
     
     _button = [UIButton buttonWithType:UIButtonTypeSystem];
     [_button setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleCallout]];
     [_button setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_PRIVACY_SETTINGS_BUTTON", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Privacy Settings", @"media picker background view privacy settings button") forState:UIControlStateNormal];
     [_button KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey: [NSBundle mainBundle].KST_bundleIdentifier} completionHandler:nil];
@@ -78,17 +80,15 @@
         
         [self.imageView setTintColor:[value.backgroundColor KDI_contrastingColor]];
         
-        [self.label setFont:value.titleFont];
         [self.label setTextColor:value.titleColor];
         
-        [self.button.titleLabel setFont:value.titleFont];
         [self.button setTintColor:value.tintColor];
     }];
     
-    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,authorizationStatus)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
+    [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,authorizationStatus),@kstKeypath(self.model,assetCollectionModels)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
-            switch ((KSOMediaPickerAuthorizationStatus)[value integerValue]) {
+            switch (self.model.authorizationStatus) {
                 case KSOMediaPickerAuthorizationStatusNotDetermined:
                     [self.label setHidden:YES];
                     [self.button setHidden:YES];
@@ -106,8 +106,15 @@
                     [self.button setHidden:NO];
                     break;
                 case KSOMediaPickerAuthorizationStatusAuthorized:
-                    [self.label setHidden:YES];
-                    [self.button setHidden:YES];
+                    if (self.model.assetCollectionModels.count > 0) {
+                        [self.label setHidden:YES];
+                        [self.button setHidden:YES];
+                    }
+                    else {
+                        [self.label setHidden:NO];
+                        [self.label setText:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomTV ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA_TV", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display.", @"media picker background view no media tv") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display. Add some media using the Camera or Photos app.", @"media picker background view no media")];
+                        [self.button setHidden:YES];
+                    }
                     break;
                 default:
                     break;

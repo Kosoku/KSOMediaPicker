@@ -20,5 +20,6 @@
 #import <CoreGraphics/CGBase.h>
 
 static CGFloat const KSOMediaPickerSubviewMargin = 8.0;
+static CGFloat const KSOMediaPickerSubviewMarginHalf = 4.0;
 
 #endif

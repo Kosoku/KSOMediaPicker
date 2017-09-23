@@ -109,7 +109,6 @@
 		0784FE711F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE721F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */; };
-		0784FE751F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */; };
 		07A549941E7C97AA00A6C4A1 /* KSOMediaPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 07A549921E7C97AA00A6C4A1 /* KSOMediaPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07A549A01E7C97D400A6C4A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A5499F1E7C97D400A6C4A1 /* main.m */; };
 		07A549A31E7C97D400A6C4A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A549A21E7C97D400A6C4A1 /* AppDelegate.m */; };
@@ -750,7 +749,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				073B35761E83470300C003A1 /* Localizable.strings in Resources */,
-				0784FE751F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
