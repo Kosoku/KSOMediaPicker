@@ -18,31 +18,31 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ku-uz-suf" customClass="KSOMediaPickerThumbnailView">
-                        <rect key="frame" x="11" y="84" width="66" height="66"/>
+                        <rect key="frame" x="11" y="76" width="82" height="82"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="66" id="nXX-nK-5cv"/>
-                            <constraint firstAttribute="width" constant="66" id="pF0-H8-cCH"/>
+                            <constraint firstAttribute="height" constant="82" id="nXX-nK-5cv"/>
+                            <constraint firstAttribute="width" constant="82" id="pF0-H8-cCH"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAW-bl-AO4" customClass="KSOMediaPickerThumbnailView">
-                        <rect key="frame" x="9" y="86" width="69" height="69"/>
+                        <rect key="frame" x="9" y="78" width="85" height="85"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="69" id="fcr-dJ-qEe"/>
-                            <constraint firstAttribute="height" constant="69" id="zcX-RY-npi"/>
+                            <constraint firstAttribute="width" constant="85" id="fcr-dJ-qEe"/>
+                            <constraint firstAttribute="height" constant="85" id="zcX-RY-npi"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnR-Iv-EcX" customClass="KSOMediaPickerThumbnailView">
-                        <rect key="frame" x="8" y="88" width="72" height="72"/>
+                        <rect key="frame" x="8" y="80" width="88" height="88"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="72" id="PYr-ik-ad8"/>
-                            <constraint firstAttribute="width" constant="72" id="n0g-Vb-w2n"/>
+                            <constraint firstAttribute="height" constant="88" id="PYr-ik-ad8"/>
+                            <constraint firstAttribute="width" constant="88" id="n0g-Vb-w2n"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-jR-96E">
-                        <rect key="frame" x="88" y="103.5" width="246" height="40.5"/>
+                        <rect key="frame" x="104" y="103.5" width="230" height="40.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYr-cV-Zxp">
                                 <rect key="frame" x="0.0" y="0.0" width="33.5" height="20.5"/>
@@ -59,7 +59,7 @@
                         </subviews>
                     </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="Fmf-t2-dGn">
-                        <rect key="frame" x="12" y="132" width="24" height="24"/>
+                        <rect key="frame" x="12" y="140" width="24" height="24"/>
                     </imageView>
                 </subviews>
                 <constraints>
