@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)initWithAsset:(PHAsset *)asset assetCollectionModel:(nullable KSOMediaPickerAssetCollectionModel *)assetCollectionModel;
 
-- (void)requestThumbnailImageOfSize:(CGSize)size completion:(void(^)(UIImage * _Nullable thumbnailImage))completion;
+- (void)requestThumbnailImageOfSize:(CGSize)size completion:(void(^)(id _Nullable thumbnailImage))completion;
 - (void)cancelAllThumbnailRequests;
 
 @end

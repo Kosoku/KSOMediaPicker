@@ -18,14 +18,19 @@
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerModel.h"
 
+#import <Stanley/Stanley.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
+#if (TARGET_OS_IOS)
+#import <FLAnimatedImage/FLAnimatedImage.h>
+#endif
 
 #import <Photos/Photos.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface KSOMediaPickerAssetModel ()
 @property (readwrite,strong,nonatomic) PHAsset *asset;
 @property (readwrite,weak,nonatomic) KSOMediaPickerAssetCollectionModel *assetCollectionModel;
-@property (assign,nonatomic) PHImageRequestID imageRequestID;
+@property (assign,nonatomic) PHImageRequestID imageRequestID, dataRequestID;
 @end
 
 @implementation KSOMediaPickerAssetModel
@@ -55,7 +60,7 @@
     return self;
 }
 
-- (void)requestThumbnailImageOfSize:(CGSize)size completion:(void(^)(UIImage * _Nullable thumbnailImage))completion; {
+- (void)requestThumbnailImageOfSize:(CGSize)size completion:(void(^)(id _Nullable thumbnailImage))completion; {
     NSParameterAssert(completion);
     
     if (CGSizeEqualToSize(CGSizeZero, size)) {
@@ -74,13 +79,30 @@
     [self setImageRequestID:[[PHCachingImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         completion(result);
     }]];
+    
+#if (TARGET_OS_IOS)
+    if (self.asset.mediaType == PHAssetMediaTypeImage) {
+        for (PHAssetResource *res in [PHAssetResource assetResourcesForAsset:self.asset]) {
+            if ([res.uniformTypeIdentifier isEqualToString:(__bridge NSString *)kUTTypeGIF]) {
+                [self setDataRequestID:[[PHCachingImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                    completion([[FLAnimatedImage alloc] initWithAnimatedGIFData:imageData optimalFrameCacheSize:0 predrawingEnabled:YES]);
+                }]];
+                break;
+            }
+        }
+    }
+#endif
 }
 - (void)cancelAllThumbnailRequests; {
     if (self.imageRequestID != PHInvalidImageRequestID) {
         [[PHCachingImageManager defaultManager] cancelImageRequest:self.imageRequestID];
     }
+    if (self.dataRequestID != PHInvalidImageRequestID) {
+        [[PHCachingImageManager defaultManager] cancelImageRequest:self.dataRequestID];
+    }
     
     [self setImageRequestID:PHInvalidImageRequestID];
+    [self setDataRequestID:PHInvalidImageRequestID];
 }
 
 - (NSString *)identifier {

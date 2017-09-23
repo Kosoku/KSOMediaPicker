@@ -26,9 +26,16 @@
 #import <Ditko/Ditko.h>
 #import <Loki/Loki.h>
 #import <Agamotto/Agamotto.h>
+#if (TARGET_OS_IOS)
+#import <FLAnimatedImage/FLAnimatedImageView.h>
+#endif
 
 @interface KSOMediaPickerAssetCollectionViewCell ()
+#if (TARGET_OS_IOS)
+@property (strong,nonatomic) FLAnimatedImageView *thumbnailImageView;
+#else
 @property (strong,nonatomic) UIImageView *thumbnailImageView;
+#endif
 @property (strong,nonatomic) KSOMediaPickerVideoPlayerView *playerView;
 @property (strong,nonatomic) KDIGradientView *gradientView;
 @property (strong,nonatomic) UIImageView *typeImageView;
@@ -42,8 +49,12 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (!(self = [super initWithFrame:frame]))
         return nil;
-    
+
+#if (TARGET_OS_IOS)
+    _thumbnailImageView = [[FLAnimatedImageView alloc] initWithFrame:CGRectZero];
+#else
     _thumbnailImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+#endif
     [_thumbnailImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_thumbnailImageView setContentMode:UIViewContentModeScaleAspectFill];
     [_thumbnailImageView setClipsToBounds:YES];
@@ -174,9 +185,18 @@
 }
 - (void)reloadThumbnailImage; {
     kstWeakify(self);
-    [self.model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.frame.size) completion:^(UIImage *thumbnailImage) {
+    [self.model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.frame.size) completion:^(id thumbnailImage) {
         kstStrongify(self);
+#if (TARGET_OS_IOS)
+        if ([thumbnailImage isKindOfClass:FLAnimatedImage.class]) {
+            [self.thumbnailImageView setAnimatedImage:thumbnailImage];
+        }
+        else {
+            [self.thumbnailImageView setImage:thumbnailImage];
+        }
+#else
         [self.thumbnailImageView setImage:thumbnailImage];
+#endif
     }];
 }
 

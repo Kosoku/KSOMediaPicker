@@ -106,6 +106,12 @@
 		0758D43B1F7600DE000E0829 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0758D43D1F7602FD000E0829 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0758D43C1F7602FD000E0829 /* FontAwesome.ttf */; };
 		0758D43E1F760308000E0829 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0758D43C1F7602FD000E0829 /* FontAwesome.ttf */; };
+		0758D4401F763908000E0829 /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4411F763908000E0829 /* FLAnimatedImage.framework */; };
+		0758D4421F763998000E0829 /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4411F763908000E0829 /* FLAnimatedImage.framework */; };
+		0758D4431F763998000E0829 /* FLAnimatedImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4411F763908000E0829 /* FLAnimatedImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0758D4451F7639A4000E0829 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4441F7639A4000E0829 /* ImageIO.framework */; };
+		0758D4471F7639B8000E0829 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4461F7639B8000E0829 /* MobileCoreServices.framework */; };
+		0758D4491F7639CA000E0829 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4481F7639CA000E0829 /* QuartzCore.framework */; };
 		0784FE711F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE721F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */; };
@@ -188,6 +194,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				07377F4B1E7DF58A00094D95 /* Agamotto.framework in Embed Frameworks */,
+				0758D4431F763998000E0829 /* FLAnimatedImage.framework in Embed Frameworks */,
 				07CC45DB1E9C4A6700D3DD29 /* Shield.framework in Embed Frameworks */,
 				07A549BA1E7C989700A6C4A1 /* KSOMediaPicker.framework in Embed Frameworks */,
 				07377F4E1E7DF59000094D95 /* Ditko.framework in Embed Frameworks */,
@@ -263,6 +270,10 @@
 		0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0758D43C1F7602FD000E0829 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "Vendor/KSOFontAwesomeExtensions/Demo-iOS/FontAwesome.ttf"; sourceTree = SOURCE_ROOT; };
+		0758D4411F763908000E0829 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FLAnimatedImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0758D4441F7639A4000E0829 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
+		0758D4461F7639B8000E0829 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		0758D4481F7639CA000E0829 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSOMediaPickerDefinesPrivate.h; path = Private/KSOMediaPickerDefinesPrivate.h; sourceTree = "<group>"; };
 		0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = KSOMediaPickerAssetCollectionTableViewCell.xib; path = KSOMediaPicker/KSOMediaPickerAssetCollectionTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		07A5498F1E7C97AA00A6C4A1 /* KSOMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +343,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0758D4401F763908000E0829 /* FLAnimatedImage.framework in Frameworks */,
 				0758D4341F76009A000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				0745316A1E9EAAA300CEF9E0 /* Stanley.framework in Frameworks */,
 				074531681E9EAA9F00CEF9E0 /* Shield.framework in Frameworks */,
@@ -346,7 +358,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0758D4491F7639CA000E0829 /* QuartzCore.framework in Frameworks */,
+				0758D4471F7639B8000E0829 /* MobileCoreServices.framework in Frameworks */,
+				0758D4451F7639A4000E0829 /* ImageIO.framework in Frameworks */,
 				073B35A21E835C5900C003A1 /* Stanley.framework in Frameworks */,
+				0758D4421F763998000E0829 /* FLAnimatedImage.framework in Frameworks */,
 				07377F501E7DF59500094D95 /* Quicksilver.framework in Frameworks */,
 				07A549C01E7C989F00A6C4A1 /* Photos.framework in Frameworks */,
 				07377F4A1E7DF58A00094D95 /* Agamotto.framework in Frameworks */,
@@ -490,6 +506,10 @@
 		07A549BE1E7C989F00A6C4A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0758D4481F7639CA000E0829 /* QuartzCore.framework */,
+				0758D4461F7639B8000E0829 /* MobileCoreServices.framework */,
+				0758D4441F7639A4000E0829 /* ImageIO.framework */,
+				0758D4411F763908000E0829 /* FLAnimatedImage.framework */,
 				0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */,
 				0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */,
 				0745316B1E9EAAAB00CEF9E0 /* Shield.framework */,
