@@ -36,7 +36,7 @@
 @implementation KSOMediaPickerAssetModel
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<%@: %p> identifier=%@",NSStringFromClass(self.class),self,self.identifier];
+    return [NSString stringWithFormat:@"<%@: %p> %@=%@",NSStringFromClass(self.class),self,@kstKeypath(self,identifier),self.identifier];
 }
 
 - (PHAsset *)mediaPickerMediaAsset {
@@ -76,7 +76,7 @@
     [options setResizeMode:PHImageRequestOptionsResizeModeFast];
     [options setNetworkAccessAllowed:YES];
     
-    [self setImageRequestID:[[PHCachingImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    [self setImageRequestID:[self.assetCollectionModel.model.assetImageManager requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         completion(result);
     }]];
     
@@ -84,7 +84,7 @@
     if (self.asset.mediaType == PHAssetMediaTypeImage) {
         for (PHAssetResource *res in [PHAssetResource assetResourcesForAsset:self.asset]) {
             if ([res.uniformTypeIdentifier isEqualToString:(__bridge NSString *)kUTTypeGIF]) {
-                [self setDataRequestID:[[PHCachingImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                [self setDataRequestID:[self.assetCollectionModel.model.assetImageManager requestImageDataForAsset:self.asset options:options resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                     completion([[FLAnimatedImage alloc] initWithAnimatedGIFData:imageData optimalFrameCacheSize:0 predrawingEnabled:YES]);
                 }]];
                 break;
@@ -95,10 +95,10 @@
 }
 - (void)cancelAllThumbnailRequests; {
     if (self.imageRequestID != PHInvalidImageRequestID) {
-        [[PHCachingImageManager defaultManager] cancelImageRequest:self.imageRequestID];
+        [self.assetCollectionModel.model.assetImageManager cancelImageRequest:self.imageRequestID];
     }
     if (self.dataRequestID != PHInvalidImageRequestID) {
-        [[PHCachingImageManager defaultManager] cancelImageRequest:self.dataRequestID];
+        [self.assetCollectionModel.model.assetImageManager cancelImageRequest:self.dataRequestID];
     }
     
     [self setImageRequestID:PHInvalidImageRequestID];

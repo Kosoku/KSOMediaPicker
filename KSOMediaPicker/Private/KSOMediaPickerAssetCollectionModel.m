@@ -99,7 +99,7 @@
     [options setNetworkAccessAllowed:YES];
     
     PHAsset *asset = [self.fetchResult objectAtIndex:self.countOfAssetModels - thumbnailIndex - 1];
-    PHImageRequestID imageRequestID = [[PHCachingImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+    PHImageRequestID imageRequestID = [self.model.assetCollectionImageManager requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         completion(result);
     }];
     
@@ -159,7 +159,7 @@
     
     [self.thumbnailIndexesToImageRequestIDs removeObjectForKey:@(thumbnailIndex)];
     
-    [[PHCachingImageManager defaultManager] cancelImageRequest:imageRequestID];
+    [self.model.assetCollectionImageManager cancelImageRequest:imageRequestID];
 }
 
 @end

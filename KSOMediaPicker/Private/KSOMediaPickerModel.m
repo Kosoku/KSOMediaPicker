@@ -38,6 +38,9 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
 @property (readwrite,copy,nonatomic,nullable) NSArray<KSOMediaPickerAssetCollectionModel *> *assetCollectionModels;
 @property (readwrite,copy,nonatomic,nullable) NSOrderedSet<NSString *> *selectedAssetIdentifiers;
 
+@property (readwrite,strong,nonatomic) PHCachingImageManager *assetCollectionImageManager;
+@property (readwrite,strong,nonatomic) PHCachingImageManager *assetImageManager;
+
 - (void)_reloadAssetCollectionModels;
 @end
 
@@ -90,6 +93,12 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
     
     _doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:NULL];
     _cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:NULL];
+    
+    _assetCollectionImageManager = [[PHCachingImageManager alloc] init];
+    [_assetCollectionImageManager setAllowsCachingHighQualityImages:NO];
+    
+    _assetImageManager = [[PHCachingImageManager alloc] init];
+    [_assetImageManager setAllowsCachingHighQualityImages:NO];
     
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
     
