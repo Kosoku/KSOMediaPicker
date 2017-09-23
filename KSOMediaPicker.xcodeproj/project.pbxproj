@@ -274,6 +274,7 @@
 		0758D4441F7639A4000E0829 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
 		0758D4461F7639B8000E0829 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		0758D4481F7639CA000E0829 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		0758D44A1F764C04000E0829 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSOMediaPickerDefinesPrivate.h; path = Private/KSOMediaPickerDefinesPrivate.h; sourceTree = "<group>"; };
 		0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = KSOMediaPickerAssetCollectionTableViewCell.xib; path = KSOMediaPicker/KSOMediaPickerAssetCollectionTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		07A5498F1E7C97AA00A6C4A1 /* KSOMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -749,6 +750,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 07A549831E7C976400A6C4A1;
 			productRefGroup = 07A549901E7C97AA00A6C4A1 /* Products */;
@@ -914,6 +916,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				07D1AC921E8171CF00A963B1 /* en */,
+				0758D44A1F764C04000E0829 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1170,12 +1173,14 @@
 		07A549881E7C976400A6C4A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 			};
 			name = Debug;
 		};
 		07A549891E7C976400A6C4A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 			};
 			name = Release;
 		};
