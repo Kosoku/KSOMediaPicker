@@ -99,6 +99,14 @@
 		0758D40E1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0758D40F1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */; };
 		0758D4101F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */; };
+		0758D4341F76009A000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */; };
+		0758D4361F7600AE000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */; };
+		0758D4381F7600D0000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */; };
+		0758D4391F7600D0000E0829 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0758D43A1F7600DE000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */; };
+		0758D43B1F7600DE000E0829 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0758D43D1F7602FD000E0829 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0758D43C1F7602FD000E0829 /* FontAwesome.ttf */; };
+		0758D43E1F760308000E0829 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0758D43C1F7602FD000E0829 /* FontAwesome.ttf */; };
 		0784FE711F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE721F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */; };
@@ -171,6 +179,7 @@
 				073B35A61E835C6200C003A1 /* Stanley.framework in Embed Frameworks */,
 				073B35A01E83522000C003A1 /* Loki.framework in Embed Frameworks */,
 				073B35711E83454500C003A1 /* KSOMediaPicker.framework in Embed Frameworks */,
+				0758D43B1F7600DE000E0829 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +197,7 @@
 				073B35A31E835C5900C003A1 /* Stanley.framework in Embed Frameworks */,
 				073B359D1E83520F00C003A1 /* Loki.framework in Embed Frameworks */,
 				07377F511E7DF59500094D95 /* Quicksilver.framework in Embed Frameworks */,
+				0758D4391F7600D0000E0829 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -253,6 +263,9 @@
 		0758D4061F75AE23000E0829 /* KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView.m; sourceTree = "<group>"; };
 		0758D40B1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerVideoPlayerView.h; sourceTree = "<group>"; };
 		0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerVideoPlayerView.m; sourceTree = "<group>"; };
+		0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0758D43C1F7602FD000E0829 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "Vendor/KSOFontAwesomeExtensions/Demo-iOS/FontAwesome.ttf"; sourceTree = SOURCE_ROOT; };
 		0784FE701F74C68C006DE9C3 /* KSOMediaPickerDefinesPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KSOMediaPickerDefinesPrivate.h; path = Private/KSOMediaPickerDefinesPrivate.h; sourceTree = "<group>"; };
 		0784FE731F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = KSOMediaPickerAssetCollectionTableViewCell.xib; path = KSOMediaPicker/KSOMediaPickerAssetCollectionTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		07A5498F1E7C97AA00A6C4A1 /* KSOMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KSOMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -293,6 +306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0758D4361F7600AE000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				0745316C1E9EAAAB00CEF9E0 /* Shield.framework in Frameworks */,
 				0745315C1E9EAA7900CEF9E0 /* Stanley.framework in Frameworks */,
 				0745315A1E9EAA7200CEF9E0 /* Quicksilver.framework in Frameworks */,
@@ -313,6 +327,7 @@
 				073B359F1E83522000C003A1 /* Loki.framework in Frameworks */,
 				07CC45DD1E9C4A6E00D3DD29 /* Shield.framework in Frameworks */,
 				073B35671E83452400C003A1 /* Agamotto.framework in Frameworks */,
+				0758D43A1F7600DE000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				073B35701E83454500C003A1 /* KSOMediaPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +336,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0758D4341F76009A000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				0745316A1E9EAAA300CEF9E0 /* Stanley.framework in Frameworks */,
 				074531681E9EAA9F00CEF9E0 /* Shield.framework in Frameworks */,
 				074531661E9EAA9900CEF9E0 /* Quicksilver.framework in Frameworks */,
@@ -341,6 +357,7 @@
 				073B359C1E83520F00C003A1 /* Loki.framework in Frameworks */,
 				07CC45DA1E9C4A6700D3DD29 /* Shield.framework in Frameworks */,
 				07377F4D1E7DF59000094D95 /* Ditko.framework in Frameworks */,
+				0758D4381F7600D0000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */,
 				07A549B91E7C989700A6C4A1 /* KSOMediaPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,6 +458,7 @@
 		07A5499E1E7C97D400A6C4A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0758D43C1F7602FD000E0829 /* FontAwesome.ttf */,
 				07A5499F1E7C97D400A6C4A1 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -477,6 +495,8 @@
 		07A549BE1E7C989F00A6C4A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */,
+				0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */,
 				0745316B1E9EAAAB00CEF9E0 /* Shield.framework */,
 				074531691E9EAAA300CEF9E0 /* Stanley.framework */,
 				074531671E9EAA9F00CEF9E0 /* Shield.framework */,
@@ -744,6 +764,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				073B35611E83451000C003A1 /* Assets.xcassets in Resources */,
+				0758D43E1F760308000E0829 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +784,7 @@
 			files = (
 				07A549AE1E7C97D400A6C4A1 /* LaunchScreen.storyboard in Resources */,
 				07A549AB1E7C97D400A6C4A1 /* Assets.xcassets in Resources */,
+				0758D43D1F7602FD000E0829 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

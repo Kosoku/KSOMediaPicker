@@ -18,6 +18,8 @@
 #import "KSOMediaPickerAssetCollectionModel.h"
 #import "KSOMediaPickerModel.h"
 
+#import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
+
 #import <Photos/Photos.h>
 
 @interface KSOMediaPickerAssetModel ()
@@ -90,7 +92,7 @@
 - (UIImage *)typeImage {
     switch (self.mediaType) {
         case KSOMediaPickerMediaTypeVideo:
-            return [UIImage imageNamed:@"type_video" inBundle:[NSBundle KSO_mediaPickerFrameworkBundle] compatibleWithTraitCollection:nil];
+            return [UIImage KSO_fontAwesomeImageWithString:@"\uf03d" size:CGSizeMake(16, 16)];
         default:
             return nil;
     }

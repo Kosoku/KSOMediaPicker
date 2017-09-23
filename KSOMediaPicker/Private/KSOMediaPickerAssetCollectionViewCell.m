@@ -60,6 +60,7 @@
     
     _typeImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [_typeImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_typeImageView setTintColor:UIColor.whiteColor];
     [_gradientView addSubview:_typeImageView];
     
     _durationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -177,7 +178,7 @@
 - (void)setModel:(KSOMediaPickerAssetModel *)model {
     _model = model;
     
-    [self.typeImageView setImage:[_model.typeImage KLO_imageByTintingWithColor:[UIColor whiteColor]]];
+    [self.typeImageView setImage:[_model.typeImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [self.durationLabel setText:_model.formattedDuration];
     [self.gradientView setHidden:self.typeImageView.image == nil && self.durationLabel.text.length == 0];
     
