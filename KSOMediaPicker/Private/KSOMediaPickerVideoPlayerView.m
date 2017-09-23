@@ -63,6 +63,10 @@
 }
 
 - (void)setModel:(KSOMediaPickerAssetModel *)model {
+    if (_model == model) {
+        return;
+    }
+    
     _model = model;
     
     if (_model == nil) {
