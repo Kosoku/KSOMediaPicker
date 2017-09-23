@@ -58,9 +58,14 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="24" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="Fmf-t2-dGn">
+                        <rect key="frame" x="12" y="132" width="24" height="24"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="nAW-bl-AO4" firstAttribute="bottom" secondItem="xnR-Iv-EcX" secondAttribute="bottom" constant="-5" id="6cy-Q2-BK5"/>
+                    <constraint firstItem="Fmf-t2-dGn" firstAttribute="leading" secondItem="xnR-Iv-EcX" secondAttribute="leading" constant="4" id="7SK-28-Q0p"/>
+                    <constraint firstItem="Fmf-t2-dGn" firstAttribute="bottom" secondItem="xnR-Iv-EcX" secondAttribute="bottom" constant="-4" id="AcW-nJ-L76"/>
                     <constraint firstItem="ZQa-jR-96E" firstAttribute="centerY" secondItem="rnb-Qx-mHg" secondAttribute="centerY" id="ByO-8f-b2A"/>
                     <constraint firstItem="xnR-Iv-EcX" firstAttribute="leading" secondItem="rnb-Qx-mHg" secondAttribute="leading" constant="8" id="Huc-fO-idM"/>
                     <constraint firstItem="xnR-Iv-EcX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rnb-Qx-mHg" secondAttribute="top" constant="8" id="M9G-Pg-aUt"/>
@@ -81,6 +86,7 @@
                 <outlet property="thumbnailView2" destination="nAW-bl-AO4" id="9TT-iU-1LD"/>
                 <outlet property="thumbnailView3" destination="5Ku-uz-suf" id="wcy-1F-T5Q"/>
                 <outlet property="titleLabel" destination="QYr-cV-Zxp" id="FOW-Fc-WLS"/>
+                <outlet property="typeImageView" destination="Fmf-t2-dGn" id="wkn-nS-30W"/>
             </connections>
             <point key="canvasLocation" x="-133.5" y="109"/>
         </tableViewCell>

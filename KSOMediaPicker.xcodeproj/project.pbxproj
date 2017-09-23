@@ -64,7 +64,6 @@
 		073B35711E83454500C003A1 /* KSOMediaPicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073B352C1E8343A300C003A1 /* KSOMediaPicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		073B35751E83454E00C003A1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073B35741E83454E00C003A1 /* Photos.framework */; };
 		073B35761E83470300C003A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC911E8171CF00A963B1 /* Localizable.strings */; };
-		073B35771E83470A00C003A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */; };
 		073B359C1E83520F00C003A1 /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073B359B1E83520F00C003A1 /* Loki.framework */; };
 		073B359D1E83520F00C003A1 /* Loki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 073B359B1E83520F00C003A1 /* Loki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		073B359F1E83522000C003A1 /* Loki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073B359E1E83522000C003A1 /* Loki.framework */; };
@@ -132,7 +131,6 @@
 		07CC45DB1E9C4A6700D3DD29 /* Shield.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC45D91E9C4A6700D3DD29 /* Shield.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07CC45DD1E9C4A6E00D3DD29 /* Shield.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC45DC1E9C4A6E00D3DD29 /* Shield.framework */; };
 		07CC45DE1E9C4A6E00D3DD29 /* Shield.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07CC45DC1E9C4A6E00D3DD29 /* Shield.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		07D1AC8B1E816A2A00A963B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */; };
 		07D1AC8E1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		07D1AC8F1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */; };
 		07D1AC931E8171CF00A963B1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 07D1AC911E8171CF00A963B1 /* Localizable.strings */; };
@@ -289,7 +287,6 @@
 		07AB59381E859DC000E52340 /* KSOMediaPickerThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerThumbnailView.m; sourceTree = "<group>"; };
 		07CC45D91E9C4A6700D3DD29 /* Shield.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Shield.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07CC45DC1E9C4A6E00D3DD29 /* Shield.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Shield.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07D1AC8C1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+KSOMediaPickerPrivateExtensions.h"; sourceTree = "<group>"; };
 		07D1AC8D1E816BBB00A963B1 /* NSBundle+KSOMediaPickerPrivateExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+KSOMediaPickerPrivateExtensions.m"; sourceTree = "<group>"; };
 		07D1AC921E8171CF00A963B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -471,7 +468,6 @@
 				07A549931E7C97AA00A6C4A1 /* KSOMediaPicker-iOS-Info.plist */,
 				073B35781E834B6C00C003A1 /* KSOMediaPicker-tvOS-Info.plist */,
 				073B35791E834B9A00C003A1 /* KSOMediaPicker-Info.h */,
-				07D1AC8A1E816A2A00A963B1 /* Assets.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -753,7 +749,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				073B35771E83470A00C003A1 /* Assets.xcassets in Resources */,
 				073B35761E83470300C003A1 /* Localizable.strings in Resources */,
 				0784FE751F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */,
 			);
@@ -772,7 +767,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07D1AC8B1E816A2A00A963B1 /* Assets.xcassets in Resources */,
 				07D1AC931E8171CF00A963B1 /* Localizable.strings in Resources */,
 				0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */,
 			);

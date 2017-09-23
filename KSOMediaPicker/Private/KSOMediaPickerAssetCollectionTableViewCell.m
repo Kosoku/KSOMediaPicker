@@ -26,6 +26,7 @@
 
 @interface KSOMediaPickerAssetCollectionTableViewCell ()
 @property (weak,nonatomic) IBOutlet KSOMediaPickerThumbnailView *thumbnailView1, *thumbnailView2, *thumbnailView3;
+@property (weak,nonatomic) IBOutlet UIImageView *typeImageView;
 @property (weak,nonatomic) IBOutlet UILabel *titleLabel, *subtitleLabel;
 @end
 
@@ -33,6 +34,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    [self.typeImageView setTintColor:UIColor.whiteColor];
     
     kstWeakify(self);
     [self KAG_addObserverForKeyPaths:@[@kstKeypath(self,model.model.theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
@@ -67,6 +70,7 @@
     
     [self.titleLabel setText:_model.title];
     [self.subtitleLabel setText:_model.subtitle];
+    [self.typeImageView setImage:[_model.typeImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     
     kstWeakify(self);
     [_model requestThumbnailImageOfSize:KDICGSizeAdjustedForMainScreenScale(self.thumbnailView1.frame.size) thumbnailIndex:0 completion:^(UIImage *thumbnailImage) {

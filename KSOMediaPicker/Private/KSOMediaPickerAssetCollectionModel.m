@@ -19,6 +19,7 @@
 #import "NSBundle+KSOMediaPickerPrivateExtensions.h"
 
 #import <Stanley/Stanley.h>
+#import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
 #import <Photos/Photos.h>
 
@@ -123,10 +124,23 @@
     return [NSNumberFormatter localizedStringFromNumber:@(self.countOfAssetModels) numberStyle:NSNumberFormatterDecimalStyle];
 }
 - (UIImage *)typeImage {
+    CGSize size = CGSizeMake(24, 24);
+    
     switch (self.subtype) {
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumVideos:
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumSlomoVideos:
-            return [UIImage imageNamed:@"type_video" inBundle:[NSBundle KSO_mediaPickerFrameworkBundle] compatibleWithTraitCollection:nil];
+            return [UIImage KSO_fontAwesomeImageWithString:@"\uf03d" size:size];
+        case KSOMediaPickerAssetCollectionSubtypeSmartAlbumRecentlyAdded:
+            return [UIImage KSO_fontAwesomeImageWithString:@"\uf017" size:size];
+        case KSOMediaPickerAssetCollectionSubtypeSmartAlbumFavorites:
+            return [UIImage KSO_fontAwesomeImageWithString:@"\uf004" size:size];
+        case KSOMediaPickerAssetCollectionSubtypeAlbumMyPhotoStream:
+        case KSOMediaPickerAssetCollectionSubtypeAlbumCloudShared:
+            return [UIImage KSO_fontAwesomeImageWithString:@"\uf0c2" size:size];
+        case KSOMediaPickerAssetCollectionSubtypeSmartAlbumSelfPortraits:
+            return [UIImage KSO_fontAwesomeImageWithString:@"\uf118" size:size];
+        case KSOMediaPickerAssetCollectionSubtypeSmartAlbumScreenshots:
+            return [UIImage KSO_fontAwesomeImageWithString:@"\uf10b" size:size];
         default:
             return nil;
     }
