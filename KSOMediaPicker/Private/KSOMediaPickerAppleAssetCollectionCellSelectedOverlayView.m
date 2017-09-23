@@ -39,7 +39,7 @@
         UIColor *baseColor = self.theme.assetCollectionCellSelectedOverlayViewTintColor ?: self.tintColor;
         UIColor *overlayColor = [baseColor KDI_contrastingColor];
         
-        [self setBackgroundColor:[overlayColor colorWithAlphaComponent:0.5]];
+        [self setBackgroundColor:[overlayColor colorWithAlphaComponent:0.33]];
         [self.badgeView setBadgeFont:self.theme.assetCollectionCellSelectedOverlayViewFont];
         [self.badgeView setBadgeBackgroundColor:baseColor];
         [self.badgeView setBadgeHighlightedBackgroundColor:baseColor];
