@@ -31,6 +31,10 @@
 
 @implementation KSOMediaPickerAssetCollectionTableViewController
 
+- (void)dealloc {
+    KSTLogObject(self.class);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

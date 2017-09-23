@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOMediaPicker'
-  s.version          = '1.0.0'
+  s.version          = '1.1.0'
   s.summary          = 'KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos framework.'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos framework. It provides similar functionality to UIImagePickerController on iOS and a custom implementation on tvOS.
+KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos framework. It provides similar functionality to UIImagePickerController on iOS and a custom implementation on tvOS. On iOS it uses FLAnimatedImage to support playback of GIFs within the asset collection view. It also supports playback of video assets while selected in the asset collection view.
                        DESC
 
   s.homepage         = 'https://github.com/Kosoku/KSOMediaPicker'

@@ -35,6 +35,10 @@
     return self.model.selectedAssetCollectionModel.title;
 }
 
+- (void)dealloc {
+    KSTLogObject(self.class);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
