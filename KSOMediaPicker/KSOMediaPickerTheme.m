@@ -54,6 +54,7 @@
     retval->_assetCollectionTableViewCellSelectedBackgroundViewClass = _assetCollectionTableViewCellSelectedBackgroundViewClass;
     
     retval->_assetSelectedOverlayStyle = _assetSelectedOverlayStyle;
+    retval->_assetSelectedOverlayViewClass = _assetSelectedOverlayViewClass;
     retval->_assetCollectionCellSelectedOverlayViewTintColor = _assetCollectionCellSelectedOverlayViewTintColor;
     retval->_assetCollectionCellSelectedOverlayViewFont = _assetCollectionCellSelectedOverlayViewFont;
     retval->_assetCollectionCellSelectedOverlayViewTextColor = _assetCollectionCellSelectedOverlayViewTextColor;

@@ -51,6 +51,41 @@
 }
 @end
 
+@interface SelectedOverlayView : UIView <KSOMediaPickerAssetCollectionCellSelectedOverlayView>
+@end
+
+@implementation SelectedOverlayView
+- (BOOL)isOpaque {
+    return NO;
+}
+- (void)drawRect:(CGRect)rect {
+    if (self.theme == nil)
+        return;
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    NSArray *colors = @[(__bridge id)UIColor.clearColor.CGColor,
+                        (__bridge id)self.theme.assetCollectionCellSelectedOverlayViewTintColor.CGColor];
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, NULL);
+    CGColorSpaceRelease(colorSpace);
+    
+    CGPoint gradCenter= CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    float gradRadius = MIN(self.bounds.size.width , self.bounds.size.height) ;
+    
+    CGContextDrawRadialGradient (ctx, gradient, gradCenter, 0, gradCenter, gradRadius, kCGGradientDrawsAfterEndLocation);
+    
+    
+    CGGradientRelease(gradient);
+}
+
+@synthesize theme=_theme;
+- (void)setTheme:(KSOMediaPickerTheme *)theme {
+    _theme = theme;
+    
+    [self setNeedsDisplay];
+}
+@end
+
 @interface ViewController () <KSOMediaPickerViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong,nonatomic) UIButton *modalButton, *modalCustomButton;
 @property (strong,nonatomic) UIButton *pushButton;
@@ -106,10 +141,11 @@
         [theme setCellBackgroundColor:[UIColor whiteColor]];
         [theme setTitleColor:[UIColor blackColor]];
         [theme setHighlightedTitleColor:[UIColor blackColor]];
+        [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
         [theme setAssetSelectedOverlayStyle:KSOMediaPickerThemeAssetSelectedOverlayStyleFacebook];
+        [theme setAssetSelectedOverlayViewClass:SelectedOverlayView.class];
         [theme setAssetCollectionCellSelectedOverlayViewTintColor:KDIColorHexadecimal(@"ff7200")];
         [theme setAssetCollectionCellSelectedOverlayViewTextColor:UIColor.whiteColor];
-        [theme setAssetCollectionTableViewCellSelectedBackgroundViewClass:[SelectedBackgroundView class]];
         
         [viewController setTheme:theme];
         

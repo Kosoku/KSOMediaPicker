@@ -95,15 +95,20 @@
             return;
         }
         
-        switch (self.model.assetCollectionModel.model.theme.assetSelectedOverlayStyle) {
-            case KSOMediaPickerThemeAssetSelectedOverlayStyleFacebook:
-                [self setSelectedOverlayView:[[KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero]];
-                break;
-            case KSOMediaPickerThemeAssetSelectedOverlayStyleApple:
-                [self setSelectedOverlayView:[[KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero]];
-                break;
-            default:
-                break;
+        if (self.model.assetCollectionModel.model.theme.assetSelectedOverlayViewClass == Nil) {
+            switch (self.model.assetCollectionModel.model.theme.assetSelectedOverlayStyle) {
+                case KSOMediaPickerThemeAssetSelectedOverlayStyleFacebook:
+                    [self setSelectedOverlayView:[[KSOMediaPickerFacebookAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero]];
+                    break;
+                case KSOMediaPickerThemeAssetSelectedOverlayStyleApple:
+                    [self setSelectedOverlayView:[[KSOMediaPickerAppleAssetCollectionCellSelectedOverlayView alloc] initWithFrame:CGRectZero]];
+                    break;
+                default:
+                    break;
+            }
+        }
+        else {
+            [self setSelectedOverlayView:[[self.model.assetCollectionModel.model.theme.assetSelectedOverlayViewClass alloc] initWithFrame:CGRectZero]];
         }
     }];
     
