@@ -29,11 +29,6 @@
 
 NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
 
-NSInteger const KSOMediaPickerErrorCodeMixedMediaSelection = 1;
-NSInteger const KSOMediaPickerErrorCodeMaximumSelectedMedia = 2;
-NSInteger const KSOMediaPickerErrorCodeMaximumSelectedImages = 3;
-NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
-
 @interface KSOMediaPickerModel () <PHPhotoLibraryChangeObserver>
 @property (readwrite,assign,nonatomic) KSOMediaPickerAuthorizationStatus authorizationStatus;
 
@@ -171,7 +166,7 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
     // if the asset model can still be selected and a maximum selected media limit has been set and selecting another media would put us over the limit, surface the appropriate error
     if (retval &&
         self.maximumSelectedMedia > 0 &&
-        self.selectedAssetIdentifiers.count + 1 > self.maximumSelectedMedia) {
+        self.selectedAssetIdentifiers.count == self.maximumSelectedMedia) {
         
         retval = NO;
         
@@ -186,7 +181,7 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
         assetModel.mediaType == KSOMediaPickerMediaTypeImage &&
         [self.selectedAssetModels KQS_reduceIntegerWithStart:0 block:^NSInteger(NSInteger sum, KSOMediaPickerAssetModel * _Nonnull object, NSInteger index) {
         return object.mediaType == KSOMediaPickerMediaTypeImage ? sum + 1 : sum;
-    }] + 1 > self.maximumSelectedImages) {
+    }] == self.maximumSelectedImages) {
         
         retval = NO;
         
@@ -203,7 +198,7 @@ NSInteger const KSOMediaPickerErrorCodeMaximumSelectedVideos = 4;
         assetModel.mediaType == KSOMediaPickerMediaTypeVideo &&
         [self.selectedAssetModels KQS_reduceIntegerWithStart:0 block:^NSInteger(NSInteger sum, KSOMediaPickerAssetModel * _Nonnull object, NSInteger index) {
         return object.mediaType == KSOMediaPickerMediaTypeVideo ? sum + 1 : sum;
-    }] + 1 > self.maximumSelectedVideos) {
+    }] == self.maximumSelectedVideos) {
         
         retval = NO;
         
