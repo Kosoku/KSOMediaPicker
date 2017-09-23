@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Requests an AVExportSession for the receiver with the *exportPresetName* preset and invokes *completion* when it has been created. If *exportSession* is nil, *error* will contain more information about the reason for failure. The *completion* block is invoked on an arbitrary queue.
  
- @param exportPresentName The AVExportSession preset name, see AVExportSession.h for more information
+ @param exportPresetName The AVExportSession preset name, see AVExportSession.h for more information
  @param completion The completion block to invoke when the export session has been created
  */
 - (void)KSO_requestExportSessionWithExportPresetName:(NSString *)exportPresetName completion:(void(^)(AVAssetExportSession * _Nullable exportSession, NSError * _Nullable error))completion;
