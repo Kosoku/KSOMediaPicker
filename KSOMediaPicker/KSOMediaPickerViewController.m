@@ -99,16 +99,16 @@
         kstStrongify(self);
         KSTDispatchMainAsync(^{
             if (self.presentingViewController != nil) {
-                [self.navigationController.navigationBar setBarTintColor:value.barTintColor];
-                [self.navigationController.navigationBar setTintColor:value.tintColor];
-                
-                NSMutableDictionary *attrs = [[NSMutableDictionary alloc] init];
-                
-                if (value.navigationBarTitleTextColor != nil) {
-                    [attrs addEntriesFromDictionary:@{NSForegroundColorAttributeName: value.navigationBarTitleTextColor}];
+                if (value.barTintColor != nil) {
+                    [self.navigationController.navigationBar setBarTintColor:value.barTintColor];
+                }
+                if (value.tintColor != nil) {
+                    [self.navigationController.navigationBar setTintColor:value.tintColor];
                 }
                 
-                [self.navigationController.navigationBar setTitleTextAttributes:attrs];
+                if (value.navigationBarTitleTextColor != nil) {
+                    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: value.navigationBarTitleTextColor}];
+                }
             }
             
             [self.view setBackgroundColor:value.backgroundColor];
