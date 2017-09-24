@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KSOMediaPicker'
-  s.version          = '1.2.0'
+  s.version          = '1.2.1'
   s.summary          = 'KSOMediaPicker is an iOS/tvOS framework that provides UI to access the Photos framework.'
 
 # This description is used to generate tags and improve search results.
