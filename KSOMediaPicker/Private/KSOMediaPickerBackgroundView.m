@@ -109,8 +109,10 @@
                     if (self.model.assetCollectionModels.count > 0) {
                         [self.label setHidden:YES];
                         [self.button setHidden:YES];
+                        [self.imageView setHidden:YES];
                     }
                     else {
+                        [self.imageView setHidden:NO];
                         [self.label setHidden:NO];
                         [self.label setText:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomTV ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA_TV", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display.", @"media picker background view no media tv") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display. Add some media using the Camera or Photos app.", @"media picker background view no media")];
                         [self.button setHidden:YES];
