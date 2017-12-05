@@ -52,6 +52,9 @@
     if (self.model.allowsMultipleSelection) {
         [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
     }
+    else {
+        [self.navigationItem setRightBarButtonItems:@[self.model.cancelBarButtonItem]];
+    }
     
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,selectedAssetIdentifiers)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
