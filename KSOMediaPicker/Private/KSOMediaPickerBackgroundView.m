@@ -24,11 +24,10 @@
 #import <Ditko/Ditko.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
+#define kActionString() NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_PRIVACY_SETTINGS_BUTTON", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Privacy Settings", @"media picker background view privacy settings button")
+
 @interface KSOMediaPickerBackgroundView ()
-@property (strong,nonatomic) UIStackView *containerView;
-@property (strong,nonatomic) UIImageView *imageView;
-@property (strong,nonatomic) UILabel *label;
-@property (strong,nonatomic) UIButton *button;
+@property (strong,nonatomic) KDIEmptyView *emptyView;
 
 @property (strong,nonatomic) KSOMediaPickerModel *model;
 @end
@@ -41,81 +40,48 @@
     
     _model = model;
     
-    _containerView = [[UIStackView alloc] initWithFrame:CGRectZero];
-    [_containerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_containerView setAxis:UILayoutConstraintAxisVertical];
-    [_containerView setSpacing:KSOMediaPickerSubviewMargin];
-    [_containerView setAlignment:UIStackViewAlignmentLeading];
-    [self addSubview:_containerView];
-    
-    _imageView = [[UIImageView alloc] initWithImage:[[UIImage KSO_fontAwesomeImageWithString:@"\uf03e" size:CGSizeMake(144, 144)] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-    [_imageView setContentMode:UIViewContentModeCenter];
-    [_imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_containerView addArrangedSubview:_imageView];
-    
-    _label = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_label setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_label setNumberOfLines:0];
-    [_label setTextAlignment:NSTextAlignmentCenter];
-    [_label setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleBody]];
-    [_containerView addArrangedSubview:_label];
-    
-    _button = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_button setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_button.titleLabel setFont:[UIFont preferredFontForTextStyle:UIFontTextStyleCallout]];
-    [_button setTitle:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_PRIVACY_SETTINGS_BUTTON", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Privacy Settings", @"media picker background view privacy settings button") forState:UIControlStateNormal];
-    [_button KDI_addBlock:^(__kindof UIControl * _Nonnull control, UIControlEvents controlEvents) {
+    _emptyView = [[KDIEmptyView alloc] initWithFrame:CGRectZero];
+    _emptyView.translatesAutoresizingMaskIntoConstraints = NO;
+    _emptyView.image = [UIImage KSO_fontAwesomeImageWithString:@"\uf03e" size:CGSizeMake(144, 144)].KDI_templateImage;
+    _emptyView.actionBlock = ^(__kindof KDIEmptyView * _Nonnull emptyView) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey: [NSBundle mainBundle].KST_bundleIdentifier} completionHandler:nil];
-    } forControlEvents:UIControlEventTouchUpInside];
-    [_containerView addArrangedSubview:_button];
+    };
+    [self addSubview:_emptyView];
     
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _containerView}]];
-    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view]-|" options:9 metrics:nil views:@{@"view": _label}]];
-    [NSLayoutConstraint activateConstraints:@[[NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0],[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_containerView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0],[NSLayoutConstraint constraintWithItem:_button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_containerView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:@{@"view": _emptyView}]];
+    [NSLayoutConstraint activateConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:9 metrics:nil views:@{@"view": _emptyView}]];
     
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,theme)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, KSOMediaPickerTheme * _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         [self setBackgroundColor:value.backgroundColor];
-        
-        [self.imageView setTintColor:[value.backgroundColor KDI_contrastingColor]];
-        
-        [self.label setTextColor:value.titleColor];
-        
-        [self.button setTintColor:value.tintColor];
     }];
     
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,authorizationStatus),@kstKeypath(self.model,assetCollectionModels)] options:NSKeyValueObservingOptionInitial block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
         kstStrongify(self);
         KSTDispatchMainAsync(^{
+            self.emptyView.hidden = NO;
+            
             switch (self.model.authorizationStatus) {
                 case KSOMediaPickerAuthorizationStatusNotDetermined:
-                    [self.label setHidden:YES];
-                    [self.button setHidden:YES];
+                    self.emptyView.body = nil;
+                    self.emptyView.action = nil;
                     break;
                 case KSOMediaPickerAuthorizationStatusRestricted:
-                    [self.label setHidden:NO];
-                    [self.label setText:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_AUTH_RESTRICTED_LABEL", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been restricted. You may be able to adjust this setting within Privacy Settings.", @"media picker background view auth restricted label")];
-                    
-                    [self.button setHidden:NO];
+                    self.emptyView.body = NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_AUTH_RESTRICTED_LABEL", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been restricted. You may be able to adjust this setting within Privacy Settings.", @"media picker background view auth restricted label");
+                    self.emptyView.action = kActionString();
                     break;
                 case KSOMediaPickerAuthorizationStatusDenied:
-                    [self.label setHidden:NO];
-                    [self.label setText:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_AUTH_DENIED_LABEL", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been denied. Please approve access within Privacy Settings.", @"media picker background view auth denied label")];
-                    
-                    [self.button setHidden:NO];
+                    self.emptyView.body = NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_AUTH_DENIED_LABEL", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been denied. Please approve access within Privacy Settings.", @"media picker background view auth denied label");
+                    self.emptyView.action = kActionString();
                     break;
                 case KSOMediaPickerAuthorizationStatusAuthorized:
                     if (self.model.assetCollectionModels.count > 0) {
-                        [self.label setHidden:YES];
-                        [self.button setHidden:YES];
-                        [self.imageView setHidden:YES];
+                        self.emptyView.hidden = YES;
                     }
                     else {
-                        [self.imageView setHidden:NO];
-                        [self.label setHidden:NO];
-                        [self.label setText:UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomTV ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA_TV", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display.", @"media picker background view no media tv") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display. Add some media using the Camera or Photos app.", @"media picker background view no media")];
-                        [self.button setHidden:YES];
+                        self.emptyView.body = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomTV ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA_TV", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display.", @"media picker background view no media tv") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display. Add some media using the Camera or Photos app.", @"media picker background view no media");
+                        self.emptyView.action = nil;
                     }
                     break;
                 default:

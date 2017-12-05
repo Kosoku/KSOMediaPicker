@@ -47,8 +47,6 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
 @implementation KSOMediaPickerModel
 
 - (void)dealloc {
-    KSTLogObject(self.class);
-    
     [[PHPhotoLibrary sharedPhotoLibrary] unregisterChangeObserver:self];
 }
 
@@ -95,9 +93,6 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
     
     _doneBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:NULL];
     _cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:NULL];
-    
-    _assetCollectionImageManager = [[PHCachingImageManager alloc] init];
-    _assetImageManager = [[PHCachingImageManager alloc] init];
     
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
     
@@ -316,10 +311,15 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
     __block __weak void(^weakBlock)(KSHPhotosAuthorizationStatus) = nil;
     
     void(^block)(KSHPhotosAuthorizationStatus) = ^(KSHPhotosAuthorizationStatus status){
-        [self setAuthorizationStatus:(KSOMediaPickerAuthorizationStatus)status];
-        
         switch (status) {
             case KSHPhotosAuthorizationStatusAuthorized: {
+                if (self.assetCollectionImageManager == nil) {
+                    self.assetCollectionImageManager = [[PHCachingImageManager alloc] init];
+                }
+                if (self.assetImageManager == nil) {
+                    self.assetImageManager = [[PHCachingImageManager alloc] init];
+                }
+                
                 NSMutableArray<PHAssetCollection *> *retval = [[NSMutableArray alloc] init];
                 
                 [[PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAny options:nil] enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -368,6 +368,8 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
             default:
                 break;
         }
+        
+        [self setAuthorizationStatus:(KSOMediaPickerAuthorizationStatus)status];
     };
     
     weakBlock = block;

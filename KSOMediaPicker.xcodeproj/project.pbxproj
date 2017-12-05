@@ -104,8 +104,6 @@
 		0758D4391F7600D0000E0829 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0758D43A1F7600DE000E0829 /* KSOFontAwesomeExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */; };
 		0758D43B1F7600DE000E0829 /* KSOFontAwesomeExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0758D43D1F7602FD000E0829 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0758D43C1F7602FD000E0829 /* FontAwesome.ttf */; };
-		0758D43E1F760308000E0829 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0758D43C1F7602FD000E0829 /* FontAwesome.ttf */; };
 		0758D4401F763908000E0829 /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4411F763908000E0829 /* FLAnimatedImage.framework */; };
 		0758D4421F763998000E0829 /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4411F763908000E0829 /* FLAnimatedImage.framework */; };
 		0758D4431F763998000E0829 /* FLAnimatedImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0758D4411F763908000E0829 /* FLAnimatedImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -273,7 +271,6 @@
 		0758D40C1F75C420000E0829 /* KSOMediaPickerVideoPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSOMediaPickerVideoPlayerView.m; sourceTree = "<group>"; };
 		0758D4351F76009A000E0829 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0758D4371F7600AE000E0829 /* KSOFontAwesomeExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KSOFontAwesomeExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0758D43C1F7602FD000E0829 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "Vendor/KSOFontAwesomeExtensions/Demo-iOS/FontAwesome.ttf"; sourceTree = SOURCE_ROOT; };
 		0758D4411F763908000E0829 /* FLAnimatedImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FLAnimatedImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0758D4441F7639A4000E0829 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
 		0758D4461F7639B8000E0829 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -477,7 +474,6 @@
 		07A5499E1E7C97D400A6C4A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0758D43C1F7602FD000E0829 /* FontAwesome.ttf */,
 				07A5499F1E7C97D400A6C4A1 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -789,7 +785,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				073B35611E83451000C003A1 /* Assets.xcassets in Resources */,
-				0758D43E1F760308000E0829 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,7 +803,6 @@
 			files = (
 				07A549AE1E7C97D400A6C4A1 /* LaunchScreen.storyboard in Resources */,
 				07A549AB1E7C97D400A6C4A1 /* Assets.xcassets in Resources */,
-				0758D43D1F7602FD000E0829 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
