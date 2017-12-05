@@ -653,6 +653,7 @@
 				073B35281E8343A300C003A1 /* Frameworks */,
 				073B35291E8343A300C003A1 /* Headers */,
 				073B352A1E8343A300C003A1 /* Resources */,
+				07D305591FD75E88002A5726 /* increment build number */,
 			);
 			buildRules = (
 			);
@@ -691,6 +692,7 @@
 				07A5498B1E7C97AA00A6C4A1 /* Frameworks */,
 				07A5498C1E7C97AA00A6C4A1 /* Headers */,
 				07A5498D1E7C97AA00A6C4A1 /* Resources */,
+				07D3055A1FD75E98002A5726 /* increment build number */,
 			);
 			buildRules = (
 			);
@@ -822,6 +824,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = scripts/./genstrings.sh;
+		};
+		07D305591FD75E88002A5726 /* increment build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "increment build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = scripts/./increment_build_number.sh;
+		};
+		07D3055A1FD75E98002A5726 /* increment build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "increment build number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = scripts/./increment_build_number.sh;
 		};
 /* End PBXShellScriptBuildPhase section */
 
