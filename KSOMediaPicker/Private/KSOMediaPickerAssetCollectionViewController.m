@@ -49,7 +49,9 @@
     [self.collectionView registerClass:[KSOMediaPickerAssetCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass([KSOMediaPickerAssetCollectionViewCell class])];
     [self.collectionView setPrefetchDataSource:self];
     
-    [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
+    if (self.model.allowsMultipleSelection) {
+        [self.navigationItem setRightBarButtonItems:@[self.model.doneBarButtonItem]];
+    }
     
     kstWeakify(self);
     [self.model KAG_addObserverForKeyPaths:@[@kstKeypath(self.model,selectedAssetIdentifiers)] options:0 block:^(NSString * _Nonnull keyPath, id  _Nullable value, NSDictionary<NSKeyValueChangeKey,id> * _Nonnull change) {
