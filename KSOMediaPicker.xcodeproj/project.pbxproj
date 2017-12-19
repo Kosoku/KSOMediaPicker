@@ -214,7 +214,6 @@
 
 /* Begin PBXFileReference section */
 		071E720D1FE8BF6400E92B75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		071E72111FE8C6AD00E92B75 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		07377F1F1E7D998700094D95 /* KSOMediaPickerMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerMedia.h; sourceTree = "<group>"; };
 		07377F211E7D9C4A00094D95 /* KSOMediaPickerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerDefines.h; sourceTree = "<group>"; };
 		07377F231E7DE98600094D95 /* KSOMediaPickerAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerAssetModel.h; sourceTree = "<group>"; };
@@ -951,7 +950,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				071E720D1FE8BF6400E92B75 /* en */,
-				071E72111FE8C6AD00E92B75 /* ja */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
