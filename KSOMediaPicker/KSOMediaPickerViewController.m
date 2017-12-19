@@ -36,7 +36,7 @@
 @implementation KSOMediaPickerViewController
 
 - (NSString *)title {
-    return NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_TITLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Photos", @"media picker title");
+    return NSLocalizedStringWithDefaultValue(@"media.picker.title", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Photos", @"Photos");
 }
 
 - (void)dealloc {

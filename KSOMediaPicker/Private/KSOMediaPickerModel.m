@@ -160,7 +160,7 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
         }];
         
         if (!retval) {
-            NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMixedMediaSelection userInfo:@{NSLocalizedDescriptionKey: NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MIXED_MEDIA_SELECTION", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than one media type.", @"media picker error code mixed media selection")}];
+            NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMixedMediaSelection userInfo:@{NSLocalizedDescriptionKey: NSLocalizedStringWithDefaultValue(@"media.picker.error.message.mixed-media-selection", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select multiple media types.", @"multiple media types error")}];
             
             [self.delegate mediaPickerModelDidError:error];
         }
@@ -173,7 +173,7 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
         
         retval = NO;
         
-        NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedMedia userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_MEDIA", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ media.", @"media picker error code maximum selected media"),[NSNumberFormatter localizedStringFromNumber:@(self.maximumSelectedMedia) numberStyle:NSNumberFormatterDecimalStyle]]}];
+        NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedMedia userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-media", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu media.", @"Also localize corresponding entry in .stringsdict file"),self.maximumSelectedMedia]}];
         
         [self.delegate mediaPickerModelDidError:error];
     }
@@ -188,8 +188,8 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
         
         retval = NO;
         
-        NSString *format = self.maximumSelectedImages == 1 ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_IMAGES_SINGLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ image.", @"media picker error code maximum selected images single") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_IMAGES_MULTIPLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ images.", @"media picker error code maximum selected images multiple");
-        NSString *title = [NSString stringWithFormat:format,[NSNumberFormatter localizedStringFromNumber:@(self.maximumSelectedImages) numberStyle:NSNumberFormatterDecimalStyle]];
+        NSString *format = NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-images", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu image(s).", @"Also localize corresponding entry in .stringsdict file");
+        NSString *title = [NSString stringWithFormat:format,self.maximumSelectedImages];
         NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedImages userInfo:@{NSLocalizedDescriptionKey: title}];
         
         [self.delegate mediaPickerModelDidError:error];
@@ -205,8 +205,8 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
         
         retval = NO;
         
-        NSString *format = self.maximumSelectedVideos == 1 ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_VIDEOS_SINGLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ video.", @"media picker error code maximum selected videos single") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_ERROR_CODE_MAXIMUM_SELECTED_VIDEOS_MULTIPLE", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %@ videos.", @"media picker error code maximum selected videos multiple");
-        NSString *title = [NSString stringWithFormat:format,[NSNumberFormatter localizedStringFromNumber:@(self.maximumSelectedVideos) numberStyle:NSNumberFormatterDecimalStyle]];
+        NSString *format = NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-videos", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu video(s).", @"Also localize corresponding entry in .stringsdict file");
+        NSString *title = [NSString stringWithFormat:format,self.maximumSelectedVideos];
         NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedVideos userInfo:@{NSLocalizedDescriptionKey: title}];
         
         [self.delegate mediaPickerModelDidError:error];

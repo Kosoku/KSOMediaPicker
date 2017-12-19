@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		071E720E1FE8BF6400E92B75 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 071E720C1FE8BF6400E92B75 /* Localizable.stringsdict */; };
+		071E720F1FE8BF6400E92B75 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 071E720C1FE8BF6400E92B75 /* Localizable.stringsdict */; };
 		07377F201E7D998700094D95 /* KSOMediaPickerMedia.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F1F1E7D998700094D95 /* KSOMediaPickerMedia.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07377F221E7D9C4A00094D95 /* KSOMediaPickerDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F211E7D9C4A00094D95 /* KSOMediaPickerDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07377F251E7DE98600094D95 /* KSOMediaPickerAssetModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 07377F231E7DE98600094D95 /* KSOMediaPickerAssetModel.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -211,6 +213,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		071E720D1FE8BF6400E92B75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		07377F1F1E7D998700094D95 /* KSOMediaPickerMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerMedia.h; sourceTree = "<group>"; };
 		07377F211E7D9C4A00094D95 /* KSOMediaPickerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerDefines.h; sourceTree = "<group>"; };
 		07377F231E7DE98600094D95 /* KSOMediaPickerAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSOMediaPickerAssetModel.h; sourceTree = "<group>"; };
@@ -483,6 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				07D1AC911E8171CF00A963B1 /* Localizable.strings */,
+				071E720C1FE8BF6400E92B75 /* Localizable.stringsdict */,
 				07A549931E7C97AA00A6C4A1 /* KSOMediaPicker-iOS-Info.plist */,
 				073B35781E834B6C00C003A1 /* KSOMediaPicker-tvOS-Info.plist */,
 				073B35791E834B9A00C003A1 /* KSOMediaPicker-Info.h */,
@@ -779,6 +783,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				073B35761E83470300C003A1 /* Localizable.strings in Resources */,
+				071E720F1FE8BF6400E92B75 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,6 +801,7 @@
 			files = (
 				07D1AC931E8171CF00A963B1 /* Localizable.strings in Resources */,
 				0784FE741F74CF12006DE9C3 /* KSOMediaPickerAssetCollectionTableViewCell.xib in Resources */,
+				071E720E1FE8BF6400E92B75 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -940,6 +946,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		071E720C1FE8BF6400E92B75 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				071E720D1FE8BF6400E92B75 /* en */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		07A549AC1E7C97D400A6C4A1 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

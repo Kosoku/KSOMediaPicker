@@ -24,7 +24,7 @@
 #import <Ditko/Ditko.h>
 #import <KSOFontAwesomeExtensions/KSOFontAwesomeExtensions.h>
 
-#define kActionString() NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_PRIVACY_SETTINGS_BUTTON", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Privacy Settings", @"media picker background view privacy settings button")
+#define kActionString() NSLocalizedStringWithDefaultValue(@"media.picker.empty.action", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Privacy Settings", @"Privacy Settings")
 
 @interface KSOMediaPickerBackgroundView ()
 @property (strong,nonatomic) KDIEmptyView *emptyView;
@@ -68,11 +68,11 @@
                     self.emptyView.action = nil;
                     break;
                 case KSOMediaPickerAuthorizationStatusRestricted:
-                    self.emptyView.body = NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_AUTH_RESTRICTED_LABEL", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been restricted. You may be able to adjust this setting within Privacy Settings.", @"media picker background view auth restricted label");
+                    self.emptyView.body = NSLocalizedStringWithDefaultValue(@"media.picker.empty.body.access-restricted", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been restricted. You may be able to adjust this setting within Privacy Settings.", @"Photos access restricted");
                     self.emptyView.action = kActionString();
                     break;
                 case KSOMediaPickerAuthorizationStatusDenied:
-                    self.emptyView.body = NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_AUTH_DENIED_LABEL", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been denied. Please approve access within Privacy Settings.", @"media picker background view auth denied label");
+                    self.emptyView.body = NSLocalizedStringWithDefaultValue(@"media.picker.empty.body.access-denied", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"Access to Photos has been denied. Please approve access within Privacy Settings.", @"Photos access denied");
                     self.emptyView.action = kActionString();
                     break;
                 case KSOMediaPickerAuthorizationStatusAuthorized:
@@ -80,7 +80,7 @@
                         self.emptyView.hidden = YES;
                     }
                     else {
-                        self.emptyView.body = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomTV ? NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA_TV", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display.", @"media picker background view no media tv") : NSLocalizedStringWithDefaultValue(@"MEDIA_PICKER_BACKGROUND_VIEW_NO_MEDIA", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display. Add some media using the Camera or Photos app.", @"media picker background view no media");
+                        self.emptyView.body = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomTV ? NSLocalizedStringWithDefaultValue(@"media.picker.empty.body.no-media.tvos", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display.", @"No media tvOS") : NSLocalizedStringWithDefaultValue(@"media.picker.empty.body.no-media.ios", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"It doesn't look like you have any media to display. Add some media using the Camera or Photos app.", @"No media iOS");
                         self.emptyView.action = nil;
                     }
                     break;
