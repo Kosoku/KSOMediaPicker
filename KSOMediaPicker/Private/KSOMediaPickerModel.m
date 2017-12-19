@@ -173,7 +173,7 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
         
         retval = NO;
         
-        NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedMedia userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-media", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu media.", @"Also localize corresponding entry in .stringsdict file"),self.maximumSelectedMedia]}];
+        NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedMedia userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-media", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu media.", @"Also translate media.picker.error.message.maximum-selected-media entry in .stringsdict file if necessary"),self.maximumSelectedMedia]}];
         
         [self.delegate mediaPickerModelDidError:error];
     }
@@ -188,7 +188,7 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
         
         retval = NO;
         
-        NSString *format = NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-images", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu image(s).", @"Also localize corresponding entry in .stringsdict file");
+        NSString *format = NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-images", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu image(s).", @"Also translate media.picker.error.message.maximum-selected-images entry in .stringsdict file if necessary");
         NSString *title = [NSString stringWithFormat:format,self.maximumSelectedImages];
         NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedImages userInfo:@{NSLocalizedDescriptionKey: title}];
         
@@ -205,7 +205,7 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
         
         retval = NO;
         
-        NSString *format = NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-videos", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu video(s).", @"Also localize corresponding entry in .stringsdict file");
+        NSString *format = NSLocalizedStringWithDefaultValue(@"media.picker.error.message.maximum-selected-videos", nil, [NSBundle KSO_mediaPickerFrameworkBundle], @"You cannot select more than %lu video(s).", @"Also translate media.picker.error.message.maximum-selected-videos entry in .stringsdict file if necessary");
         NSString *title = [NSString stringWithFormat:format,self.maximumSelectedVideos];
         NSError *error = [NSError errorWithDomain:KSOMediaPickerErrorDomain code:KSOMediaPickerErrorCodeMaximumSelectedVideos userInfo:@{NSLocalizedDescriptionKey: title}];
         
