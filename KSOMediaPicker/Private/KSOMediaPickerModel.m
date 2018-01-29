@@ -300,7 +300,7 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
 - (PHImageRequestOptions *)assetImageRequestOptions {
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     
-    [options setDeliveryMode:PHImageRequestOptionsDeliveryModeFastFormat];
+    [options setDeliveryMode:PHImageRequestOptionsDeliveryModeOpportunistic];
     [options setResizeMode:PHImageRequestOptionsResizeModeFast];
     [options setNetworkAccessAllowed:YES];
     
