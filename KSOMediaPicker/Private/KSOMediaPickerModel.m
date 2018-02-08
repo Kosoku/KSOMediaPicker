@@ -283,12 +283,13 @@ NSString *const KSOMediaPickerErrorDomain = @"com.kosoku.ksomediapicker.error";
     for (NSString *assetIdentifier in self.selectedAssetIdentifiers) {
         PHFetchOptions *options = [[PHFetchOptions alloc] init];
         
+        [options setIncludeHiddenAssets:YES];
         [options setWantsIncrementalChangeDetails:NO];
         [options setFetchLimit:1];
         
         PHAsset *asset = [PHAsset fetchAssetsWithLocalIdentifiers:@[assetIdentifier] options:options].firstObject;
         
-        if (retval != nil) {
+        if (asset != nil) {
             [retval addObject:asset];
         }
     }
