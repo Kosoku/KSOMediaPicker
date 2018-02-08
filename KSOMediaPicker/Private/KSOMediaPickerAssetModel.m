@@ -27,6 +27,30 @@
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
+NSString* KSOMediaPickerStringFromMediaType(KSOMediaPickerMediaType mediaType) {
+    switch (mediaType) {
+        case KSOMediaPickerMediaTypeUnknown:
+            return nil;
+        case KSOMediaPickerMediaTypeAudio:
+            return NSLocalizedStringWithDefaultValue(@"media.type.audio", nil, NSBundle.KSO_mediaPickerFrameworkBundle, @"Audio", @"Audio");
+        case KSOMediaPickerMediaTypeImage:
+            return NSLocalizedStringWithDefaultValue(@"media.type.image", nil, NSBundle.KSO_mediaPickerFrameworkBundle, @"Photo", @"Photo");
+        case KSOMediaPickerMediaTypeVideo:
+            return NSLocalizedStringWithDefaultValue(@"media.type.video", nil, NSBundle.KSO_mediaPickerFrameworkBundle, @"Video", @"Video");
+    }
+}
+NSString* KSOMediaPickerStringFromDuration(NSTimeInterval duration) {
+    static NSDateComponentsFormatter *kFormatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        kFormatter = [[NSDateComponentsFormatter alloc] init];
+        
+        kFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        kFormatter.allowedUnits = NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond;
+    });
+    return [kFormatter stringFromTimeInterval:duration];
+}
+
 @interface KSOMediaPickerAssetModel ()
 @property (readwrite,strong,nonatomic) PHAsset *asset;
 @property (readwrite,weak,nonatomic) KSOMediaPickerAssetCollectionModel *assetCollectionModel;
@@ -147,6 +171,27 @@
         return [self.assetCollectionModel.model.selectedAssetIdentifiers indexOfObject:self.identifier];
     }
     return NSNotFound;
+}
+
+- (NSString *)accessibilityLabel {
+    KSOMediaPickerMediaType type = self.mediaType;
+    NSString *typeString = KSOMediaPickerStringFromMediaType(type);
+    NSString *dateString = [NSDateFormatter localizedStringFromDate:self.creationDate dateStyle:NSDateFormatterFullStyle timeStyle:NSDateFormatterFullStyle];
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    
+    switch (type) {
+        case KSOMediaPickerMediaTypeVideo:
+        case KSOMediaPickerMediaTypeAudio:
+            temp.array = @[typeString,KSOMediaPickerStringFromDuration(self.duration),dateString];
+            break;
+        case KSOMediaPickerMediaTypeImage:
+            temp.array = @[typeString,dateString];
+            break;
+        default:
+            break;
+    }
+    
+    return [temp componentsJoinedByString:@", "];
 }
 
 @end

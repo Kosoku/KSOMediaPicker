@@ -750,7 +750,7 @@
 					};
 					07A5499B1E7C97D400A6C4A1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = C6AZ27TEW2;
+						DevelopmentTeam = 74KPPW2K35;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1405,7 +1405,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = C6AZ27TEW2;
+				DEVELOPMENT_TEAM = 74KPPW2K35;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1459,7 +1459,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = C6AZ27TEW2;
+				DEVELOPMENT_TEAM = 74KPPW2K35;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

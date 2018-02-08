@@ -50,6 +50,8 @@
     if (!(self = [super initWithFrame:frame]))
         return nil;
 
+    self.isAccessibilityElement = YES;
+    
 #if (TARGET_OS_IOS)
     _thumbnailImageView = [[FLAnimatedImageView alloc] initWithFrame:CGRectZero];
 #else
@@ -202,6 +204,8 @@
 
 - (void)setModel:(KSOMediaPickerAssetModel *)model {
     _model = model;
+    
+    self.accessibilityLabel = _model.accessibilityLabel;
     
     [self.typeImageView setImage:[_model.typeImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [self.durationLabel setText:_model.formattedDuration];
