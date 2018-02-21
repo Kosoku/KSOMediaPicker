@@ -30,6 +30,10 @@
 
 @implementation KSOMediaPickerVideoPlayerView
 
+- (void)dealloc {
+    [_player replaceCurrentItemWithPlayerItem:nil];
+}
+
 + (Class)layerClass {
     return [AVPlayerLayer class];
 }
