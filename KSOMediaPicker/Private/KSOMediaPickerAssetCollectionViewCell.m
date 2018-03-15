@@ -121,7 +121,7 @@
             }
         }
         else {
-            [self setSelectedOverlayView:[[self.model.assetCollectionModel.model.theme.assetSelectedOverlayViewClass alloc] initWithFrame:CGRectZero]];
+            [self setSelectedOverlayView:[[(id)self.model.assetCollectionModel.model.theme.assetSelectedOverlayViewClass alloc] initWithFrame:CGRectZero]];
         }
     }];
     
