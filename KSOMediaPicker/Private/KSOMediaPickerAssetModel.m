@@ -132,7 +132,7 @@ NSString* KSOMediaPickerStringFromDuration(NSTimeInterval duration) {
 - (UIImage *)typeImage {
     switch (self.mediaType) {
         case KSOMediaPickerMediaTypeVideo:
-            return [UIImage KSO_fontAwesomeImageWithString:@"\uf03d" size:CGSizeMake(16, 16)];
+            return [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf03d" size:CGSizeMake(16, 16)];
         default:
             return nil;
     }

@@ -132,18 +132,18 @@
     switch (self.subtype) {
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumVideos:
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumSlomoVideos:
-            return [UIImage KSO_fontAwesomeImageWithString:@"\uf03d" size:size];
+            return [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf03d" size:size];
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumRecentlyAdded:
-            return [UIImage KSO_fontAwesomeImageWithString:@"\uf017" size:size];
+            return [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf017" size:size];
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumFavorites:
-            return [UIImage KSO_fontAwesomeImageWithString:@"\uf004" size:size];
+            return [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf004" size:size];
         case KSOMediaPickerAssetCollectionSubtypeAlbumMyPhotoStream:
         case KSOMediaPickerAssetCollectionSubtypeAlbumCloudShared:
-            return [UIImage KSO_fontAwesomeImageWithString:@"\uf0c2" size:size];
+            return [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf0c2" size:size];
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumSelfPortraits:
-            return [UIImage KSO_fontAwesomeImageWithString:@"\uf118" size:size];
+            return [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf118" size:size];
         case KSOMediaPickerAssetCollectionSubtypeSmartAlbumScreenshots:
-            return [UIImage KSO_fontAwesomeImageWithString:@"\uf10b" size:size];
+            return [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf10b" size:size];
         default:
             return nil;
     }

@@ -42,7 +42,7 @@
     
     _emptyView = [[KDIEmptyView alloc] initWithFrame:CGRectZero];
     _emptyView.translatesAutoresizingMaskIntoConstraints = NO;
-    _emptyView.image = [UIImage KSO_fontAwesomeImageWithString:@"\uf03e" size:CGSizeMake(144, 144)].KDI_templateImage;
+    _emptyView.image = [UIImage KSO_fontAwesomeSolidImageWithString:@"\uf03e" size:CGSizeMake(144, 144)].KDI_templateImage;
     _emptyView.actionBlock = ^(__kindof KDIEmptyView * _Nonnull emptyView) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{UIApplicationOpenURLOptionsSourceApplicationKey: [NSBundle mainBundle].KST_bundleIdentifier} completionHandler:nil];
     };
