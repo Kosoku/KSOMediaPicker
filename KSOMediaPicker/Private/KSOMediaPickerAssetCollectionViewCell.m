@@ -157,7 +157,9 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     
+#if (TARGET_OS_IOS)
     [self.thumbnailImageView setAnimatedImage:nil];
+#endif
     [self.model cancelAllThumbnailRequests];
     [self.playerView setModel:nil];
 }
