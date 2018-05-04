@@ -157,6 +157,7 @@
 - (void)prepareForReuse {
     [super prepareForReuse];
     
+    [self.thumbnailImageView setAnimatedImage:nil];
     [self.model cancelAllThumbnailRequests];
     [self.playerView setModel:nil];
 }
@@ -194,7 +195,9 @@
             [self.thumbnailImageView setAnimatedImage:thumbnailImage];
         }
         else {
-            [self.thumbnailImageView setImage:thumbnailImage];
+            if (self.thumbnailImageView.animatedImage == nil) {
+                [self.thumbnailImageView setImage:thumbnailImage];
+            }
         }
 #else
         [self.thumbnailImageView setImage:thumbnailImage];
