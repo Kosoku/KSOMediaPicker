@@ -829,7 +829,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = scripts/./genstrings.sh;
+			shellScript = "scripts/./genstrings.sh\n";
 		};
 		07D305591FD75E88002A5726 /* increment build number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -857,7 +857,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = scripts/./increment_build_number.sh;
+			shellScript = "scripts/./increment_build_number.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1111,7 +1111,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksomediapicker;
 				PRODUCT_NAME = KSOMediaPicker;
 				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 				VALIDATE_PRODUCT = YES;
@@ -1372,7 +1372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kosoku.ksomediapicker;
 				PRODUCT_NAME = KSOMediaPicker;
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
