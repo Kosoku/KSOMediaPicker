@@ -31,6 +31,7 @@
 #import <Loki/Loki.h>
 #import <Agamotto/Agamotto.h>
 #if (TARGET_OS_IOS)
+#import <FLAnimatedImage/FLAnimatedImage.h>
 #import <FLAnimatedImage/FLAnimatedImageView.h>
 #endif
 
