@@ -47,8 +47,8 @@
     KSTLogObject(self.class);
 }
 
-- (instancetype)init {
-    if (!(self = [super init]))
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
         return nil;
     
     _model = [[KSOMediaPickerModel alloc] init];
